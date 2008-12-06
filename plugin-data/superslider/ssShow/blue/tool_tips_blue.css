@@ -1,0 +1,43 @@
+/* tootip classes */
+
+.customTip{
+	margin-left:0px;
+	margin-top:0px;
+	width: 280px;
+	overflow: hidden;
+	z-index: 13000;
+}
+.tipClosed{
+	margin-left:-60px;
+	margin-top:-60px;
+	width: 0px;
+	overflow: hidden;
+	z-index: 13000;
+}
+.tip-top {
+	width: 280px;
+	height: 20px;
+	background:transparent url(img_blue/tooltips/tip-top.png) no-repeat scroll 50% 50%;
+}
+ 
+.tip-bottom {
+	width: 280px;
+	height: 20px;
+	background:transparent url(img_blue/tooltips/tip-bottom.png) no-repeat scroll 50% 50%;
+}
+.tip {
+	color: #5091c9;
+	width: 280px;
+	background:transparent url(img_blue/tooltips/tip-text.png) repeat-y scroll 50% 50%;
+}
+.tip-title, .tip-text {
+	font-size: 12px;
+	padding: 2px 30px 3px 10px;
+	text-align: center;
+}
+.tip-title {
+	font-weight: bold;
+	color: #5091c9;
+	padding-bottom: 6px;
+}
+.tip-text { font-style: italic; }
