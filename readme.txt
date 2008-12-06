@@ -12,24 +12,34 @@ Animated Gallery slideshow uses Mootools 1.2 javascript replaces wordpress galle
 
 SuperSlider-Show is your Animated show plugin that uses [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript to replace your gallery with a Slideshow. Highly configurable, theme based design, css based animations. Built upon [Slideshow2](http://www.electricprism.com/aeron/slideshow/ "Your favorite slideshow")
 
-== Screenshots ==
+**Features**
+	* complete global control from options page
+	* full short code over ride per show
+	* Endless image animation/transition possibilities
+	* Control transition time, image display time.
+	* Animated controller
+	* Animated captions
+	* Link each image or whole show 
+	* Uses WordPress native media / images
 
-1. a SlideShow
-2. plugin settings screen 
-
-== Demo ==
-
-This plugin is in use here at 
+**Demos**
+This plugin can be seen in use here
 	* [Demo 1](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-1 "Demo")
 	* [Demo 2](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-2 "Demo")
 	* [Demo 3](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-3 "Demo")
 	* [Demo 4](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-4 "Demo")
 
+== Screenshots ==
+
+1. a SlideShow sample screenshot-1.png
+2. SuperSlider-Show options screen screenshot-2.png
+
+
 == Installation ==
 
  - Unpack contents to wp-content/plugins/ into a superslider-show directory. 
  - Activate the plugin, 
- - Configure plugin under > settings > ss-Show
+ - Configure global settings for plugin under > settings > ss-Show
  - Create post/page ,Add WordPress gallery shortcode, or slideshow shortcode.
  - (optional) move plugin sub folder plugin-data to your wp-content folder,
 	under  > settings > SuperSlider-show > option group, File Storage - Loading Options
@@ -93,14 +103,12 @@ Create your own graphic and animation theme based on one of these provided
 
 	* Enqueue javascript files
 	* fix known bugs:
-				- no thumbnails in the short code fails
-				- lightbox fails
 				
 
 == Report Bugs Request / Options / Functions ==
 
 * for now please use the comments system at http://wp-superslider.com
-	
+* or post to the wordpress forums
 
 == Frequently Asked Questions ==	
 
