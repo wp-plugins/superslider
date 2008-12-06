@@ -1,5 +1,5 @@
 === SuperSlider-Show ===
-Contributors: twincascos
+Contributors: daiv mowbray
 Plugin URI: http://wp-superslider.com/
 Tags:animation, animated, gallery, slideshow, mootools 1.2, mootools, slider, superslider, slideshow2
 Requires at least: 2.6
@@ -27,9 +27,9 @@ This plugin is in use here at
 
 == Installation ==
 
- - Unpackage contents to wp-content/plugins/ so that the files are in a superslider-show directory. 
+ - Unpack contents to wp-content/plugins/ into a superslider-show directory. 
  - Activate the plugin, 
- - Configure plugin under > settings > SuperSlider-show
+ - Configure plugin under > settings > ss-Show
  - Create post/page ,Add WordPress gallery shortcode, or slideshow shortcode.
  - (optional) move plugin sub folder plugin-data to your wp-content folder,
 	under  > settings > SuperSlider-show > option group, File Storage - Loading Options
@@ -39,9 +39,10 @@ This plugin is in use here at
 
 == OPTIONS AND CONFIGURATIONS ==
 
-Available under > settings > SuperSlider-show
+Available under > settings > ss-Show
 	* theme css files to use
 	* shortcode tag to use (gallery or slideshow)
+	* post id to pull images from
 	* transition type
 	* opacity transition
 	* transition speed
@@ -56,6 +57,7 @@ Available in the shortcode tag:
 
 	* show_class="family" 
 	* first_slide="0" 
+	* href="www.yourcooldoiman.com"
 	* show_type="kenburns/push/fold/default" 
 	* height="400" 
 	* width="200" 
