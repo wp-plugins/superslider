@@ -1,7 +1,7 @@
-=== SuperSlider Show ===
+=== SuperSlider-Show ===
 Contributors: twincascos
 Plugin URI: http://wp-superslider.com/
-Tags:animation, animated, gallery, slideshow, mootools 1.2, mootools, slider, superslider
+Tags:animation, animated, gallery, slideshow, mootools 1.2, mootools, slider, superslider, slideshow2
 Requires at least: 2.6
 Tested up to: 2.7
 Stable tag: 1.0
@@ -10,16 +10,27 @@ Animated Gallery slideshow uses Mootools 1.2 javascript replaces wordpress galle
 
 == Description ==
 
-This is your Animated show plugin that uses Mootools 1.2 javascript to replace your gallery with a Slideshow. Highly configurable, theme based design, css based animations.
+SuperSlider-Show is your Animated show plugin that uses [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript to replace your gallery with a Slideshow. Highly configurable, theme based design, css based animations. Built upon [Slideshow2](http://www.electricprism.com/aeron/slideshow/ "Your favorite slideshow")
 
+== Screenshots ==
 
+1. a SlideShow
+2. plugin settings screen 
+
+== Demo ==
+
+This plugin is in use here at 
+	* [Demo 1](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-1 "Demo")
+	* [Demo 2](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-2 "Demo")
+	* [Demo 3](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-3 "Demo")
+	* [Demo 4](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-4 "Demo")
 
 == Installation ==
 
  - Unpackage contents to wp-content/plugins/ so that the files are in a superslider-show directory. 
  - Activate the plugin, 
  - Configure plugin under > settings > SuperSlider-show
- - Create post ,Add WordPress Gallery shortcode, or slideshow shortcode.
+ - Create post/page ,Add WordPress gallery shortcode, or slideshow shortcode.
  - (optional) move plugin sub folder plugin-data to your wp-content folder,
 	under  > settings > SuperSlider-show > option group, File Storage - Loading Options
 	select "Load css from plugin-data folder, see side note. (Recommended)". This will
@@ -116,16 +127,6 @@ Create your own graphic and animation theme based on one of these provided
 You can upload your own images to
 http://yourblogaddress/wp-content/plugins/superslider-show/plugin-data/superslider/ssShow/img_custom
 
-== Screenshots ==
-
-1. a SlideShow
-2. plugin settings screen 
-
-== Demo ==
-
-This plugin is in use here at 
-	* <http://wp-superslider.com>
-	* <http://portfolio.daivmowbray.com>
 
 == CAVEAT ==
 
@@ -136,7 +137,6 @@ If a user's browser doesn't support javascript the gallery will display normally
 * 1.0 rc (2008/12/04)
 	- fixed shortcode transition type
 	- fixed no thumbs option
-	- fixed Milkbox option
 
 
 * 0.7.0_beta (2008/12/01)
