@@ -12,28 +12,27 @@ Animated Gallery slideshow uses Mootools 1.2 javascript replaces wordpress galle
 
 SuperSlider-Show is your Animated show plugin that uses [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript to replace your gallery with a Slideshow. Highly configurable, theme based design, css based animations. Built upon [Slideshow2](http://www.electricprism.com/aeron/slideshow/ "Your favorite slideshow")
 
-**Features**
-	* complete global control from options page
-	* full short code over ride per show
-	* Endless image animation/transition possibilities
-	* Control transition time, image display time.
-	* Animated controller
-	* Animated captions
-	* Link each image or whole show 
-	* Uses WordPress native media / images
+##Features##
+* complete global control from options page
+* full short code over ride per show
+* Endless image animation/transition possibilities
+* Control transition time, image display time.
+* Animated controller
+* Animated captions
+* Link each image or whole show 
+* Uses WordPress native media / images
 
-**Demos**
-This plugin can be seen in use here
-	* [Demo 1](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-1 "Demo")
-	* [Demo 2](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-2 "Demo")
-	* [Demo 3](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-3 "Demo")
-	* [Demo 4](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-4 "Demo")
+##Demos##
+This plugin can be seen in use here:  
+* [Demo 1](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-1 "Demo")
+* [Demo 2](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-2 "Demo")
+* [Demo 3](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-3 "Demo")
+* [Demo 4](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-4 "Demo")
 
 == Screenshots ==
 
-1. a SlideShow sample screenshot-1.png
-2. SuperSlider-Show options screen screenshot-2.png
-
+1. ![SlideShow sample](screenshot-1.png "SlideShow sample")
+2. ![SuperSlider-Show options screen](screenshot-2.png "SuperSlider-Show options screen")
 
 == Installation ==
 
