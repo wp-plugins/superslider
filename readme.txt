@@ -23,7 +23,8 @@ SuperSlider-Show is your Animated show plugin that uses [Mootools](http://mootoo
 * Uses WordPress native media / images
 
 ##Demos##
-This plugin can be seen in use here:  
+This plugin can be seen in use here:
+
 * [Demo 1](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-1 "Demo")
 * [Demo 2](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-2 "Demo")
 * [Demo 3](http://wp-superslider.com/wp-plugins/superslider-show/slideshow-demo-3 "Demo")
@@ -36,12 +37,12 @@ This plugin can be seen in use here:
 
 == Installation ==
 
- - Unpack contents to wp-content/plugins/ into a **superslider-show** directory. 
- - Activate the plugin, 
- - Configure global settings for plugin under > settings > ss-Show
- - Create post/page ,Add WordPress gallery shortcode, or slideshow shortcode.
- - (optional) move plugin sub folder plugin-data to your wp-content folder,
-	under  > settings > SuperSlider-show > option group, File Storage - Loading Options
+* Unpack contents to wp-content/plugins/ into a **superslider-show** directory
+* Activate the plugin,
+* Configure global settings for plugin under > settings > ss-Show
+* Create post/page ,Add WordPress gallery shortcode, or slideshow shortcode.
+* (optional) move SuperSlider-Show plugin sub folder plugin-data to your wp-content folder,
+	under  > settings > ss-Show > option group, File Storage - Loading Options
 	select "Load css from plugin-data folder, see side note. (Recommended)". This will
 	prevent plugin uploads from over writing any css changes you may have made.
 
@@ -126,28 +127,19 @@ Create your own graphic and animation theme based on one of these provided.
 
 =  How do I change the style of the slideshow? =
   
-  I recommend that you move the folder plugin-data to your wp-content folder
-  if you already have a plugin-data folder there, just move the superslider folder.
-  remember to change the css location option in the settings page for this plugin.
-  Or edit directly: 
-  wp-content/plugins/superslider-show/plugin-data/superslider/ssshow/custom.css.
-  Alternatively, you can copy those rules into your WordPress themes, style file. 
-  Then remember to change the css location option in the settings page for this plugin.
+>I recommend that you move the folder plugin-data to your wp-content folder if you already have a plugin-data folder there, just move the superslider folder. Remember to change the css location option in the settings page for this plugin. Or edit directly: **wp-content/plugins/superslider-show/plugin-data/superslider/ssshow/custom.css** Alternatively, you can copy those rules into your WordPress themes, style file. Then remember to change the css location option in the settings page for this plugin.
   
 
 = The stylesheet doesn't seem to be having any effect? =
  
-  Check this url in your browser:
-  http://yourblogaddress/wp-content/plugins/superslider-show/plugin-data/superslider/ssShow/custom.css
-  If you don't see a plaintext file with css style rules, there may be
-  something wrong with your .htaccess file (mod_rewrite). If you don't know
-  how to fix this, you can copy the style rules there into your themes style
-  file.
+>Check this url in your browser:
+>http://yourblogaddress/wp-content/plugins/superslider-show/plugin-data/superslider/ssShow/custom.css
+>If you don't see a plaintext file with css style rules, there may be something wrong with your .htaccess file (mod_rewrite). If you don't know how to fix this, you can copy the style rules there into your themes style file.
 
 = How do I use different graphics and symbols for collapsing and expanding? =
 
-You can upload your own images to
-http://yourblogaddress/wp-content/plugins/superslider-show/plugin-data/superslider/ssShow/img_custom
+>You can upload your own images to
+>http://yourblogaddress/wp-content/plugins/superslider-show/plugin-data/superslider/ssShow/img_custom
 
 
 == CAVEAT ==
