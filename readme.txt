@@ -125,6 +125,11 @@ Create your own graphic and animation theme based on one of these provided.
 
 == Frequently Asked Questions ==	
 
+=  Why isn't my slideshow working? =
+
+>*You first need to check that your web site page isn't loading more than 1 copy of mootools javascript into the head of your file.
+>*While reading the source code of your website files header look to see if another plugin is using jquery. This will cause a javascript conflict. Jquery and mootools are not compatible.
+
 =  How do I change the style of the slideshow? =
   
 >I recommend that you move the folder plugin-data to your wp-content folder if you already have a plugin-data folder there, just move the superslider folder. Remember to change the css location option in the settings page for this plugin. Or edit directly: **wp-content/plugins/superslider-show/plugin-data/superslider/ssshow/custom.css** Alternatively, you can copy those rules into your WordPress themes, style file. Then remember to change the css location option in the settings page for this plugin.
