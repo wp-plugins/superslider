@@ -73,8 +73,9 @@ Available under > settings > ss-Show
 * lightbox on images on or off
 * to load or not Mootools.js
 * css files storage loaction
-* many more Advanced options
+* **many more Advanced options**
 
+----------
 Available in the shortcode tag:
 
 * show_class="family"
@@ -115,7 +116,8 @@ Create your own graphic and animation theme based on one of these provided.
 == To Do ==
 
 * Enqueue javascript files
-* fix known bugs:
+* fix known bugs:?
+* Add shortcode helper to post screen.
 				
 
 == Report Bugs Request / Options / Functions ==
