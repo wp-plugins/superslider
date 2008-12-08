@@ -45,15 +45,27 @@ This plugin can be seen in use here:
 	select "Load css from plugin-data folder, see side note. (Recommended)". This will
 	prevent plugin uploads from over writing any css changes you may have made.
 
+== USAGE ==
+
+If you arenÕt sure how this plugin works you may want to read the following.
+
+* First ensure that you have uploaded all of the plugin files into wp-content/plugins/superslider-show folder.
+* Go to your WordPress admin panel and stop in to the plugins control page. Activate the SuperSlider-Show plugin.
+* Create a new post, use the WordPress built in media uploader, (upload some images).
+* Click on insert gallery from the media uploader popover panel.
+* you should now have the shortcode [gallery] in your post.
+* Publish your new post
+
+You should be able to view your new slide show in the new post.
+You can adjust how the slide show looks and works by making adjustments in the plugin settings page. (ss-Show).
 
 == OPTIONS AND CONFIGURATIONS ==
 
-Available under > settings > ss-Show  
+Available under > settings > ss-Show
 * theme css files to use
 * shortcode tag to use (gallery or slideshow)
 * post id to pull images from (if not actual post)
 * transition type
-* opacity transition
 * transition speed
 * display time
 * lightbox on images on or off
@@ -61,28 +73,28 @@ Available under > settings > ss-Show
 * css files storage loaction
 * many more Advanced options
 
-Available in the shortcode tag:  
-* show_class="family" 
-* first_slide="0" 
+Available in the shortcode tag:
+* show_class="family"
+* first_slide="0"
 * href="www.yourcooldoiman.com"
-* show_type="kenburns/push/fold/default" 
-* height="400" 
-* width="200" 
-* transition="elastic:In:Out" 
-* thumbnails="true" 
-* image_size="thumbnail/medium/large/full" 
-* delay="milliseconds" 
-* duration="milliseconds" 
-* center="true" 
-* resize="true" 
-* overlap="true" 
-* random="true" 
-* loop="true" 
-* linked="true" 
-* thumbnails="true" 
-* fast="true" 
-* captions="true" 
-* controller="true" 
+* show_type="kenburns/push/fold/default"
+* height="400"
+* width="200"
+* transition="elastic:In:Out"
+* thumbnails="true"
+* image_size="thumbnail/medium/large/full"
+* delay="milliseconds"
+* duration="milliseconds"
+* center="true"
+* resize="true"
+* overlap="true"
+* random="true"
+* loop="true"
+* linked="true"
+* thumbnails="true"
+* fast="true"
+* captions="true"
+* controller="true"
 * paused ="true"
 
 
@@ -91,7 +103,7 @@ Available in the shortcode tag:
 Create your own graphic and animation theme based on one of these provided.  
 ** Available themes**
 * default (Thumbs set to 150px x 150px)
-* blue (Thumbs set to 50px x 150px)
+* blue (Thumbs set to 50px x 50px)
 * black (Thumbs set to 150px x 150px)
 * custom (Thumbs set to 150px x 150px vertical right side )
 
