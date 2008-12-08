@@ -105,7 +105,7 @@ Available in the shortcode tag:
 
 Create your own graphic and animation theme based on one of these provided.
 
-** Available themes**
+**Available themes**
 
 * default (Thumbs set to 150px x 150px)
 * blue (Thumbs set to 50px x 50px)
