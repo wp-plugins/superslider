@@ -14,7 +14,7 @@ SuperSlider-Show is your Animated show plugin that uses [Mootools](http://mootoo
 Compatible with WordPress system default gallery shows. 
 
 ==Support==
-If you have any problems or suggestions regarding this plugin [please speak up](http://wp-superslider.com/wp-plugins/superslider-show/how-to-use-superslider-show-plugin "temporary support"), 
+If you have any problems or suggestions regarding this plugin [please speak up](http://support.wp-superslider.com/forum/superslider-show "support forum"), 
 
 ==NOTICE==
 
