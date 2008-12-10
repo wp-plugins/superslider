@@ -16,13 +16,15 @@ Compatible with WordPress system default gallery shows.
 ##Support##
 If you have any problems or suggestions regarding this plugin [please speak up](http://wp-superslider.com/wp-plugins/superslider-show/how-to-use-superslider-show-plugin "temporary support"), 
 
-##WARNING##
+##NOTICE##
+
 *This plugin should be relocating [to this page](http://wordpress.org/extend/plugins/superslider-show/ "Your favourite slideshow plugin") to soon.
 *The downloaded folder is named ##superslider##, You need to change it's name to ##superslider-show##
 *Also available for [download from here](http://wp-superslider.com/superslider-show/superslider-show-download "superslider-show plugin home page").
 *Probably not compatible with plugins which use jquery. (not tested)
 
 ##Features##
+
 * complete global control from options page
 * full short code over ride per show
 * Endless image animation/transition possibilities
