@@ -13,13 +13,13 @@ Animated Gallery slideshow uses Mootools 1.2 javascript replaces wordpress galle
 SuperSlider-Show is your Animated show plugin that uses [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript to replace your gallery with a Slideshow. Highly configurable, theme based design, css based animations. Shortcode system on post and page screens to make each slideshow unique. Built upon [Slideshow2](http://www.electricprism.com/aeron/slideshow/ "Your favorite slideshow"). Degrades gracefully with javascript turned off, or plugin removed / disabled.
 Compatible with WordPress system default gallery shows. 
 
-##Support##
+==Support==
 If you have any problems or suggestions regarding this plugin [please speak up](http://wp-superslider.com/wp-plugins/superslider-show/how-to-use-superslider-show-plugin "temporary support"), 
 
-##NOTICE##
+==NOTICE==
 
 *This plugin should be relocating [to this page](http://wordpress.org/extend/plugins/superslider-show/ "Your favourite slideshow plugin") to soon.
-*The downloaded folder is named ##superslider##, You need to change it's name to ##superslider-show##
+*The downloaded folder is named ##superslider##, You need to change it's name to ===superslider-show===
 *Also available for [download from here](http://wp-superslider.com/superslider-show/superslider-show-download "superslider-show plugin home page").
 *Probably not compatible with plugins which use jquery. (not tested)
 
