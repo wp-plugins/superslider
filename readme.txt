@@ -16,10 +16,12 @@ Support
 If you have any problems or suggestions regarding these plugins [please speak up](http://support.wp-superslider.com/ "support forum"), 
 
 ##Plugins ##
-These plugins are available here:
+Download These Plugins here:
 
 * [SuperSlider-Show](http://wordpress.org/extend/plugins/superslider-show/ "SuperSlider-Show")
 * [SuperSlider-Menu](http://wordpress.org/extend/plugins/superslider-menu/ "SuperSlider-Menu")
+
+Or download from the domain [wp-superslider.com](http://wp-superslider.com/downloadsuperslider "SuperSlider-Downloads")
 
 
 == Screenshots ==
