@@ -1,5 +1,5 @@
 === SuperSlider ===
-Contributors: daiv mowbray
+Contributors: Daiv Mowbray
 Plugin URI: http://wp-superslider.com/
 Tags:animation, animated, gallery, slideshow, mootools 1.2, mootools, slider, superslider, slideshow2
 Requires at least: 2.6
