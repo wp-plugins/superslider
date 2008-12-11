@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: SuperSlider-Show
-Plugin URI: http://wp-superslider.com/superslider-show
+Plugin Name: SuperSlider
+Plugin URI: http://wp-superslider.com/superslider
 Description: Animated Gallery slideshow uses Mootools 1.2 javascript and Slideshow2 to replace wordpress gallery with a slideshow. 
 Author: Daiv Mowbray
 Version: 1.0
