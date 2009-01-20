@@ -1,0 +1,19 @@
+.ss_label
+{
+	border: 1px solid silver;
+	padding: 4px;
+	margin: 2px 4px;
+	float: left;
+	width: 22%;
+	height: 2.1em;
+}
+
+.ss_label input { margin: 0px 4px; }
+
+.ss_label input[type="text"]
+{
+	background: #b6e8f9;
+	line-height: 0.8em;
+	padding: 1px 0px 1px 3px;
+	border: 1px solid #6f8e99;
+}
