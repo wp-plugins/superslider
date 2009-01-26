@@ -35,8 +35,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				"reflect" => "on",
 				"reflect_height" => "0.33",
 				"reflect_opacity" => "0.5",
-				"auto_reflect" => "on",
+				"auto_reflect" => "off",
 				"accordion" => "on",
+				"acc_css"       =>  "on",
 				"auto_accordion" => "on",
 				"acc_container" => "accordion",
 				"acc_toggler" => "toggler",
@@ -50,7 +51,27 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				"acc_width" => "false",
 				"acc_opacity" => "true",
 				"acc_firstopen" => "0",
-				
+				"zoom"      => "on",
+				"zoom_auto" => "off",
+				"zoom_time" => "1250",
+				"zoom_trans_type" => "sine",
+				"zoom_trans_typeinout" => "out",
+				"zoom_border"   =>  "10px solid silver",
+				"zoom_pad"   =>  "10",
+				"zoom_back"   =>  "#000",
+				"scroll"   =>  "on",
+				"scroll_css"   =>  "on",
+				"scroll_time"   =>  "1200",
+				"scroll_trans"   =>  "sine",
+				"scroll_transout"   =>  "out",
+				"com"   =>  "on",
+				"com_css"   =>  "on",
+				"com_time"   =>  "1200",
+				"com_trans"   =>  "sine",
+				"com_transout"   =>  "out",
+				"com_direction"   =>  "virtical",
+				"com_open"        =>  "Open comments",
+				"com_close" => "Close comments",
 				'ss_global_over_ride' => "on");//end array
 			
 			update_option($this->AdminOptionsName, $ssBase_OldOptions);
@@ -73,6 +94,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				'reflect_opacity'=> $_POST["op_reflect_opacity"],
 				'auto_reflect'=> $_POST["op_auto_reflect"],				
 				'accordion'		=> $_POST["op_accordion"],
+				'acc_css'		=> $_POST["op_acc_css"],
 				'auto_accordion'		=> $_POST["op_auto_accordion"],
 				'acc_container'		=> $_POST["op_acc_container"],
 				'acc_toggler'		=> $_POST["op_acc_toggler"],
@@ -86,6 +108,26 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				'acc_width'		=> $_POST["op_acc_width"],
 				'acc_opacity'		=> $_POST["op_acc_opacity"],
 				'acc_firstopen'		=> $_POST["op_acc_firstopen"],
+				'zoom'      		=> $_POST["op_zoom"],
+				'zoom_auto'      		=> $_POST["op_zoom_auto"],
+				'zoom_time'		=> $_POST["op_zoom_time"],
+				'zoom_trans_type'		=> $_POST["op_zoom_trans"],
+				'zoom_trans_typeinout'		=> $_POST["op_zoom_transinout"],
+				'zoom_border'		=> $_POST["op_zoom_border"],
+				'zoom_pad'		=> $_POST["op_zoom_pad"],
+				'zoom_back'		=> $_POST["op_zoom_back"],
+				'scroll'         => $_POST["op_scroll"],
+				'scroll_css'         => $_POST["op_scroll_css"],
+				'scroll_time'	=> $_POST["op_scroll_time"],
+				'scroll_trans'	=> $_POST["op_scroll_trans"],
+				'scroll_transout'	=> $_POST["op_scroll_transout"],
+				'com'         => $_POST["op_com"],
+				'com_css'         => $_POST["op_com_css"],
+				'com_time'	=> $_POST["op_com_time"],
+				'com_trans'	=> $_POST["op_com_trans"],
+				'com_transout'	=> $_POST["op_com_transout"],
+				'com_open'	=> $_POST["op_com_open"],
+				'com_close'	=> $_POST["op_com_close"],
 				'ss_global_over_ride'	=> $_POST["op_global_over_ride"]
 			);	
 
@@ -241,7 +283,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                 <?php if($ssBase_newOptions['auto_reflect'] == "on") echo $checked; ?> name="op_auto_reflect" id="op_auto_reflect" />
                 <?php _e(' Automatically add reflect to all post images.',$ssBase_domain); ?></label>
               <br />
-              <span class="setting-description"><?php _e(' If turned off, you can manually add class="reflect" to individual images.',$ssBase_domain); ?></span>
+              <span class="setting-description"><?php _e(' If turned off, you can manually add class="reflect" to individual images, or wrap a post or group of images with the reflect shortcode, by clicking on the reflect button in the html view of your post screen..',$ssBase_domain); ?></span>
                 
               </li>
             </ul>
@@ -254,6 +296,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                 <input type="checkbox" 
                 <?php if($ssBase_newOptions['accordion'] == "on") echo $checked; ?> name="op_accordion" id="op_accordion" />
                 <?php _e(' Add the Accordion module.',$ssBase_domain); ?></label>
+                <br />
+                <label for="op_acc_css">
+                <input type="checkbox" 
+                <?php if($ssBase_newOptions['acc_css'] == "on") echo $checked; ?> name="op_acc_css" id="op_acc_css" />
+                <?php _e(' Add the Accordion css file.',$ssBase_domain); ?></label>
                 <ul style="list-style-type: none;margin-top:20px;">
                  <!-- <li>
                       <label for="op_auto_accordion">
@@ -352,9 +399,169 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                 
                   </li>
                 </ul>
+               
             </div><br style="clear:both;" />
+             <br />
+                 <span class="setting-description"><?php _e(' To use the accordion, click on the add accordion button found in the SuperSlider-Accordion meta box on your post screen (this works best in code view). This will insert the accordion structure. Edit the toggle bar titles, ie: toggle one, toggle two , then insert your content into content one and content two etc. to add more toggle bars and content just copy and paste the h3 followed by the div tags.',$ssBase_domain); ?></span>
+                
 	   </li>
+    <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+        <h3>Image Zoom</h3>
+    	<label for="op_zoom">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['zoom'] == "on") echo $checked; ?> name="op_zoom" id="op_zoom" />
+    	<?php _e(' Add zoom to your images.',$ssBase_domain); ?></label>
+    	<label for="op_zoom_auto">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['zoom_auto'] == "on") echo $checked; ?> name="op_zoom_auto" id="op_zoom_auto" />
+    	<?php _e(' Auto zoom your images.',$ssBase_domain); ?></label>
+            <ul style="list-style-type: none;margin-top:20px;">
+               <li>
+               <label for="op_zoom_trans"><?php _e(' Transition type',$ssBase_domain); ?>:   </label>  
+             <select name="op_zoom_trans" id="op_zoom_trans">
+                 <option <?php if($ssBase_newOptions['zoom_trans_type'] == "sine") echo $selected; ?> id="sine" value='sine'> sine</option>
+                 <option <?php if($ssBase_newOptions['zoom_trans_type'] == "elastic") echo $selected; ?> id="elastic" value='elastic'> elastic</option>
+                 <option <?php if($ssBase_newOptions['zoom_trans_type'] == "bounce") echo $selected; ?> id="bounce" value='bounce'> bounce</option>
+                 <option <?php if($ssBase_newOptions['zoom_trans_type'] == "back") echo $selected; ?> id="back" value='back'> back</option>
+                 <option <?php if($ssBase_newOptions['zoom_trans_type'] == "expo") echo $selected; ?> id="expo" value='expo'> expo</option>
+                 <option <?php if($ssBase_newOptions['zoom_trans_type'] == "circ") echo $selected; ?> id="circ" value='circ'> circ</option>
+                 <option <?php if($ssBase_newOptions['zoom_trans_type'] == "quad") echo $selected; ?> id="quad" value='quad'> quad</option>
+                 <option <?php if($ssBase_newOptions['zoom_trans_type'] == "cubic") echo $selected; ?> id="cubic" value='cubic'> cubic</option>
+                 <option <?php if($ssBase_newOptions['zoom_trans_type'] == "linear") echo $selected; ?> id="linear" value='linear'> linear</option>
+                </select>&nbsp;
+            <label for="op_zoom_transinout"><?php _e(' Transition action.',$ssBase_domain); ?></label>
+            <select name="op_zoom_transinout" id="op_zoom_transinout">
+                 <option <?php if($ssBase_newOptions['zoom_trans_typeinout'] == "in") echo $selected; ?> id="in" value='in'> in</option>
+                 <option <?php if($ssBase_newOptions['zoom_trans_typeinout'] == "out") echo $selected; ?> id="out" value='out'> out</option>
+                 <option <?php if($ssBase_newOptions['zoom_trans_typeinout'] == "in:out") echo $selected; ?> id="inout" value='in:out'> in:out</option>     
+            </select>&nbsp;&nbsp;
+                <label for="op_zoom_time"><?php _e(' zoom time',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_zoom_time" id="op_zoom_time" size="3" maxlength="6"
+			 value="<?php echo ($ssBase_newOptions['zoom_time']); ?>" /></label>
+                <br />
+            <span class="setting-description"><?php _e(' IN is the begginning of transition. OUT is the end of transition.',$ssBase_domain); ?></span>
 
+             </li>
+             <li>
+                <label for="op_zoom_border"><?php _e('Image border -',$ssBase_domain); ?>
+                <input type="text" class="span-text" name="op_zoom_border" id="op_zoom_border" size="12" maxlength="50"
+			 value="<?php echo ($ssBase_newOptions['zoom_border']); ?>" />
+                </label>,&nbsp;
+
+                <label for="op_zoom_pad"><?php _e(' padding -',$ssBase_domain); ?>
+                <input type="text" class="span-text" name="op_zoom_pad" id="op_zoom_pad" size="2" maxlength="6"
+			 value="<?php echo ($ssBase_newOptions['zoom_pad']); ?>" />
+                </label>
+
+                <label for="op_zoom_back"><?php _e('px, background color -',$ssBase_domain); ?>
+                <input type="text" class="span-text" name="op_zoom_back" id="op_zoom_back" size="6" maxlength="20"
+			 value="<?php echo ($ssBase_newOptions['zoom_back']); ?>" />
+                </label>
+            </li>
+            <span class="setting-description"><?php _e(' If You deactivate the auto zoom, you can add a zoom to your image by including class="zoom" to the a href tag surrounding your image. Or use the zoom button to add shortcode around a group of images. Colors can be named or hex values, ie: silver, transparent or #afafaf. And border style can be any of the following: solid, dotted, dashed, double, groove, ridge, inset, outset.',$ssBase_domain); ?></span>
+
+ 
+         </ul>
+	   </li>
+	   <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+        <h3>Page Scroller</h3>
+    	<label for="op_scroll">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['scroll'] == "on") echo $checked; ?> name="op_scroll" id="op_scroll" />
+    	<?php _e(' Add scroller to your page.',$ssBase_domain); ?></label>
+    	<label for="op_scroll_css">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['scroll_css'] == "on") echo $checked; ?> name="op_scroll_css" id="op_scroll_css" />
+    	<?php _e(' Add scroll Css file.',$ssBase_domain); ?></label>
+            <ul style="list-style-type: none;margin-top:20px;">
+               <li>
+               <label for="op_scroll_trans"><?php _e(' Transition type',$ssBase_domain); ?>:   </label>  
+             <select name="op_scroll_trans" id="op_scroll_trans">
+                 <option <?php if($ssBase_newOptions['scroll_trans'] == "sine") echo $selected; ?> id="sine" value='sine'> sine</option>
+                 <option <?php if($ssBase_newOptions['scroll_trans'] == "elastic") echo $selected; ?> id="elastic" value='elastic'> elastic</option>
+                 <option <?php if($ssBase_newOptions['scroll_trans'] == "bounce") echo $selected; ?> id="bounce" value='bounce'> bounce</option>
+                 <option <?php if($ssBase_newOptions['scroll_trans'] == "back") echo $selected; ?> id="back" value='back'> back</option>
+                 <option <?php if($ssBase_newOptions['scroll_trans'] == "expo") echo $selected; ?> id="expo" value='expo'> expo</option>
+                 <option <?php if($ssBase_newOptions['scroll_trans'] == "circ") echo $selected; ?> id="circ" value='circ'> circ</option>
+                 <option <?php if($ssBase_newOptions['scroll_trans'] == "quad") echo $selected; ?> id="quad" value='quad'> quad</option>
+                 <option <?php if($ssBase_newOptions['scroll_trans'] == "cubic") echo $selected; ?> id="cubic" value='cubic'> cubic</option>
+                 <option <?php if($ssBase_newOptions['scroll_trans'] == "linear") echo $selected; ?> id="linear" value='linear'> linear</option>
+                </select>&nbsp;
+            <label for="op_scroll_transout"><?php _e(' Transition action.',$ssBase_domain); ?></label>
+            <select name="op_scroll_transout" id="op_scroll_transout">
+                 <option <?php if($ssBase_newOptions['scroll_transout'] == "in") echo $selected; ?> id="in" value='in'> in</option>
+                 <option <?php if($ssBase_newOptions['scroll_transout'] == "out") echo $selected; ?> id="out" value='out'> out</option>
+                 <option <?php if($ssBase_newOptions['scroll_transout'] == "in:out") echo $selected; ?> id="inout" value='in:out'> in:out</option>     
+            </select>&nbsp;&nbsp;
+                <label for="op_scroll_time"><?php _e(' Scroll time',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_scroll_time" id="op_scroll_time" size="3" maxlength="6"
+			 value="<?php echo ($ssBase_newOptions['scroll_time']); ?>" /></label>
+                <br />
+            <span class="setting-description"><?php _e(' IN is the begginning of transition. OUT is the end of transition.',$ssBase_domain); ?></span>
+            <br />
+            <span class="setting-description"><?php _e(' Use the quick tag button in html/code view to insert a scroll structure to your page or post. Edit the content of the structure to your needs. Add more items by copy and paste. Content object divs must be number sequencially, ie: div id="scroll3"... div id="scroll4"...  This works for single posts and pages, but not for multiple posts per page.',$ssBase_domain); ?></span>
+
+
+             </li>
+ 
+         </ul>
+	   </li>
+	   <li style="display: none;">
+        <h3>Comment Slider</h3>
+    	<label for="op_com">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['com'] == "on") echo $checked; ?> name="op_com" id="op_com" />
+    	<?php _e(' Add Commmet Slider to your page.',$ssBase_domain); ?></label>
+    	<label for="op_com_css">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['com_css'] == "on") echo $checked; ?> name="op_com_css" id="op_com_css" />
+    	<?php _e(' Add Com Slider Css file.',$ssBase_domain); ?></label>
+            <ul style="list-style-type: none;margin-top:20px;">
+               <li>
+               <label for="op_com_trans"><?php _e(' Transition type',$ssBase_domain); ?>:   </label>  
+             <select name="op_com_trans" id="op_com_trans">
+                 <option <?php if($ssBase_newOptions['com_trans'] == "sine") echo $selected; ?> id="sine" value='sine'> sine</option>
+                 <option <?php if($ssBase_newOptions['com_trans'] == "elastic") echo $selected; ?> id="elastic" value='elastic'> elastic</option>
+                 <option <?php if($ssBase_newOptions['com_trans'] == "bounce") echo $selected; ?> id="bounce" value='bounce'> bounce</option>
+                 <option <?php if($ssBase_newOptions['com_trans'] == "back") echo $selected; ?> id="back" value='back'> back</option>
+                 <option <?php if($ssBase_newOptions['com_trans'] == "expo") echo $selected; ?> id="expo" value='expo'> expo</option>
+                 <option <?php if($ssBase_newOptions['com_trans'] == "circ") echo $selected; ?> id="circ" value='circ'> circ</option>
+                 <option <?php if($ssBase_newOptions['com_trans'] == "quad") echo $selected; ?> id="quad" value='quad'> quad</option>
+                 <option <?php if($ssBase_newOptions['com_trans'] == "cubic") echo $selected; ?> id="cubic" value='cubic'> cubic</option>
+                 <option <?php if($ssBase_newOptions['com_trans'] == "linear") echo $selected; ?> id="linear" value='linear'> linear</option>
+                </select>&nbsp;
+            <label for="op_com_transout"><?php _e(' Transition action.',$ssBase_domain); ?></label>
+            <select name="op_com_transout" id="op_com_transout">
+                 <option <?php if($ssBase_newOptions['com_transout'] == "in") echo $selected; ?> id="in" value='in'> in</option>
+                 <option <?php if($ssBase_newOptions['com_transout'] == "out") echo $selected; ?> id="out" value='out'> out</option>
+                 <option <?php if($ssBase_newOptions['com_transout'] == "in:out") echo $selected; ?> id="inout" value='in:out'> in:out</option>     
+            </select>&nbsp;&nbsp;
+                <label for="op_com_time"><?php _e(' com time',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_com_time" id="op_com_time" size="3" maxlength="6"
+			 value="<?php echo ($ssBase_newOptions['com_time']); ?>" /></label>
+                <br />
+            <span class="setting-description"><?php _e(' IN is the begginning of transition. OUT is the end of transition.',$ssBase_domain); ?></span>
+
+             </li>
+             <li>
+                <label for="op_com_open">
+               <input type="text" class="span-text" name="op_com_open" id="op_com_open" size="20" maxlength="100"
+			 value="<?php echo ($ssBase_newOptions['com_open']); ?>" />
+                <?php _e(' open link text',$ssBase_domain); ?></label>
+             </li>
+             <li>
+                <label for="op_com_close">
+               <input type="text" class="span-text" name="op_com_close" id="op_com_close" size="20" maxlength="100"
+			 value="<?php echo ($ssBase_newOptions['com_close']); ?>" />
+                <?php _e(' close link text',$ssBase_domain); ?></label>
+             </li>
+ 
+         </ul>
+	   </li>
+	   
+	   
+	   
+	   
     </ul>
      </fieldset>
      </td>

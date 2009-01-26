@@ -12,15 +12,18 @@
 			show_code = show_code+'acc_fixedwidth="'+f.value+'" ';
 			}
 		var f = document.getElementById('acc_height'); 
-		if (f.value != "") {
+		if (f.checked != "") {
+			f.value = 'true';
 			show_code = show_code+'acc_height="'+f.value+'" ';
 			}
 		var f = document.getElementById('acc_width'); 
-		if (f.value != "") {
+		if (f.checked != "") {
+			f.value = 'true';
 			show_code = show_code+'acc_width="'+f.value+'" ';
 			}
 		var f = document.getElementById('acc_opacity'); 
-		if (f.value != "") {
+		if (f.checked != "") {
+			f.value = 'true';
 			show_code = show_code+'acc_opacity="'+f.value+'" ';
 			}
 		var f = document.getElementById('acc_first'); 
@@ -28,11 +31,16 @@
 			show_code = show_code+'acc_firstopen="'+f.value+'" ';
 			}
 		var f = document.getElementById('acc_all'); 
-		if (f.value != "") {
+		if (f.checked != "") {
+			f.value = 'true';
 			show_code = show_code+'acc_openall="'+f.value+'" ';
 			}
+		var f = document.getElementById('acc_togtag');
+			var g = f.value;
+		var f = document.getElementById('acc_elemtag');
+			var h = f.value;
 		
-				show_code = show_code+']\n<h3>toggle one</h3>\n<div>content one</div>\n<h3>toggle two</h3>\n<div>content two</div>\n<h3>toggle three</h3>\n<div>content three</div>\n[/accordion]';
+				show_code = show_code+']\n<'+g+'>toggle one</'+g+'>\n<'+h+'>content one</'+h+'>\n<'+g+'>toggle two</'+g+'>\n<'+h+'>content two</'+h+'>\n<'+g+'>toggle three</'+g+'>\n<'+h+'>content three</'+h+'>\n[/accordion]';
 				var destination1 = document.getElementById('content');
 				
 				if (destination1) {

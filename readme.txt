@@ -4,13 +4,14 @@ Plugin URI: http://wp-superslider.com/
 Tags:animation, animated, gallery, slideshow, mootools 1.2, mootools, slider, superslider, slideshow2, menu
 Requires at least: 2.6
 Tested up to: 2.7
-Stable tag: 0.1
+Stable tag: 0.3
 
 Suit of Animated Plugins which use Mootools 1.2 javascript  
 
+
 == Description ==
 
-SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: Reflection;(adds floor reflection to your images), Accordion;(add accordions to your post content). Get the following plugins to accompany this suit: SuperSlider-Show, SuperSlider-Menu, SuperSlider-Milkbox. Plugins that use [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript. Highly configurable, theme based design, css based animations. Shortcode system on post and page screens and or Widgets. Degrades gracefully with javascript turned off, or plugin removed / disabled.
+SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: Reflection;(adds floor reflection to your images), Accordion;(add accordions to your post content). Scroll (add smooth scroll to your page) Zoomer (Adds a smooth image zoomer) .Get the following plugins to accompany this suit: SuperSlider-Show, SuperSlider-Menu, SuperSlider-Milkbox. Plugins that use [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript. Highly configurable, theme based design, css based animations. Shortcode system on post and page screens and or Widgets. Degrades gracefully with javascript turned off, or plugin removed / disabled.
 
 Support
 If you have any problems or suggestions regarding these plugins [please speak up](http://support.wp-superslider.com/ "support forum"), 
@@ -48,6 +49,19 @@ Create your own graphic and animation theme based on one of these provided.
 * custom
 
 == HISTORY ==
+*0.3 (2009/01/25)
+
+	- Added Zoomer module
+	- Added page scroller module
+	- Improved previous modules
+	- improved code
+	
+*0.2 (2009/01/20)
+
+	- Added Reflect module
+	- Added Accordion module
+	- improved code
+	
 *0.1 (2009/01/15)
 
 	- first public launch
