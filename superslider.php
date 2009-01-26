@@ -2,7 +2,7 @@
 /*
 Plugin Name: SuperSlider
 Plugin URI: http://wp-superslider.com/superslider
-Description: In production. 
+Description: SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: Reflection;(adds floor reflection to your images), Accordion;(add accordions to your post content). Scroll (add smooth scroll to your page) Zoomer (Adds a smooth image zoomer) .Get the following plugins to accompany this suit: SuperSlider-Show, SuperSlider-Menu, SuperSlider-Milkbox. Plugins that use [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript. Highly configurable, theme based design, css based animations. Shortcode system on post and page screens and or Widgets. Degrades gracefully with javascript turned off, or plugin removed / disabled.
 Author: Daiv Mowbray
 Version: 0.3
 Author URI: http://wp-superslider.com
@@ -567,7 +567,11 @@ function reflect_footer_admin() {
         extract($this->ssBaseOpOut);
         
 		$zoom_trans = 	$zoom_trans_type.':'.$zoom_trans_typeinout;
-		
+		if ($css_load != 'off') {
+		      $wait = $this->css_path.'/images/loading.gif';
+		      $error = $this->css_path.'/images/error.png';
+		}
+
 		$myzoomer = 'var ssZoom'.$this->acc_id.' = new ByZoomer(\'zoom'.$this->acc_id.'\', {
 		                    duration: \''.$zoom_time.'\',
                             transition: \''.$zoom_trans.'\',
@@ -578,8 +582,8 @@ function reflect_footer_admin() {
                             onZoomInComplete: $empty,
                             onZoomOutStart: $empty,
                             onZoomOutComplete: $empty,
-                            waitIcon: \'wait.gif\',
-                            errorIcon: \'error.png\'       
+                            waitIcon: \''.$wait.'\',
+                            errorIcon: \''.$error.'\'       
                             });';
 
             $zoomerOut = "\n\t"."<script type=\"text/javascript\">\n";
