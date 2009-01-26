@@ -2,7 +2,7 @@
 /*
 Plugin Name: SuperSlider
 Plugin URI: http://wp-superslider.com/superslider
-Description: SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: Reflection;(adds floor reflection to your images), Accordion;(add accordions to your post content). Scroll (add smooth scroll to your page) Zoomer (Adds a smooth image zoomer) .Get the following plugins to accompany this suit: SuperSlider-Show, SuperSlider-Menu, SuperSlider-Milkbox. Plugins that use [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript. Highly configurable, theme based design, css based animations. Shortcode system on post and page screens and or Widgets. Degrades gracefully with javascript turned off, or plugin removed / disabled.
+Description: SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: Reflection;(adds floor reflection to your images), Accordion;(add accordions to your post content). Scroll (add smooth scroll to your page) Zoomer (Adds a smooth image zoomer).
 Author: Daiv Mowbray
 Version: 0.3
 Author URI: http://wp-superslider.com
