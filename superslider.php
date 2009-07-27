@@ -626,7 +626,7 @@ function reflect_footer_admin() {
 		      $error = $this->css_path.'/images/error.png';
 		}
 
-		$myzoomer = 'var ssZoom'.$this->my_id.' = new ByZoomer(\'zoom'.$this->my_id.'\', {
+		$myzoomer = 'var ssZoom'.$this->my_id.' = new ByZoomer(\'zoom\', {//'.$this->my_id.'
 		                    duration: \''.$zoom_time.'\',
                             transition: \''.$zoom_trans.'\',
                             border: \''.$zoom_border.'\',
