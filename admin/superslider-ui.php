@@ -19,8 +19,9 @@ along with Fancy Categories; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 	/**
-   * Should you be doing this?
+   * Turn php warnings down/ off.
    */ 	
+   error_reporting(E_ALL ^ E_NOTICE);
    
 	if ( !current_user_can('manage_options') ) {
 		// Apparently not.
@@ -72,6 +73,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				"com_direction"   =>  "virtical",
 				"com_open"        =>  "Open comments",
 				"com_close" => "Close comments",
+				"nudger" => "on",
+				"nudge_amount" => '20',
+                "nudge_duration" => '500',
+                "nudge_family" => '#footer a, #sidebar a',
+                "fader" => 'on',
+                "fader_family" => '.fader',
+                "fader_opacity" => '0.5',
 				'ss_global_over_ride' => "on");//end array
 			
 			update_option($this->AdminOptionsName, $ssBase_OldOptions);
@@ -128,6 +136,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				'com_transout'	=> $_POST["op_com_transout"],
 				'com_open'	=> $_POST["op_com_open"],
 				'com_close'	=> $_POST["op_com_close"],
+				'nudger' => $_POST['op_nudger'],
+				'nudge_amount' => $_POST['op_nudge_amount'],
+                'nudge_duration' => $_POST['op_nudge_duration'],
+                'nudge_family' => $_POST['op_nudge_family'],
+                'fader' => $_POST['op_fader'],
+                'fader_opacity' => $_POST['op_fader_opacity'],
+                'fader_family' => $_POST['op_fader_family'],
 				'ss_global_over_ride'	=> $_POST["op_global_over_ride"]
 			);	
 
@@ -152,14 +167,54 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 		wp_nonce_field('ssBase_options'); echo "\n"; 
 		?>
 		
-<div style="">
-<a href="http://wp-superslider.com/">
-<img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/logo_superslider.png" style="margin-bottom: -15px;padding: 20px 20px 0px 20px;" alt="SuperSlider Logo" width="52" height="52" border="0" /></a>
-  <h2 style="display:inline; position: relative;">SuperSlider Base Options</h2>
- </div><br style="clear:both;" />
- <table class="form-table">
-    <tr><th scope="row">Global Options</th>
-		<td>
+    <div style="">
+    <a href="http://wp-superslider.com/">
+    <img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/logo_superslider.png" style="margin-bottom: -15px;padding: 20px 20px 0px 20px;" alt="SuperSlider Logo" width="52" height="52" border="0" /></a>
+      <h2 style="display:inline; position: relative;">SuperSlider Base Options</h2>
+     </div><br style="clear:both;" />
+ 
+ 
+ <script type="text/javascript">
+// <![CDATA[
+function create_ui_tabs() {
+
+
+    jQuery(function() {
+        var selector = '#ssslider';
+            if ( typeof jQuery.prototype.selector === 'undefined' ) {
+            // We have jQuery 1.2.x, tabs work better on UL
+            selector += ' > ul';
+        }
+        jQuery( selector ).tabs({ fxFade: true, fxSpeed: 'slow' });
+
+    });
+}
+
+jQuery(document).ready(function(){
+        create_ui_tabs();
+});
+
+	
+// ]]>
+</script>
+ 
+ 
+<div id="ssslider" class="ui-tabs">
+    <ul id="ssnav" class="ui-tabs-nav">
+        <li class="ui-tabs-selected"><a href="#fragment-1"><span>Global Options</span></a></li>
+        <li class="ui-state-default"><a href="#fragment-2"><span>Plugins Appearance</span></a></li>
+        <li class="ui-state-default"><a href="#fragment-3"><span>File Storage</span></a></li>
+        <li class="ui-state-default"><a href="#fragment-4"><span>Image Reflection</span></a></li>
+        <li class="ui-state-default"><a href="#fragment-5"><span>Accordion in post</span></a></li>
+        <li class="ui-state-default"><a href="#fragment-6"><span>Image Zoom</span></a></li>
+        <li class="ui-state-default"><a href="#fragment-7"><span>Page Scroller</span></a></li>
+        <li class="ui-state-default"><a href="#fragment-8"><span>Link Nudger</span></a></li>
+        <li class="ui-state-default"><a href="#fragment-9"><span>Object Fader </span></a></li>
+        <li class="ui-state-default" style="display: none;"><a href="#fragment-10"><span>Comment Slider</span></a></li>
+    </ul>
+    <div id="fragment-1" class="ui-tabs-panel">
+ 	<h3 scope="row">Global Options</h3>
+		
 		<fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;"><!-- SLideshow options start -->
    <legend><b><?php _e(' Global Over ride',$ssBase_domain); ?>:</b></legend>
     	<label for="op_global_over_ride">
@@ -168,97 +223,91 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
     	<?php _e(' Global superslider plugin over ride .',$ssBase_domain); ?></label>
     	 <br /><span class="setting-description"><?php _e(' All SuperSlider plugins will use these Base plugin settings for: Themes,Mootools loading, and css file storage. ',$ssBase_domain); ?></span>
   </fieldset>
-  </td>
-		<td valign="top">
-		</td>
-	</tr>
-	<tr><th scope="row">SuperSlider Plugins Appearance</th>
-		<td width="70%" valign="top">
+ 
+    </div>
+    
+	<div id="fragment-2" class="ss-tabs-panel">
+	<h3>SuperSlider Plugins Appearance</h3>
+		
 		<fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;"><!-- Theme options start -->  	
 		<legend><b><?php _e(' Themes',$ssBase_domain); ?>:</b></legend>
-	<!--<optgroup label="op_css_theme">-->
+
 	<table width="100%" cellpadding="10" align="center">
-	<tr>
-		<td width="25%" align="center" valign="top"><img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/default.png" alt="default" border="0" width="110" height="25" /></td>
-		<td width="25%" align="center" valign="top"><img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/blue.png" alt="blue" border="0" width="110" height="25" /></td>
-		<td width="25%" align="center" valign="top"><img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/black.png" alt="black" border="0" width="110" height="25" /></td>
-		<td width="25%" align="center" valign="top"><img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/custom.png" alt="custom" border="0" width="110" height="25" /></td>
-	</tr>
-	<tr>
-		<td><label for="op_css_theme1">
-			 <input type="radio"  name="op_css_theme" id="op_css_theme1"
-			 <?php if($ssBase_newOptions['css_theme'] == "default") echo $checked; ?> value="default" />
-			</label>
-		</td>
-		<td> <label for="op_css_theme2">
-			 <input type="radio"  name="op_css_theme" id="op_css_theme2"
-			 <?php if($ssBase_newOptions['css_theme'] == "blue") echo $checked; ?> value="blue" />
-			 </label>
-  		</td>
-		<td><label for="op_css_theme3">
-			 <input type="radio"  name="op_css_theme" id="op_css_theme3"
-			 <?php if($ssBase_newOptions['css_theme'] == "black") echo $checked; ?> value="black" />
-			 </label>
-  		</td>
-		<td> <label for="op_css_theme4">
-			 <input type="radio"  name="op_css_theme" id="op_css_theme4"
-			 <?php if($ssBase_newOptions['css_theme'] == "custom") echo $checked; ?> value="custom" />
-			</label>
-     </td>
-	</tr>
+        <tr>
+            <td width="25%" align="center" valign="top"><img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/default.png" alt="default" border="0" width="110" height="25" /></td>
+            <td width="25%" align="center" valign="top"><img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/blue.png" alt="blue" border="0" width="110" height="25" /></td>
+            <td width="25%" align="center" valign="top"><img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/black.png" alt="black" border="0" width="110" height="25" /></td>
+            <td width="25%" align="center" valign="top"><img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/custom.png" alt="custom" border="0" width="110" height="25" /></td>
+        </tr>
+        <tr>
+            <td><label for="op_css_theme1">
+                 <input type="radio"  name="op_css_theme" id="op_css_theme1"
+                 <?php if($ssBase_newOptions['css_theme'] == "default") echo $checked; ?> value="default" />
+                </label>
+            </td>
+            <td> <label for="op_css_theme2">
+                 <input type="radio"  name="op_css_theme" id="op_css_theme2"
+                 <?php if($ssBase_newOptions['css_theme'] == "blue") echo $checked; ?> value="blue" />
+                 </label>
+            </td>
+            <td><label for="op_css_theme3">
+                 <input type="radio"  name="op_css_theme" id="op_css_theme3"
+                 <?php if($ssBase_newOptions['css_theme'] == "black") echo $checked; ?> value="black" />
+                 </label>
+            </td>
+            <td> <label for="op_css_theme4">
+                 <input type="radio"  name="op_css_theme" id="op_css_theme4"
+                 <?php if($ssBase_newOptions['css_theme'] == "custom") echo $checked; ?> value="custom" />
+                </label>
+         </td>
+        </tr>
 	</table>
-    <!--</optgroup>-->
-  </fieldset>
-  </td>
-		<td width="30%" valign="top">
-		<p class="submit">
-		<input type="submit" id="update1" class="button-primary" value="<?php _e(' Update options',$ssBase_domain); ?> &raquo;" />
-		</p>
-		</td>
-	</tr>
-<tr><th scope="row">File Storage</th>
-		<td>
-<fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
-   	<legend><b><?php _e(' Loading Options'); ?>:</b></legend>
-  	<ul style="list-style-type: none;">
-    <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
-    	<label for="op_load_moo">
-    	<input type="checkbox" 
-    	<?php if($ssBase_newOptions['load_moo'] == "on") echo $checked; ?> name="op_load_moo" id="op_load_moo" />
-    	<?php _e(' Load Mootools 1.2 into your theme header.',$ssBase_domain); ?></label>
-    	
-	</li>
-    <li>
-    	<label for="op_css_load1">
-			<input type="radio" name="op_css_load" id="op_css_load1"
-			<?php if($ssBase_newOptions['css_load'] == "default") echo $checked; ?> value="default" />
-			<?php _e(' Load css from default location. superslider plugin folder.',$ssBase_domain); ?></label><br />
-    	<label for="op_css_load2">
-			<input type="radio" name="op_css_load"  id="op_css_load2"
-			<?php if($ssBase_newOptions['css_load'] == "pluginData") echo $checked; ?> value="pluginData" />
-			<?php _e(' Load css from plugin-data folder, see side note. (Recommended)',$ssBase_domain); ?></label><br />
-    	<label for="op_css_load3">
-			<input type="radio" name="op_css_load"  id="op_css_load3"
-			<?php if($ssBase_newOptions['css_load'] == "off") echo $checked; ?> value="off" />
-			<?php _e(' Don\'t load css, manually add to your theme css file.',$ssBase_domain); ?></label>
-    	<br />
-    	<span class="setting-description"><?php _e(' Via ftp, move the folder named plugin-data from this plugin folder into your wp-content folder. This is recomended to avoid over writing any changes you make to the css files when you update this plugin.',$ssBase_domain); ?></span>
-               
-	
-    </li>
-    </ul>
-</fieldset>
-     </td>
-		<td valign="top"><p><?php _e(' If your theme or any other plugin loads the mootools 1.2 javascript framework into your file header, you can disactivate it here.',$ssBase_domain); ?></p>
-		</td>
-		</tr>
-	<tr><th scope="row">SuperSlider Modules</th>
-		<td>
-<fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
-   	<legend><b><?php _e(' Modules'); ?>:</b></legend>
-  	<ul style="list-style-type: none;">
-      <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
-        <h3>Image Reflection</h3>
+    
+    </fieldset>
+    </div>
+		
+    <div id="fragment-3" class="ss-tabs-panel">
+    <h3>File Storage</h3>
+		
+    <fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
+        <legend><b><?php _e(' Loading Options'); ?>:</b></legend>
+        <ul style="list-style-type: none;">
+        <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+            <label for="op_load_moo">
+            <input type="checkbox" 
+            <?php if($ssBase_newOptions['load_moo'] == "on") echo $checked; ?> name="op_load_moo" id="op_load_moo" />
+            <?php _e(' Load Mootools 1.2 into your theme header.',$ssBase_domain); ?></label>
+            
+        </li>
+        <li>
+            <label for="op_css_load1">
+                <input type="radio" name="op_css_load" id="op_css_load1"
+                <?php if($ssBase_newOptions['css_load'] == "default") echo $checked; ?> value="default" />
+                <?php _e(' Load css from default location. superslider plugin folder.',$ssBase_domain); ?></label><br />
+            <label for="op_css_load2">
+                <input type="radio" name="op_css_load"  id="op_css_load2"
+                <?php if($ssBase_newOptions['css_load'] == "pluginData") echo $checked; ?> value="pluginData" />
+                <?php _e(' Load css from plugin-data folder, see side note. (Recommended)',$ssBase_domain); ?></label><br />
+            <label for="op_css_load3">
+                <input type="radio" name="op_css_load"  id="op_css_load3"
+                <?php if($ssBase_newOptions['css_load'] == "off") echo $checked; ?> value="off" />
+                <?php _e(' Don\'t load css, manually add to your theme css file.',$ssBase_domain); ?></label>
+            <br />
+            <span class="setting-description"><?php _e(' Via ftp, move the folder named plugin-data from this plugin folder into your wp-content folder. This is recomended to avoid over writing any changes you make to the css files when you update this plugin.',$ssBase_domain); ?></span>
+                   
+        
+        </li>
+        </ul>
+    </fieldset>
+     
+		<p><?php _e(' If your theme or any other plugin loads the mootools 1.2 javascript framework into your file header, you can disactivate it here.',$ssBase_domain); ?></p>
+
+		</div>
+	<div id="fragment-4" class="ss-tabs-panel">
+	<h3>Image Reflection</h3>
+		
+    <fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
+   	<legend><b><?php _e(' Reflection'); ?>:</b></legend>        
     	<label for="op_reflect">
     	<input type="checkbox" 
     	<?php if($ssBase_newOptions['reflect'] == "on") echo $checked; ?> name="op_reflect" id="op_reflect" />
@@ -287,11 +336,15 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                 
               </li>
             </ul>
-	   </li>
-        <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+	  </fieldset>
+        </div>
+        
+        <div id="fragment-5" class="ss-tabs-panel">
          
-         <div style="width: 50%; float:left;">
             <h3>Accordion in post</h3>
+            <fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
+   	        <legend><b><?php _e(' Accordion'); ?>:</b></legend>
+            <div style="width: 50%; float:left;">
     	       <label for="op_accordion">
                 <input type="checkbox" 
                 <?php if($ssBase_newOptions['accordion'] == "on") echo $checked; ?> name="op_accordion" id="op_accordion" />
@@ -401,12 +454,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                 </ul>
                
             </div><br style="clear:both;" />
+             </fieldset>
+             
              <br />
                  <span class="setting-description"><?php _e(' To use the accordion, click on the add accordion button found in the SuperSlider-Accordion meta box on your post screen (this works best in code view). This will insert the accordion structure. Edit the toggle bar titles, ie: toggle one, toggle two , then insert your content into content one and content two etc. to add more toggle bars and content just copy and paste the h3 followed by the div tags.',$ssBase_domain); ?></span>
                 
-	   </li>
-    <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+	   </div>
+	   
+	   
+    <div id="fragment-6" class="ss-tabs-panel">
         <h3>Image Zoom</h3>
+    	<fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
+   	        <legend><b><?php _e(' Zoom'); ?>:</b></legend>
     	<label for="op_zoom">
     	<input type="checkbox" 
     	<?php if($ssBase_newOptions['zoom'] == "on") echo $checked; ?> name="op_zoom" id="op_zoom" />
@@ -454,7 +513,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                 </label>
 
                 <label for="op_zoom_back"><?php _e('px, background color -',$ssBase_domain); ?>
-                <input type="text" class="span-text" name="op_zoom_back" id="op_zoom_back" size="6" maxlength="20"
+                <input type="text" class="span-text" name="op_zoom_back" id="op_zoom_back" size="8" maxlength="20"
 			 value="<?php echo ($ssBase_newOptions['zoom_back']); ?>" />
                 </label>
             </li>
@@ -462,9 +521,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
  
          </ul>
-	   </li>
-	   <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+	   </fieldset>
+	   </div>
+	   <div id="fragment-7" class="ss-tabs-panel">
         <h3>Page Scroller</h3>
+        <fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
+   	        <legend><b><?php _e(' Scroller'); ?>:</b></legend>
     	<label for="op_scroll">
     	<input type="checkbox" 
     	<?php if($ssBase_newOptions['scroll'] == "on") echo $checked; ?> name="op_scroll" id="op_scroll" />
@@ -505,9 +567,84 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
              </li>
  
          </ul>
-	   </li>
-	   <li style="display: none;">
+	   </fieldset>
+	   </div>
+	   <div id="fragment-8" class="ss-tabs-panel">
+	    <h3>Link Nudger</h3>
+	    <fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
+   	        <legend><b><?php _e(' Nudger'); ?>:</b></legend>
+        
+    	<label for="op_nudger">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['nudger'] == "on") echo $checked; ?> name="op_nudger" id="op_nudger" />
+    	<?php _e(' Add link nudger to your page.',$ssBase_domain); ?></label>
+    	<label for="op_nudger_css">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['nudger_css'] == "on") echo $checked; ?> name="op_nudger_css" id="op_nudger_css" />
+    	<?php _e(' Add nudger Css file.',$ssBase_domain); ?></label>
+            <ul style="list-style-type: none;margin-top:20px;">
+               <li>
+              <!--<label for="op_nudger_trans"><?php _e(' Transition type',$ssBase_domain); ?>:   </label>  
+             <select name="op_nudger_trans" id="op_nudger_trans">
+                 <option <?php if($ssBase_newOptions['nudger_trans'] == "sine") echo $selected; ?> id="sine" value='sine'> sine</option>
+                 <option <?php if($ssBase_newOptions['nudger_trans'] == "elastic") echo $selected; ?> id="elastic" value='elastic'> elastic</option>
+                 <option <?php if($ssBase_newOptions['nudger_trans'] == "bounce") echo $selected; ?> id="bounce" value='bounce'> bounce</option>
+                 <option <?php if($ssBase_newOptions['nudger_trans'] == "back") echo $selected; ?> id="back" value='back'> back</option>
+                 <option <?php if($ssBase_newOptions['nudger_trans'] == "expo") echo $selected; ?> id="expo" value='expo'> expo</option>
+                 <option <?php if($ssBase_newOptions['nudger_trans'] == "circ") echo $selected; ?> id="circ" value='circ'> circ</option>
+                 <option <?php if($ssBase_newOptions['nudger_trans'] == "quad") echo $selected; ?> id="quad" value='quad'> quad</option>
+                 <option <?php if($ssBase_newOptions['nudger_trans'] == "cubic") echo $selected; ?> id="cubic" value='cubic'> cubic</option>
+                 <option <?php if($ssBase_newOptions['nudger_trans'] == "linear") echo $selected; ?> id="linear" value='linear'> linear</option>
+                </select>&nbsp;
+            <label for="op_nudger_transout"><?php _e(' Transition action.',$ssBase_domain); ?></label>
+            <select name="op_nudger_transout" id="op_nudger_transout">
+                 <option <?php if($ssBase_newOptions['nudger_transout'] == "in") echo $selected; ?> id="in" value='in'> in</option>
+                 <option <?php if($ssBase_newOptions['nudger_transout'] == "out") echo $selected; ?> id="out" value='out'> out</option>
+                 <option <?php if($ssBase_newOptions['nudger_transout'] == "in:out") echo $selected; ?> id="inout" value='in:out'> in:out</option>     
+            </select>-->
+                <label for="op_nudger_time"><?php _e(' nudger time',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_nudge_duration" id="op_nudge_duration" size="3" maxlength="6"
+			 value="<?php echo ($ssBase_newOptions['nudge_duration']); ?>" /></label>
+			 <label for="op_nudge_amount"><?php _e(' nudger distance',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_nudge_amount" id="op_nudge_amount" size="3" maxlength="6"
+			 value="<?php echo ($ssBase_newOptions['nudge_amount']); ?>" /></label>
+			 <label for="op_nudge_family"><?php _e(' nudger families',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_nudge_family" id="op_nudge_family" size="18" maxlength="60"
+			 value="<?php echo ($ssBase_newOptions['nudge_family']); ?>" /></label>
+            </li>
+         </ul>
+	   </fieldset>
+	   
+	   </div>
+	   <div id="fragment-9" class="ss-tabs-panel">
+	    <h3>Fader</h3>
+	    <fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
+   	        <legend><b><?php _e(' Fader'); ?>:</b></legend>
+        
+    	<label for="op_fader">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['fader'] == "on") echo $checked; ?> name="op_fader" id="op_fader" />
+    	<?php _e(' Add object fader to your page.',$ssBase_domain); ?></label>
+            <ul style="list-style-type: none;margin-top:20px;">
+               <li>
+                <label for="op_fader_opacity"><?php _e(' Fader opacity',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_fader_opacity" id="op_fader_opacity" size="3" maxlength="6"
+			 value="<?php echo ($ssBase_newOptions['fader_opacity']); ?>" /></label>
+			 <label for="op_nudge_family"><?php _e(' Fader families',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_fader_family" id="op_fader_family" size="18" maxlength="60"
+			 value="<?php echo ($ssBase_newOptions['fader_family']); ?>" /></label>
+			 <br />
+			 <span class="setting-description"><?php _e('Add a Fade transition to one object of a group on mouseover. Draws attention to that object.<br /> To use, add class="fader" to an unordered list, or any object with child objects. Then fade will be applied to all the list/child items.',$ssBase_domain); ?></span>
+            </li>
+         </ul>
+	   </fieldset>
+	   
+	   </div>
+	   
+	   <div id="fragment-10" class="ss-tabs-panel" style="display: none;">
         <h3>Comment Slider</h3>
+    	<fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
+   	        <legend><b><?php _e(' Nudger'); ?>:</b></legend>
     	<label for="op_com">
     	<input type="checkbox" 
     	<?php if($ssBase_newOptions['com'] == "on") echo $checked; ?> name="op_com" id="op_com" />
@@ -557,20 +694,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
              </li>
  
          </ul>
-	   </li>
-	   
-	   
-	   
-	   
-    </ul>
-     </fieldset>
-     </td>
-		<td valign="top"><p><?php _e(' ',$ssBase_domain); ?></p>
-		</td>
-		</tr>
-	
-</table>
-<p class="submit">
+	   </fieldset>
+	   </div>
+</div>	   
+    <p class="submit">
 		<input type="submit" name="set_defaults" value="<?php _e(' Reload Default Options',$ssBase_domain); ?> &raquo;" />
 		<input type="submit" id="update2" class="button-primary" value="<?php _e(' Update options',$ssBase_domain); ?> &raquo;" />
 		<input type="hidden" name="action" id="action" value="update" />

@@ -4,14 +4,24 @@ Plugin URI: http://wp-superslider.com/
 Tags:animation, animated, accordion, reflection, page scroll, mootools 1.2, mootools, slider, superslider
 Requires at least: 2.6
 Tested up to: 2.8.2
-Stable tag: 0.6.1
+Stable tag: 0.6.2
 
 Suit of Animated Plugins which use Mootools 1.2 javascript  
 
 
 == Description ==
 
-SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: Reflection;(adds floor reflection to your images), Accordion;(add accordions to your post content). Scroll (add smooth scroll to your page) Zoomer (Adds a smooth image zoomer) .Get the following plugins to accompany this suit: SuperSlider-Show, SuperSlider-Slimbox, SuperSlider-MooFLow. Plugins that use [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript. Highly configurable, theme based design, css based animations. Shortcode system on post and page screens and or Widgets. Degrades gracefully with javascript turned off, or plugin removed / disabled.
+SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: 
+
+* Reflection: (adds floor reflection to your images), 
+* Accordion: (add nested accordions to your post content),
+* Scroll: (add smooth scroll navigation to your page.), 
+* Zoomer: (Adds a smooth image zoomer),
+* Nudger: (slide links or small objects on mouseover),
+* Fader: (fade transition one object of a group on mouseover)(NEW! with version 0.6.2)
+
+
+Get the following plugins to accompany this suit: SuperSlider-Show, SuperSlider-Slimbox, SuperSlider-MooFLow. Plugins that use [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript. Highly configurable, theme based design, css based animations. Shortcode system on post and page screens and or Widgets. Degrades gracefully with javascript turned off, or plugin removed / disabled.
 
 Support
 If you have any problems or suggestions regarding these plugins [please speak up](http://support.wp-superslider.com/ "support forum"), 
@@ -49,6 +59,10 @@ Create your own graphic and animation theme based on one of these provided.
 * custom
 
 == HISTORY ==
+
+*0.6.2 (2009/09/17)
+    
+    * added Fader module
 
 *0.6.1 (2009/09/17)
     

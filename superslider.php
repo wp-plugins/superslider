@@ -4,7 +4,7 @@ Plugin Name: SuperSlider
 Plugin URI: http://wp-superslider.com/superslider
 Description: SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: Reflection;(adds floor reflection to your images), Accordion;(add accordions to your post content). Scroll (add smooth scroll to your page) Zoomer (Adds a smooth image zoomer).
 Author: Daiv Mowbray
-Version: 0.6.1
+Version: 0.6.2
 Author URI: http://wp-superslider.com
 Tags: animation, animated, gallery, slideshow, mootools 1.2, mootools, accordion, slider, superslider, menu, lightbox
 
@@ -51,6 +51,7 @@ if (!class_exists("ssBase")) {
 		var $zoom_started = 'false';
 		var $has_zoomed = 'false';
 		var $nudger_started = 'false';
+		var $fader_started = 'false';
 	
 	// Pre-2.6 compatibility
 	function set_base_paths($css_load, $css_theme) {
@@ -153,6 +154,9 @@ if (!class_exists("ssBase")) {
 				"nudge_amount" => '20',
                 "nudge_duration" => '500',
                 "nudge_family" => '#footer a, #sidebar a',
+                "fader" => 'on',
+                "fader_family" => '.fader',
+                "fader_opacity" => '0.5',
 				'ss_global_over_ride' => "on");
 		
 		
@@ -234,6 +238,10 @@ if (!class_exists("ssBase")) {
             if ( $nudger == 'on'){  
                    add_action ( "wp_head", array(&$this,"nudger_add_script"));  
                    add_action ( "wp_head", array(&$this,"nudger_starter"));
+                  
+            }
+            if ( $fader == 'on'){   
+                   add_action ( "wp_head", array(&$this,"fader_starter"));
                   
             }
             /*if ( $com == 'on' ){             
@@ -626,7 +634,7 @@ function reflect_footer_admin() {
 		      $error = $this->css_path.'/images/error.png';
 		}
 
-		$myzoomer = 'var ssZoom'.$this->my_id.' = new ByZoomer(\'zoom\', {//'.$this->my_id.'
+		$myzoomer = 'var ssZoom'.$this->my_id.' = new ByZoomer(\'zoom\', { //'.$this->my_id.'
 		                    duration: \''.$zoom_time.'\',
                             transition: \''.$zoom_trans.'\',
                             border: \''.$zoom_border.'\',
@@ -832,6 +840,34 @@ function reflect_footer_admin() {
         if (!is_admin()) {
 			if ($this->nudger_started != 'true')echo $nudgerOut;
 			$this->nudger_started = 'true';
+		}
+    
+    }
+    
+    function fader_starter(){
+
+        extract($this->ssBaseOpOut);
+
+        $myfader = "$$('".$fader_family."').each(function(container) {
+			container.getChildren().each(function(child) {
+				var siblings = child.getParent().getChildren().erase(child);
+				child.addEvents({
+					mouseenter: function() { siblings.tween('opacity',".$fader_opacity."); },
+					mouseleave: function() { siblings.tween('opacity',1); }
+				});
+			});
+		});";
+                            
+            $faderOut = "\n\t"."<script type=\"text/javascript\">\n";
+			$faderOut .= "\t"."// <![CDATA[\n";		
+			$faderOut .= "window.addEvent('domready', function() {
+			".$myfader."
+			});\n";
+			$faderOut .= "\t"."// ]]></script>\n";
+                      
+        if (!is_admin()) {
+			if ($this->fader_started != 'true')echo $faderOut;
+			$this->fader_started = 'true';
 		}
     
     }
