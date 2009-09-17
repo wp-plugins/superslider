@@ -62,15 +62,15 @@ Create your own graphic and animation theme based on one of these provided.
 
 *0.6.2 (2009/09/17)
     
-    * added Fader module
+  * added Fader module
 
 *0.6.1 (2009/09/17)
     
-    * repaired accordion js and nudger js file name error
+  * repaired accordion js and nudger js file name error
 
 *0.6 (2009/07/27)
 
-    * updated mootools to 1.2.3
+  * updated mootools to 1.2.3
 
 *0.5 (2009/06/16)
 
