@@ -1,0 +1,1 @@
+(function(){window.addEvent("domready",function(){$$(".fade-area").each(function(a){a.getChildren().each(function(c){var b=c.getParent().getChildren().erase(c);c.addEvents({mouseenter:function(){b.tween("opacity",0.5)},mouseleave:function(){b.tween("opacity",1)}})})})})})();
