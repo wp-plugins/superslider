@@ -4,7 +4,7 @@ Plugin Name: SuperSlider
 Plugin URI: http://wp-superslider.com/superslider
 Description: SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: Reflection;(adds floor reflection to your images), Accordion;(add accordions to your post content). Scroll (add smooth scroll to your page) Zoomer (Adds a smooth image zoomer).
 Author: Daiv Mowbray
-Version: 0.6.2
+Version: 0.6.3
 Author URI: http://wp-superslider.com
 Tags: animation, animated, gallery, slideshow, mootools 1.2, mootools, accordion, slider, superslider, menu, lightbox
 
@@ -52,6 +52,8 @@ if (!class_exists("ssBase")) {
 		var $has_zoomed = 'false';
 		var $nudger_started = 'false';
 		var $fader_started = 'false';
+		var $open_addEvent = '';
+		var $close_addEvent = '';
 	
 	// Pre-2.6 compatibility
 	function set_base_paths($css_load, $css_theme) {
@@ -202,6 +204,36 @@ if (!class_exists("ssBase")) {
 			'moomore',
 			$this->js_path. 'mootools-1.2.3.1-more.js',
 			array( 'moocore' ), '1.2.3');
+			
+			/** new script registry */
+			
+			wp_register_script(
+			'reflection',
+			$this->js_path.'reflection.js',
+			array( 'moocore' ), '1');
+			
+			wp_register_script(
+			'multiopen-accordion',
+			$this->js_path.'multiopen-accordion.js',
+			array( 'moocore' ), '1');
+			
+			wp_register_style(
+			'accordion_style', 
+			$this->css_path.'/accordion.css');
+			
+			wp_register_style(
+			'scroll_style', 
+			$this->css_path.'/scroll.css');
+			
+			wp_register_script(
+			'zoomer',
+			$this->js_path.'zoomer.js',
+			array( 'moocore' ), '1');
+			
+			wp_register_script(
+			'nudger',
+			$this->js_path.'nudger.js',
+			array( 'moocore' ), '1');
 
   			//add_action( 'admin_menu', array(&$this,'ssBase_setup_optionspage'));					
 			add_action('wp_enqueue_scripts', array(&$this,'ssBase_add_javascript'),3); //this loads the mootools scripts.
@@ -236,7 +268,8 @@ if (!class_exists("ssBase")) {
             }
 
             if ( $nudger == 'on'){  
-                   add_action ( "wp_head", array(&$this,"nudger_add_script"));  
+                   add_action('wp_enqueue_scripts', array(&$this,'nudger_add_script'),3);
+                   //add_action ( "wp_head", array(&$this,"nudger_add_script"));  
                    add_action ( "wp_head", array(&$this,"nudger_starter"));
                   
             }
@@ -310,15 +343,11 @@ if (!class_exists("ssBase")) {
 			if (!is_admin()) {				
 				if (function_exists('wp_enqueue_script')) {
 					if ($load_moo == 'on'){
-					echo "\t<!-- SuperSlider Base 0.5 plugin available at http://wp-superslider.com/ -->\n";		
 						wp_enqueue_script('moocore');		
 						wp_enqueue_script('moomore');	
-					
 					}
 					
 				}
-				
-				
 			}// is not admin
 	}
 
@@ -388,8 +417,8 @@ function reflect_footer_admin() {
                 return; 	 
         foreach ( $posts as $mypost ) {         
                 
-            if ( false !== strpos ( $mypost->post_content, 'reflect' ) ) { 
-                    add_action ( "wp_head", array(&$this,"reflect_add_script"));  
+            if ( false !== strpos ( $mypost->post_content, 'reflect' ) ) {  
+                    add_action('wp_enqueue_scripts', array(&$this,'reflect_add_script'),3);
                     add_action ( "wp_head", array(&$this,"reflect_starter"));
                     break; 
             } 
@@ -412,7 +441,6 @@ function reflect_footer_admin() {
     function reflect_shortcode_out($atts, $content){
        
 
-        //extract(shortcode_atts(array(
         $atts = (shortcode_atts(array(
 			'reflect_height' => '',
 			'reflect_opacity' => ''), $atts));
@@ -429,31 +457,58 @@ function reflect_footer_admin() {
         return do_shortcode($content);
         
     }
+    
     function reflect_starter(){
       
         extract($this->ssBaseOpOut);
         
         $myreflect = '$$("img").filter(function(img) { return img.hasClass("reflect"); }).reflect({ height:'.$reflect_height.', opacity:'.$reflect_opacity.'});';
 
-            $reflectOut = "\n\t"."<script type=\"text/javascript\">\n";
-			$reflectOut .= "\t"."// <![CDATA[\n";		
-			$reflectOut .= "window.addEvent('domready', function() {
-			".$myreflect."
-			});\n";
-			$reflectOut .= "\t"."// ]]></script>\n";
+        if ($this->reflect_started != 'true'){
+			 
+			 $this->open_addEvent() ;
+			 echo $myreflect;
+			 $this->close_addEvent() ;  
+			 
+			 $this->reflect_started = 'true';
+		}
+       
 
-			if ($this->reflect_started != 'true')echo $reflectOut;
-			$this->reflect_started = 'true';
-    
     }
     function reflect_add_script() {    
-        echo "\t<!-- SuperSlider Reflect script available at http://wp-superslider.com/ -->\n";							
-        echo "\t".'<script src="'.$this->js_path.'reflection.js" type="text/javascript"></script> '."\n";
-        
-//wp_enqueue_script('reflection');	
+
+            wp_enqueue_script('reflection');
 		
 		$this->reflect_script_added = 'true';
    }
+   
+    /**
+    *   Open the window add event
+	*	
+	*/   
+   function open_addEvent() {
+        
+        $addEvent = "\n\t"."<script type=\"text/javascript\">\n";
+		$addEvent .= "\t"."// <![CDATA[\n";		
+		$addEvent .= "window.addEvent('domready', function() {";
+			
+        //if ($this->open_addEvent != 'true') 
+        echo $addEvent;
+        
+   
+        $this->open_addEvent = 'true';
+   }
+   function close_addEvent() {
+    
+        $closeEvent = "});\n";
+        $closeEvent .= "\t"."// ]]></script>\n";
+        
+        //if ($this->close_addEvent != 'true' & $this->open_addEvent == 'true' ) 
+        
+        echo $closeEvent;
+        
+       $this->close_addEvent = 'true';
+    }
     /**
     *   Start the accordion functions
 	*	Look ahead to check if any posts contain the [gallery / slideshow] shortcode
@@ -466,7 +521,11 @@ function reflect_footer_admin() {
                 return; 	 
         foreach ( $posts as $mypost ) { 
                 if ( false !== strpos ( $mypost->post_content, '[accordion' ) ) {                 
-                        add_action ( "wp_head", array(&$this,"accordion_add_script"));                                              
+                       
+                        add_action('wp_enqueue_scripts', array(&$this,'accordion_add_script'),3);
+                        if ($css_load != 'off' && $acc_css == 'on') {
+                             add_action('wp_print_styles', array(&$this,'accordion_add_css'));
+                             }
                         break; 
                 }  
          }
@@ -476,7 +535,6 @@ function reflect_footer_admin() {
 	*/
     function accordion_shortcode_out ($atts, $content=''){
          
-        // extract(shortcode_atts(array(
          $atts = (shortcode_atts(array(
             'auto_accordion' => '',
             'acc_container' => '',
@@ -514,31 +572,30 @@ function reflect_footer_admin() {
         $output = "<div id=\"accordion".$this->my_id."\" class=\"".$acc_container."\">".$content."</div>";
         
         $output .= $this->accordion_starter();
+        
         return do_shortcode($output);
         
     }
 
     /**
-	* add the accordion code
+	* add the accordion script
 	*/
     function accordion_add_script(){
-        extract($this->ssBaseOpOut);
-        
-       	$js_path = WP_CONTENT_URL . '/plugins/'. plugin_basename(dirname(__FILE__)) . '/js/';
-        
-        echo "\t<!-- SuperSlider Accordion script available at http://wp-superslider.com/ -->\n";
-		echo "\t".'<script src="'.$js_path.'multiopen-accordion.js" type="text/javascript"></script> '."\n";
-		
-//wp_enqueue_script('multiopen-accordion');	
-		
-		if ($css_load != 'off' && $acc_css == 'on') {
-		      echo "\t".'<link type="text/css" rel="stylesheet" rev="stylesheet" href="'.$this->css_path.'/accordion.css" media="screen" />'."\n";
-		}
-	}
+        wp_enqueue_script('multiopen-accordion');	
 
+	}
+    /**
+	* add the accordion script
+	*/
+    function accordion_add_css(){
+        wp_enqueue_style( 'accordion_style');
+
+	}
 	
 	function accordion_starter(){
+		
 		extract($this->ssBaseOpOut);
+		
 		$myaccordion = 'var ssAcc'.$this->my_id.' = new MultipleOpenAccordion($(\'#accordion'.$this->my_id.'\'), {
 		                    togglers:$$(\'#accordion'.$this->my_id.' .'.$acc_toggler.'\'),       
 		                    elements:$$(\'#accordion'.$this->my_id.' .'.$acc_elements.'\'),     
@@ -550,14 +607,12 @@ function reflect_footer_admin() {
                             width: '.$acc_width.',                
                             firstElementsOpen: ['.$acc_firstopen.']        
                             });';
+			
+			 $this->open_addEvent() ;
 
-            $accordionOut = "\n\t"."<script type=\"text/javascript\">\n";
-			$accordionOut .= "\t"."// <![CDATA[\n";		
-			$accordionOut .= "window.addEvent('domready', function() {".$myaccordion."
-						});\n";
-			$accordionOut .= "\t"."// ]]></script>\n";
-
-			echo $accordionOut;
+			  echo $myaccordion;
+			
+			 $this->close_addEvent() ;
 				
     }
         	/**
@@ -619,10 +674,12 @@ function reflect_footer_admin() {
     }
     function zoom_add_script(){
         if ($this->has_zoomed != 'true') {	
-        echo "\t".'<script src="'.$this->js_path.'zoomer.js" type="text/javascript"></script> '."\n";
+            
+            wp_enqueue_script('zoomer');
         }
+        
         $this->has_zoomed = 'true';
-        //wp_enqueue_script('zoomer');
+       
 
     }
     function zoom_starter(){ 
@@ -647,15 +704,14 @@ function reflect_footer_admin() {
                             waitIcon: \''.$wait.'\',
                             errorIcon: \''.$error.'\'       
                             });';
-
-            $zoomerOut = "\n\t"."<script type=\"text/javascript\">\n";
-			$zoomerOut .= "\t"."// <![CDATA[\n";		
-			$zoomerOut .= "window.addEvent('domready', function() {".$myzoomer."
-						});\n";
-			$zoomerOut .= "\t"."// ]]></script>\n";
 			
-			if ($this->zoom_started != 'true') echo $zoomerOut;
+			$this->open_addEvent() ;
+			    
+			    if ($this->zoom_started != 'true') echo $myzoomer;
+			    
 			$this->zoom_started = 'true';
+			
+			$this->close_addEvent() ;
     }
         /**
 	*	Look ahead to check if any posts contain the [zoom ] shortcode or class
@@ -668,8 +724,8 @@ function reflect_footer_admin() {
                 return; 	 
         foreach ( $posts as $post ) { 
             if ( false !== strpos ( $post->post_content, 'zoom' ) ) {                 
-                add_action ( "wp_head", array(&$this,"zoom_add_script"));
-           
+               // add_action ( "wp_head", array(&$this,"zoom_add_script"));
+                add_action('wp_enqueue_scripts', array(&$this,'zoom_add_script'),3);
                     break; 
             }  
          }
@@ -719,19 +775,24 @@ function reflect_footer_admin() {
                 return; 	 
         foreach ( $posts as $mypost ) {         
                 if ( false !== strpos ( $mypost->post_content, '<div id="scroll"' ) ) {                 
-                        add_action ( "wp_head", array(&$this,"scroll_add_script"));  
+                        add_action ( "wp_head", array(&$this,"scroll_add_script")); 
+                        if ($css_load != 'off' && $scroll_css == 'on') {
+                             add_action('wp_print_styles', array(&$this,'scroll_add_css'));
+                             }
                         break; 
                 } 
          }
+	}
+	
+	function scroll_add_css() {
+		wp_enqueue_style( 'scroll_style');
+	
 	}
 	function scroll_add_script() {
     
         extract($this->ssBaseOpOut);
         $scroll_trans = $scroll_trans.':'.$scroll_transout;
-        echo "\t<!-- SuperSlider Scroll script available at http://wp-superslider.com/ -->\n";							
-		if ($css_load != 'off' && $scroll_css == 'on') {
-		      echo "\t".'<link type="text/css" rel="stylesheet" rev="stylesheet" href="'.$this->css_path.'/scroll.css" media="screen" />'."\n";
-		}
+        
 
      $myscroll = "  var scroller = new Fx.Scroll(window,{      
             links:'elements',
@@ -761,7 +822,7 @@ function reflect_footer_admin() {
              });
          });
          ";
-
+/*
         $scrollOut = "\n\t"."<script type=\"text/javascript\">\n";
         $scrollOut .= "\t"."// <![CDATA[\n";		
         $scrollOut .= "window.addEvent('domready', function() {
@@ -770,6 +831,18 @@ function reflect_footer_admin() {
         $scrollOut .= "\t"."// ]]></script>\n";
 
         echo $scrollOut;
+        */
+        
+        if (!is_admin()) {
+           
+           $this->open_addEvent() ;
+			
+			if ($this->scroll_started != 'true')echo $myscroll;
+			
+			$this->scroll_started = 'true';
+			
+			$this->close_addEvent() ;
+		}
    }
     
     /**
@@ -805,8 +878,7 @@ function reflect_footer_admin() {
     function nudger_add_script(){
     
         if (!is_admin()) {	
-            echo "\t".'<script src="'.$this->js_path.'nudger.js" type="text/javascript"></script> '."\n";
-//wp_enqueue_script('nudger');
+            wp_enqueue_script('nudger');
         }
 
     }
@@ -830,16 +902,15 @@ function reflect_footer_admin() {
                                    
                             });';
                             
-            $nudgerOut = "\n\t"."<script type=\"text/javascript\">\n";
-			$nudgerOut .= "\t"."// <![CDATA[\n";		
-			$nudgerOut .= "window.addEvent('domready', function() {
-			".$mynudger."
-			});\n";
-			$nudgerOut .= "\t"."// ]]></script>\n";
-                      
+        
         if (!is_admin()) {
-			if ($this->nudger_started != 'true')echo $nudgerOut;
+           
+           $this->open_addEvent() ;
+			
+			if ($this->nudger_started != 'true')echo $mynudger;
 			$this->nudger_started = 'true';
+			
+			$this->close_addEvent() ;
 		}
     
     }
@@ -858,16 +929,15 @@ function reflect_footer_admin() {
 			});
 		});";
                             
-            $faderOut = "\n\t"."<script type=\"text/javascript\">\n";
-			$faderOut .= "\t"."// <![CDATA[\n";		
-			$faderOut .= "window.addEvent('domready', function() {
-			".$myfader."
-			});\n";
-			$faderOut .= "\t"."// ]]></script>\n";
                       
         if (!is_admin()) {
-			if ($this->fader_started != 'true')echo $faderOut;
+            
+            $this->open_addEvent() ;
+            
+			if ($this->fader_started != 'true')echo $myfader;
 			$this->fader_started = 'true';
+			
+			$this->close_addEvent() ;
 		}
     
     }

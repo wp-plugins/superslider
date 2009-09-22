@@ -47,3 +47,17 @@ Notes:
     border-bottom: 1px solid #615133;
     margin: 10px 0px;
 }
+.totop{
+    display:block;
+    color:#C2A367;
+    font-style:italic;
+    font-weight:bolder;
+    margin:20px 0 10px 0;
+    padding:4px 0 4px 30px;
+    text-transform:uppercase;
+	background: transparent url(images/logo_ball_mini.png) no-repeat  0 -50px ;
+}
+.totop:hover{
+	color: #F4CB81;
+	background-position: 0 20;
+}

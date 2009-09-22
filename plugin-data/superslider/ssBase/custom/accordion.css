@@ -28,12 +28,12 @@ HTML:
 	cursor: pointer;
 	padding: 4px 8px 4px 30px;
 	margin: 0px;
-	background: #c2a367 url('images/arrow.png') no-repeat 4px 3px ;
+	background: #c2a367 url('images/logo_ball_mini.png') no-repeat 0px -50px ;
 	color: #ebebeb;
 	border: 1px solid #997f51;
 }
 .toggler:hover{
-    background: #f4cb81 url('images/arrow_down.png') no-repeat 4px 3px ;
+    background: #f4cb81 url('images/logo_ball_mini.png') no-repeat 0px -25px ;
 }
 .togcontent {
 	display: block;
