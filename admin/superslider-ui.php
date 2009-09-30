@@ -80,6 +80,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                 "fader" => 'on',
                 "fader_family" => '.fader',
                 "fader_opacity" => '0.5',
+                "linker" => 'on',
+                "linker_tag" => 'a',
+                "linker_color" => '#ffbdd2',
+                "clicker" => 'on',
+                "clicker_tag" => '.clickable li',
+                "clicker_span" => 'false',
+                "clicker_color" => '#c9e0f4',
+                "wrap" => 'off',
 				'ss_global_over_ride' => "on");//end array
 			
 			update_option($this->AdminOptionsName, $ssBase_OldOptions);
@@ -143,6 +151,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                 'fader' => $_POST['op_fader'],
                 'fader_opacity' => $_POST['op_fader_opacity'],
                 'fader_family' => $_POST['op_fader_family'],
+                'linker' => $_POST['op_linker'],
+                'linker_tag' => $_POST['op_linker_tag'],
+                'linker_color' => $_POST['op_linker_color'],
+                'clicker' => $_POST['op_clicker'],
+                'clicker_tag' => $_POST['op_clicker_tag'],
+                'clicker_span' => $_POST['op_clicker_span'],
+                'clicker_color' => $_POST['op_clicker_color'],
+                'wrap' => $_POST['op_wrap'],
 				'ss_global_over_ride'	=> $_POST["op_global_over_ride"]
 			);	
 
@@ -208,8 +224,8 @@ jQuery(document).ready(function(){
         <li class="ui-state-default"><a href="#fragment-5"><span>Accordion in post</span></a></li>
         <li class="ui-state-default"><a href="#fragment-6"><span>Image Zoom</span></a></li>
         <li class="ui-state-default"><a href="#fragment-7"><span>Page Scroller</span></a></li>
-        <li class="ui-state-default"><a href="#fragment-8"><span>Link Nudger</span></a></li>
-        <li class="ui-state-default"><a href="#fragment-9"><span>Object Fader </span></a></li>
+        <li class="ui-state-default"><a href="#fragment-8"><span>Links</span></a></li>
+        <li class="ui-state-default"><a href="#fragment-9"><span>Fader </span></a></li>
         <li class="ui-state-default" style="display: none;"><a href="#fragment-10"><span>Comment Slider</span></a></li>
     </ul>
     <div id="fragment-1" class="ui-tabs-panel">
@@ -614,6 +630,67 @@ jQuery(document).ready(function(){
             </li>
          </ul>
 	   </fieldset>
+	   	   
+	   	   <h3>Linker</h3>
+	    <fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
+   	        <legend><b><?php _e(' Linker'); ?>:</b></legend>
+        
+    	<label for="op_linker">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['linker'] == "on") echo $checked; ?> name="op_linker" id="op_linker" />
+    	<?php _e(' Add linker to your hyperlinks. Dynamically adds a subtle darkened background effect when you click a link.',$ssBase_domain); ?></label>
+
+            <ul style="list-style-type: none;margin-top:20px;">
+               <li>
+			 <label for="op_linker_color"><?php _e(' linker color',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_linker_color" id="op_linker_color" size="18" maxlength="60"
+			 value="<?php echo ($ssBase_newOptions['linker_color']); ?>" /></label>
+			 
+			 </li>
+            <li>
+			 <label for="op_linker_tag"><?php _e(' Linker tags',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_linker_tag" id="op_linker_tag" size="18" maxlength="60"
+			 value="<?php echo ($ssBase_newOptions['linker_tag']); ?>" />
+			 <?php _e(' The tags you want to apply the Linker effect to. eg: #sidebar a',$ssBase_domain); ?></label>
+			 
+			 </li>
+         </ul>
+	   </fieldset>
+	   
+	   	   <h3>Clicker</h3>
+	    <fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
+   	        <legend><b><?php _e(' Clicker'); ?>:</b></legend>
+        
+    	<label for="op_clicker">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['clicker'] == "on") echo $checked; ?> name="op_clicker" id="op_clicker" />
+    	<?php _e('Add clicker to your pages. Dynamically takes the first link from the contents of a list item and makes the whole list item a clickable link.',$ssBase_domain); ?></label>
+
+            <ul style="list-style-type: none;margin-top:20px;">
+               
+            <li>
+			 <label for="op_clicker_tag"><?php _e(' clicker tags',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_clicker_tag" id="op_clicker_tag" size="18" maxlength="60"
+			 value="<?php echo ($ssBase_newOptions['clicker_tag']); ?>" />
+			 <?php _e(' The tags you want to apply the clicker effect to. (default = .clickable li) *Tip - in this case you would need to add class="clickable" to the unordered list. Or you could set this to .entry li to apply clickable to all list items in the entry.',$ssBase_domain); ?></label>
+			 
+			 </li>
+			 <li>
+			 <label for="op_clicker_color"><?php _e(' clicker color',$ssBase_domain); ?>
+               <input type="text" class="color-text" name="op_clicker_color" id="op_clicker_color" size="18" maxlength="60"
+			 value="<?php echo ($ssBase_newOptions['clicker_color']); ?>" />
+			 <?php _e('What color should the clicker hover background be? (default = #c9e0f4) eg. silver, teal, or blue',$ssBase_domain); ?></label>
+			 
+			 </li>
+			 <li>
+			 <label for="op_clicker_span"><?php _e(' clicker span',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_clicker_span" id="op_clicker_span" size="18" maxlength="60"
+			 value="<?php echo ($ssBase_newOptions['clicker_span']); ?>" />
+			 <?php _e('To remove the a link tag from the linked text add true, or to leave the link also active add false.',$ssBase_domain); ?></label>
+			 
+			 </li>
+         </ul>
+	   </fieldset>
 	   
 	   </div>
 	   <div id="fragment-9" class="ss-tabs-panel">
@@ -630,7 +707,7 @@ jQuery(document).ready(function(){
                 <label for="op_fader_opacity"><?php _e(' Fader opacity',$ssBase_domain); ?>
                <input type="text" class="span-text" name="op_fader_opacity" id="op_fader_opacity" size="3" maxlength="6"
 			 value="<?php echo ($ssBase_newOptions['fader_opacity']); ?>" /></label>
-			 <label for="op_nudge_family"><?php _e(' Fader families',$ssBase_domain); ?>
+			 <label for="op_fader_family"><?php _e(' Fader families',$ssBase_domain); ?>
                <input type="text" class="span-text" name="op_fader_family" id="op_fader_family" size="18" maxlength="60"
 			 value="<?php echo ($ssBase_newOptions['fader_family']); ?>" /></label>
 			 <br />
@@ -639,6 +716,17 @@ jQuery(document).ready(function(){
          </ul>
 	   </fieldset>
 	   
+	 <!--  <h3>Widow wrapper</h3>
+	    <fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
+   	        <legend><b><?php _e(' Wrap'); ?>:</b></legend>
+        
+    	<label for="op_wrap">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['wrap'] == "on") echo $checked; ?> name="op_wrap" id="op_wrap" />
+    	<?php _e(' Prevent widowed text, (single words on a new line).',$ssBase_domain); ?></label>
+          
+	   </fieldset>-->
+
 	   </div>
 	   
 	   <div id="fragment-10" class="ss-tabs-panel" style="display: none;">

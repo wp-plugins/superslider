@@ -4,9 +4,9 @@ Plugin Name: SuperSlider
 Plugin URI: http://wp-superslider.com/superslider
 Description: SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: Reflection;(adds floor reflection to your images), Accordion;(add accordions to your post content). Scroll (add smooth scroll to your page) Zoomer (Adds a smooth image zoomer).
 Author: Daiv Mowbray
-Version: 0.6.3
+Version: 0.6.4
 Author URI: http://wp-superslider.com
-Tags: animation, animated, gallery, slideshow, mootools 1.2, mootools, accordion, slider, superslider, menu, lightbox
+Tags: animation, animated, gallery, slideshow, mootools 1.2, mootools, accordion, slider, superslider, lightbox
 
 
 Credits:
@@ -16,6 +16,10 @@ Image zoomer - http://www.byscripts.info/mootools/byzoomer
 Multiple Accordion - http://www.clientcide.com/wiki/cnet-libraries/08-layout/02.1-multipleopenaccordion
 Page Scroller _ http://wp-superslider.com/superslider
 Link Nudger - http://www.nwhite.net/2009/02/07/insights-from-link-nudging/
+Fader - http://davidwalsh.name/opacity-focus 
+Linker - http://davidwalsh.name/iphone-click 
+Word wrap - http://davidwalsh.name/word-wrap-mootools-php
+Clickable - http://davidwalsh.name/dwclickable-entire-block-clickable-mootools
 
 Copyright 2008
        SuperSlider-Show is free software; you can redistribute it and/or
@@ -52,6 +56,7 @@ if (!class_exists("ssBase")) {
 		var $has_zoomed = 'false';
 		var $nudger_started = 'false';
 		var $fader_started = 'false';
+		var $link_started = 'false';
 		var $open_addEvent = '';
 		var $close_addEvent = '';
 	
@@ -159,7 +164,15 @@ if (!class_exists("ssBase")) {
                 "fader" => 'on',
                 "fader_family" => '.fader',
                 "fader_opacity" => '0.5',
-				'ss_global_over_ride' => "on");
+                "linker" => 'on',
+                "linker_tag" => 'a',
+                "linker_color" => '#ffbdd2',
+                "clicker" => 'on',
+                "clicker_tag" => '.clickable li',
+                "clicker_span" => 'false',
+                "clicker_color" => '#c9e0f4',
+                "wrap" => 'on',
+				'ss_global_over_ride' => "off");
 		
 		
 		$defaultOptions = get_option($this->AdminOptionsName);
@@ -234,18 +247,21 @@ if (!class_exists("ssBase")) {
 			'nudger',
 			$this->js_path.'nudger.js',
 			array( 'moocore' ), '1');
+			
+			wp_register_script(
+			'clicker',
+			$this->js_path.'clicker.js',
+			array( 'moocore' ), '1');
+
+			wp_register_script(
+			'word_wrap',
+			$this->js_path.'word_wrap.js',
+			array( 'moocore' ), '1');
 
   			//add_action( 'admin_menu', array(&$this,'ssBase_setup_optionspage'));					
 			add_action('wp_enqueue_scripts', array(&$this,'ssBase_add_javascript'),3); //this loads the mootools scripts.
             
-            if ( $reflect == 'on'){			    
-			      add_action ( 'template_redirect' , array(&$this,'reflect_scan') );
-                  add_shortcode ( 'reflect' , array(&$this, 'reflect_shortcode_out') ); //disabled as it fails to work
-                  add_action('admin_footer', array(&$this, 'reflect_footer_admin') );
-               if ( $auto_reflect == 'on'){ 
-                     add_filter( 'the_content', array(&$this, 'reflect_replace') );
-                }        
-            }
+            
             if ( $accordion == 'on'){  
                   add_action ( 'template_redirect' , array(&$this,'accordion_scan') );	// Add look ahead for accordion
                   add_shortcode ( 'accordion' , array(&$this, 'accordion_shortcode_out'));
@@ -266,16 +282,38 @@ if (!class_exists("ssBase")) {
 			     add_action ( 'template_redirect' , array( &$this,'scroll_scan' ) );
 			     //add_action('admin_header', array(&$this,'scroll_header_tinymce') );// this needs to load into tinymce
             }
+            
+            if ( $reflect == 'on'){			    
+			      add_action ( 'template_redirect' , array(&$this,'reflect_scan') );
+                  add_shortcode ( 'reflect' , array(&$this, 'reflect_shortcode_out') ); //disabled as it fails to work
+                  add_action('admin_footer', array(&$this, 'reflect_footer_admin') );
+               if ( $auto_reflect == 'on'){ 
+                     add_filter( 'the_content', array(&$this, 'reflect_replace') );
+                }        
+            }
 
             if ( $nudger == 'on'){  
-                   add_action('wp_enqueue_scripts', array(&$this,'nudger_add_script'),3);
-                   //add_action ( "wp_head", array(&$this,"nudger_add_script"));  
-                   add_action ( "wp_head", array(&$this,"nudger_starter"));
+                   add_action('wp_enqueue_scripts', array(&$this,'nudger_add_script'),3); 
+                   add_action ( "wp_footer", array(&$this,"nudger_starter"));
                   
             }
             if ( $fader == 'on'){   
-                   add_action ( "wp_head", array(&$this,"fader_starter"));
+                   add_action ( "wp_footer", array(&$this,"fader_starter"));
                   
+            }
+           
+            if ( $clicker == 'on'){  
+                   add_action('wp_enqueue_scripts', array(&$this,'clicker_add_script'),3); 
+                   add_action ( "wp_footer", array(&$this,"clicker_starter"));
+                   add_action ( "wp_head", array(&$this,"clicker_add_css"));
+            }
+            if ( $linker == 'on'){
+                   add_action ( "wp_footer", array(&$this,"link_starter"), 10, 1);
+                   add_action ( "wp_head", array(&$this,"link_css"), 10, 1);
+                   
+            }
+            if ( $wrap == 'on'){ 
+                add_action('wp_enqueue_scripts', array(&$this,'word_wrap_add_script'),3);
             }
             /*if ( $com == 'on' ){             
                  add_filter( 'comments_template', array(&$this,"com_slide_out"), 10 );
@@ -419,7 +457,7 @@ function reflect_footer_admin() {
                 
             if ( false !== strpos ( $mypost->post_content, 'reflect' ) ) {  
                     add_action('wp_enqueue_scripts', array(&$this,'reflect_add_script'),3);
-                    add_action ( "wp_head", array(&$this,"reflect_starter"));
+                    add_action ( "wp_footer", array(&$this,"reflect_starter"));
                     break; 
             } 
          }  
@@ -500,8 +538,9 @@ function reflect_footer_admin() {
    }
    function close_addEvent() {
     
-        $closeEvent = "});\n";
-        $closeEvent .= "\t"."// ]]></script>\n";
+        $closeEvent = "\n});\n";
+        $closeEvent .= "// ]]>\n";
+        $closeEvent .= "</script>\n";
         
         //if ($this->close_addEvent != 'true' & $this->open_addEvent == 'true' ) 
         
@@ -724,7 +763,7 @@ function reflect_footer_admin() {
                 return; 	 
         foreach ( $posts as $post ) { 
             if ( false !== strpos ( $post->post_content, 'zoom' ) ) {                 
-               // add_action ( "wp_head", array(&$this,"zoom_add_script"));
+               
                 add_action('wp_enqueue_scripts', array(&$this,'zoom_add_script'),3);
                     break; 
             }  
@@ -775,7 +814,7 @@ function reflect_footer_admin() {
                 return; 	 
         foreach ( $posts as $mypost ) {         
                 if ( false !== strpos ( $mypost->post_content, '<div id="scroll"' ) ) {                 
-                        add_action ( "wp_head", array(&$this,"scroll_add_script")); 
+                        add_action ( "wp_footer", array(&$this,"scroll_add_script")); 
                         if ($css_load != 'off' && $scroll_css == 'on') {
                              add_action('wp_print_styles', array(&$this,'scroll_add_css'));
                              }
@@ -898,8 +937,7 @@ function reflect_footer_admin() {
         $mynudger = 'var ssNudg'.$this->my_id.' = new Nudger(\''.$nudge_family.' \', { 
                             transition:  Fx.Transitions.'.$nudge_trans.',
                             amount: '.$nudge_amount.',    
-                            duration: '.$nudge_duration.'      
-                                   
+                            duration: '.$nudge_duration.'    
                             });';
                             
         
@@ -908,8 +946,7 @@ function reflect_footer_admin() {
            $this->open_addEvent() ;
 			
 			if ($this->nudger_started != 'true')echo $mynudger;
-			$this->nudger_started = 'true';
-			
+			$this->nudger_started = 'true';			
 			$this->close_addEvent() ;
 		}
     
@@ -940,6 +977,89 @@ function reflect_footer_admin() {
 			$this->close_addEvent() ;
 		}
     
+    }
+    
+   function link_starter($linker_tag){
+
+        extract($this->ssBaseOpOut);
+
+        $mylink = "	var lynx = $$('".$linker_tag."');
+	lynx.addEvent('click',function(e) {
+		lynx.removeClass('clicked'); //remove from others
+		this.addClass('clicked');
+	});";
+              
+        if (!is_admin()) {            
+            $this->open_addEvent() ;
+            
+			if ($this->link_started != 'true')echo $mylink;
+			$this->link_started = 'true';
+			
+			$this->close_addEvent() ;
+		}		
+		
+    }
+
+    function link_css() {
+        
+        extract($this->ssBaseOpOut);
+        
+        $mylinkstyle = "<style type=\"text/css\" media=\"screen\">
+		.clicked { -moz-border-radius:5px; -webkit-border-radius:5px; background:".$linker_color.";padding:0 4px; }
+		</style>";
+        
+        if (!is_admin()) {  
+         
+             echo $mylinkstyle;
+        
+        }
+    }
+    
+   function clicker_starter(){
+
+        extract($this->ssBaseOpOut);
+
+        $myclicker = "var clix = new Clickables({
+                         elements: '".$clicker_tag."',
+                         selectClass: '',
+                         anchorToSpan: ".$clicker_span."
+                     });";
+                     
+        if (!is_admin()) {
+            
+            $this->open_addEvent() ;
+            
+			if ($this->clicker_started != 'true')echo $myclicker;
+			$this->clicker_started = 'true';
+			$this->close_addEvent() ;
+		}
+    }
+    function clicker_add_css(){
+    
+        extract($this->ssBaseOpOut);
+        
+        $myclickstyle = "<style type=\"text/css\" media=\"screen\">
+		".$clicker_tag.":hover { background:".$clicker_color.";cursor:pointer; }
+		</style>";
+        
+        if (!is_admin()) {    
+             echo $myclickstyle;
+        }
+    }
+    
+    function clicker_add_script(){
+    
+        if (!is_admin()) {	
+            wp_enqueue_script('clicker');
+        }
+    }
+    
+    function word_wrap_add_script(){
+    
+        if (!is_admin()) {	
+            wp_enqueue_script('word_wrap');
+        }
+
     }
     /**
     *   Function: Add Quick Tag In TinyMCE >= WordPress 2.5
