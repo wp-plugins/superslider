@@ -74,21 +74,21 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				"com_open"        =>  "Open comments",
 				"com_close" => "Close comments",
 				"nudger" => "on",
-				"nudge_amount" => '20',
-                "nudge_duration" => '500',
-                "nudge_family" => '#footer a, #sidebar a',
-                "fader" => 'on',
-                "fader_family" => '.fader',
-                "fader_opacity" => '0.5',
-                "linker" => 'on',
-                "linker_tag" => 'a',
-                "linker_color" => '#ffbdd2',
-                "clicker" => 'on',
-                "clicker_tag" => '.clickable li',
-                "clicker_span" => 'false',
-                "clicker_color" => '#c9e0f4',
-                "wrap" => 'off',
-				'ss_global_over_ride' => "on");//end array
+				"nudge_amount" => "20",
+                "nudge_duration" => "500",
+                "nudge_family" => "#footer a, #sidebar a",
+                "fader" => "on",
+                "fader_family" => ".fader",
+                "fader_opacity" => "0.5",
+                "linker" => "on",
+                "linker_tag" => "a",
+                "linker_color" => "#ffbdd2",
+                "clicker" => "on",
+                "clicker_tag" => ".clickable li",
+                "clicker_span" => "false",
+                "clicker_color" => "#c9e0f4",
+                "wrap" => "off",
+				"ss_global_over_ride" => "on");//end array
 			
 			update_option($this->AdminOptionsName, $ssBase_OldOptions);
 				
@@ -158,7 +158,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
                 'clicker_tag' => $_POST['op_clicker_tag'],
                 'clicker_span' => $_POST['op_clicker_span'],
                 'clicker_color' => $_POST['op_clicker_color'],
-                'wrap' => $_POST['op_wrap'],
+                //'wrap' => $_POST['op_wrap'],
 				'ss_global_over_ride'	=> $_POST["op_global_over_ride"]
 			);	
 
@@ -625,7 +625,7 @@ jQuery(document).ready(function(){
                <input type="text" class="span-text" name="op_nudge_amount" id="op_nudge_amount" size="3" maxlength="6"
 			 value="<?php echo ($ssBase_newOptions['nudge_amount']); ?>" /></label>
 			 <label for="op_nudge_family"><?php _e(' nudger families',$ssBase_domain); ?>
-               <input type="text" class="span-text" name="op_nudge_family" id="op_nudge_family" size="18" maxlength="60"
+               <input type="text" class="span-text" name="op_nudge_family" id="op_nudge_family" size="60" maxlength="200"
 			 value="<?php echo ($ssBase_newOptions['nudge_family']); ?>" /></label>
             </li>
          </ul>

@@ -3,8 +3,8 @@ Contributors: Daiv Mowbray
 Plugin URI: http://wp-superslider.com/
 Tags:animation, animated, accordion, reflection, page scroll, mootools 1.2, mootools, slider, superslider
 Requires at least: 2.6
-Tested up to: 2.8.2
-Stable tag: 0.6.4
+Tested up to: 2.8.5
+Stable tag: 0.7
 
 Suit of Animated Plugins which use Mootools 1.2 javascript  
 
@@ -13,24 +13,44 @@ Suit of Animated Plugins which use Mootools 1.2 javascript
 
 SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: 
 
-* Reflection: (adds floor reflection to your images), 
-* Accordion: (add nested accordions to your post content),
-* Scroll: (add smooth scroll navigation to your page.), 
-* Zoomer: (Adds a smooth image zoomer),
-* Nudger: (slide links or small objects on mouseover),
-* Fader: (fade transition one object of a group on mouseover)(NEW! with version 0.6.2)
+* Reflection: adds floor reflection to your images, 
+* Accordion: add nested accordions to your post content,
+* Scroll: add smooth scroll navigation to your page, 
+* Zoomer: Adds a smooth image enlarging zoomer,
+* Nudger: slide links or small objects on mouseover,
+* Fader: fade transition one object of a group on mouseover (NEW! with version 0.6.2),
+* Linker: iPhone - Safari like darkened background effect when you click a link(NEW! with version 6.4)
+* Clicker: Dynamically takes the first link from the contents of a list item and makes the whole list item a clickable link(NEW! with version 6.4)
+
+
+**Features**
+
+* Complete global control from options page
+* Control module themes and other superslider plugin themes.
+* Control transition times, types.
+* Modules system for adding javascript functions.
+* Shortcode buttons on post screen.
+* Metabox shortcode helpers.
+* Title , Text, and Link in Captions
+
+
+**Demos**
+
+This plugin can be seen in use here:
+
+* [Demo 1](http://wp-superslider.com/wp-plugin-demos/superslider/zoom-demo-1 "Demo")
 
 
 Get the following plugins to accompany this suit: SuperSlider-Show, SuperSlider-Slimbox, SuperSlider-MooFLow. Plugins that use [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript. Highly configurable, theme based design, css based animations. Shortcode system on post and page screens and or Widgets. Degrades gracefully with javascript turned off, or plugin removed / disabled.
 
-Support
+**Support**
 If you have any problems or suggestions regarding these plugins [please speak up](http://support.wp-superslider.com/ "support forum"), 
 
 ##Plugins ##
 Download These Plugins here:
 
 * [SuperSlider-Show](http://wordpress.org/extend/plugins/superslider-show/ "SuperSlider-Show")
-* [SuperSlider-Menu](http://wordpress.org/extend/plugins/superslider-menu/ "SuperSlider-Menu")
+* [SuperSlider-Login](http://wordpress.org/extend/plugins/superslider-login/ "SuperSlider-Login")
 * [SuperSlider-MooFlow](http://wordpress.org/extend/plugins/superslider-mooflow/ "SuperSlider-MooFlow")
 
 Or download from the domain [wp-superslider.com](http://wp-superslider.com/downloadsuperslider/superslider-download "SuperSlider-Downloads")
@@ -58,7 +78,18 @@ Create your own graphic and animation theme based on one of these provided.
 * black
 * custom
 
-== HISTORY ==
+== Changelog ==
+
+*0.7 (2009/11/07)
+
+  * moved javascripts into footer
+  * reduced html server calls by 45%
+  * removed numerous functions from the ssBase class
+
+
+*0.6.5 (2009/11/01)
+
+  * css adjustment in accordion.css
 
 *0.6.4 (2009/09/27)
 
