@@ -38,8 +38,11 @@ SuperSlider base, is a global admin plugin for all SuperSlider plugins. Supersli
 
 This plugin can be seen in use here:
 
-* [Demo 1](http://wp-superslider.com/wp-plugin-demos/superslider/zoom-demo-1 "Demo")
-
+* [SuperSlider Scroller demo](http://wp-superslider.com/2009/superslider-scroller-demo "SuperSlider Scroller demo")
+* [Superslider Accordion demo](http://wp-superslider.com/2009/superslider-accordion-demo "Superslider Accordion demo")
+* [Clicker with fader demo](http://wp-superslider.com/2009/clicker-with-fader-demo "Clicker with fader demo")
+* [Object fader demo](http://wp-superslider.com/2009/object-fader-demo "Object fader demo")
+* [Zoom with reflect demo 1](http://wp-superslider.com/2009/zoom-with-reflect-demo-1 "Zoom with reflect demo 1")
 
 Get the following plugins to accompany this suit: SuperSlider-Show, SuperSlider-Slimbox, SuperSlider-MooFLow. Plugins that use [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript. Highly configurable, theme based design, css based animations. Shortcode system on post and page screens and or Widgets. Degrades gracefully with javascript turned off, or plugin removed / disabled.
 
