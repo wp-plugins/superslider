@@ -1,4 +1,22 @@
 <script language="javascript" type="text/javascript">
+	function insertAtCursor(myField, myValue) {
+		//IE support
+		if (document.selection) {
+			myField.focus();
+			sel = document.selection.createRange();
+			sel.text = myValue;
+		}
+		//MOZILLA/NETSCAPE support
+		else if (myField.selectionStart || myField.selectionStart == '0') {
+			var startPos = myField.selectionStart;
+			var endPos = myField.selectionEnd;
+			myField.value = myField.value.substring(0, startPos)
+			+ myValue
+			+ myField.value.substring(endPos, myField.value.length);
+		} else {
+			myField.value += myValue;
+		}
+	}
 
 	function addacc() {
 		var show_code = '[accordion ';
@@ -30,6 +48,11 @@
 		if (f.value != "") {
 			show_code = show_code+'acc_firstopen="'+f.value+'" ';
 			}
+		var f = document.getElementById('acc_mode'); 
+		if (f.checked != "") {
+			f.value = 'on';
+			show_code = show_code+'acc_mode="'+f.value+'" ';
+			}
 		var f = document.getElementById('acc_all'); 
 		if (f.checked != "") {
 			f.value = 'true';
@@ -44,10 +67,9 @@
 				var destination1 = document.getElementById('content');
 				
 				if (destination1) {
-					destination1.SelStart = 0;
-					destination1.value += show_code;
-					}
-				
+				// calling the function
+					insertAtCursor(destination1, show_code);
+				}
 				/*var destination2 = content_ifr.tinymce;
 				var destination2 = window.frames[0].document.getelementbyid('tinymce')
 				if (destination2) {

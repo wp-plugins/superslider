@@ -4,7 +4,7 @@ Plugin URI: http://wp-superslider.com/
 Tags:animation, animated, accordion, reflection, page scroll, mootools 1.2, mootools, slider, superslider
 Requires at least: 2.6
 Tested up to: 2.8.5
-Stable tag: 0.7
+Stable tag: 0.8
 
 Suit of Animated Plugins which use Mootools 1.2 javascript  
 
@@ -82,6 +82,10 @@ Create your own graphic and animation theme based on one of these provided.
 * custom
 
 == Changelog ==
+
+*0.8 (2009/11/11)
+
+  * Added single open mode to Accordion Module
 
 *0.7 (2009/11/07)
 

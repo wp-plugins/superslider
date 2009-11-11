@@ -38,6 +38,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				"reflect_opacity" => "0.5",
 				"auto_reflect" => "off",
 				"accordion" => "on",
+				"acc_mode" => "off",
 				"acc_css"       =>  "on",
 				"auto_accordion" => "on",
 				"acc_container" => "accordion",
@@ -110,6 +111,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				'reflect_opacity'=> $_POST["op_reflect_opacity"],
 				'auto_reflect'=> $_POST["op_auto_reflect"],				
 				'accordion'		=> $_POST["op_accordion"],
+				'acc_mode'		=> $_POST["op_acc_mode"],				
 				'acc_css'		=> $_POST["op_acc_css"],
 				'auto_accordion'		=> $_POST["op_auto_accordion"],
 				'acc_container'		=> $_POST["op_acc_container"],
@@ -365,6 +367,11 @@ jQuery(document).ready(function(){
                 <input type="checkbox" 
                 <?php if($ssBase_newOptions['accordion'] == "on") echo $checked; ?> name="op_accordion" id="op_accordion" />
                 <?php _e(' Add the Accordion module.',$ssBase_domain); ?></label>
+                <br />
+                <label for="op_acc_mode">
+                <input type="checkbox" 
+                <?php if($ssBase_newOptions['acc_mode'] == "on") echo $checked; ?> name="op_acc_mode" id="op_acc_mode" />
+                <?php _e(' Set the accordion to single open mode.',$ssBase_domain); ?></label>
                 <br />
                 <label for="op_acc_css">
                 <input type="checkbox" 

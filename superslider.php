@@ -4,7 +4,7 @@ Plugin Name: SuperSlider
 Plugin URI: http://wp-superslider.com/superslider
 Description: SuperSlider base, is an optional global admin plugin for all SuperSlider plugins. Superslider base also includes the following numerous web 2 motion modules.
 Author: Daiv Mowbray
-Version: 0.7
+Version: 0.8
 Author URI: http://wp-superslider.com
 Tags: animation, animated, gallery, slideshow, mootools 1.2, mootools, accordion, slider, superslider, lightbox, link, effects, web2
 
@@ -123,6 +123,7 @@ if (!class_exists("ssBase")) {
 				"reflect_opacity" => "0.5",
 				"auto_reflect" => "off",
 				"accordion" => "on",
+				"acc_mode" => "off",
 				"acc_css"       =>  "on",	
 				"auto_accordion" => "on",
 				"acc_container" => "accordion",
@@ -293,8 +294,7 @@ if (!class_exists("ssBase")) {
                 }        
             }
 
-            if ( $nudger == 'on'){  
-                 
+            if ( $nudger == 'on'){                  
                    add_action ( "wp_footer", array(&$this,"nudger_starter"));
                   
             }
@@ -303,16 +303,17 @@ if (!class_exists("ssBase")) {
                   
             }
            
-            if ( $clicker == 'on'){  
-                   
+            if ( $clicker == 'on'){                    
                    add_action ( "wp_footer", array(&$this,"clicker_starter"));
                    add_action ( "wp_head", array(&$this,"clicker_add_css"));
             }
+            
             if ( $linker == 'on'){
                    add_action ( "wp_footer", array(&$this,"link_starter"), 10, 1);
                    add_action ( "wp_head", array(&$this,"link_css"), 10, 1);
                    
             }
+            
             if ( $wrap == 'on'){ 
                 add_action('wp_enqueue_scripts', array(&$this,'word_wrap_add_script'),3);
             }
@@ -548,9 +549,9 @@ function reflect_footer_admin() {
         foreach ( $posts as $mypost ) { 
                 if ( false !== strpos ( $mypost->post_content, '[accordion' ) ) {                 
                        
-                        //add_action('wp_enqueue_scripts', array(&$this,'accordion_add_script'),3);
-                        wp_enqueue_script('multiopen-accordion');
-                        
+                       if ($acc_mode != 'on') {
+                            wp_enqueue_script('multiopen-accordion');
+                        }
                         if ($css_load != 'off' && $acc_css == 'on') {
                              add_action('wp_print_styles', array(&$this,'accordion_add_css'));
                         }
@@ -565,6 +566,7 @@ function reflect_footer_admin() {
          
          $atts = (shortcode_atts(array(
             'auto_accordion' => '',
+            'acc_mode' => '',            
             'acc_container' => '',
             'acc_toggler' => '',
             'acc_elements' => '',            
@@ -613,13 +615,25 @@ function reflect_footer_admin() {
 	}
 	
 	function accordion_starter(){
-		
+	
 		extract($this->ssBaseOpOut);
-		
-		$myaccordion = 'var ssAcc'.$this->my_acc_id.' = new MultipleOpenAccordion($(\'#accordion'.$this->my_id.'\'), {
+		if ($acc_mode == 'on') {
+		  $myaccordion = 'var ssAcc'.$this->my_acc_id.' = new Accordion($(\'accordion'.$this->my_acc_id.'\'), 
+		                    \'#accordion'.$this->my_acc_id.' .'.$acc_toggler.'\',       
+		                    \'#accordion'.$this->my_acc_id.' .'.$acc_elements.'\',  
+		                    {           
+                            fixedHeight: '.$acc_fixedheight.',    
+                            fixedWidth: '.$acc_fixedwidth.',      
+                            height: '.$acc_height.',              
+                            opacity: '.$acc_opacity.',            
+                            width: '.$acc_width.',                
+                            display: ['.$acc_firstopen.']        
+                            });';
+		  } else {  		  
+		  $myaccordion = 'var ssAcc'.$this->my_acc_id.' = new MultipleOpenAccordion($(\'accordion'.$this->my_acc_id.'\'), {
 		                    togglers:$$(\'#accordion'.$this->my_acc_id.' .'.$acc_toggler.'\'),       
-		                    elements:$$(\'#accordion'.$this->my_acc_id.' .'.$acc_elements.'\'),     
-                            openAll: '.$acc_openall.',             
+		                    elements:$$(\'#accordion'.$this->my_acc_id.' .'.$acc_elements.'\'),  		                    
+                            openAll: '.$acc_openall.',            
                             fixedHeight: '.$acc_fixedheight.',    
                             fixedWidth: '.$acc_fixedwidth.',      
                             height: '.$acc_height.',              
@@ -627,6 +641,7 @@ function reflect_footer_admin() {
                             width: '.$acc_width.',                
                             firstElementsOpen: ['.$acc_firstopen.']        
                             });';
+             }
 			
 			$this->open_addEvent() ;
 
@@ -635,6 +650,7 @@ function reflect_footer_admin() {
 			 $this->close_addEvent() ;
 				
     }
+    
         	/**
 		*	creates accordion metabox in post window
 		*/

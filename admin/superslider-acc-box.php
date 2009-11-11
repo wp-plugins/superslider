@@ -24,8 +24,10 @@ $box = '
 			<label class ="ss_label" for="acc_all">
 			<input tabindex="26" name="acc_all" id="acc_all" type="checkbox" /> All opened at start</label> 
 			
+			<label class ="ss_label" for="acc_mode">
+			<input tabindex="27" name="acc_mode" id="acc_mode" type="checkbox" /> Single Open mode on</label>
 			
-			<input type="button" tabindex="27" value="Add Accordion" name="acctotextfield" id="acctotextfield" class="button-primary action" style="margin:10px 40px 0 10px; float: right;" onclick="addacc(); return false;" />
+			<input type="button" tabindex="28" value="Add Accordion" name="acctotextfield" id="acctotextfield" class="button-primary action" style="margin:10px 40px 0 10px; float: right;" onclick="addacc(); return false;" />
 			
 
 			<input name="acc_togtag" id="acc_togtag" type="hidden" value="'.$acc_togtag.'" />
