@@ -4,7 +4,7 @@ Plugin Name: SuperSlider
 Plugin URI: http://wp-superslider.com/superslider
 Description: SuperSlider base, is an optional global admin plugin for all SuperSlider plugins. Superslider base also includes the following numerous web 2 motion modules.
 Author: Daiv Mowbray
-Version: 0.8
+Version: 0.9.1
 Author URI: http://wp-superslider.com
 Tags: animation, animated, gallery, slideshow, mootools 1.2, mootools, accordion, slider, superslider, lightbox, link, effects, web2
 
@@ -276,6 +276,8 @@ if (!class_exists("ssBase")) {
                   add_action('admin_footer', array(&$this, 'zoom_footer_admin') );
                 if ( $zoom_auto == 'on'){ 
                      add_filter( 'the_content', array(&$this, 'zoom_replace') );
+                     wp_enqueue_script('zoomer');
+                     add_action('wp_footer', array(&$this,'zoom_starter'));
                 }    
             }
          
@@ -555,7 +557,7 @@ function reflect_footer_admin() {
                         if ($css_load != 'off' && $acc_css == 'on') {
                              add_action('wp_print_styles', array(&$this,'accordion_add_css'));
                         }
-                        break; 
+                        //break; 
                 }  
          }
 	}
@@ -601,7 +603,8 @@ function reflect_footer_admin() {
 
         $output = "<div id=\"accordion".$this->my_acc_id."\" class=\"".$acc_container."\">".$content."</div>";
         
-        add_action ( "wp_footer", array(&$this,"accordion_starter"));
+        //add_action ( "wp_footer", array(&$this,"accordion_starter"));
+        $output .= $this->accordion_starter();
         return do_shortcode($output);
         
     }
@@ -615,7 +618,7 @@ function reflect_footer_admin() {
 	}
 	
 	function accordion_starter(){
-	
+
 		extract($this->ssBaseOpOut);
 		if ($acc_mode == 'on') {
 		  $myaccordion = 'var ssAcc'.$this->my_acc_id.' = new Accordion($(\'accordion'.$this->my_acc_id.'\'), 
@@ -763,10 +766,10 @@ function reflect_footer_admin() {
 	}
 	function zoom_replace($content) {
 
-        if ($this->has_zoomed != 'true') {	
+       /* if ($this->has_zoomed != 'true') {	
                      wp_enqueue_script('zoomer');
                      add_action('wp_footer', array(&$this,'zoom_starter'));
-                }
+                }*/
                 
        $this->has_zoomed = 'true';
                 
