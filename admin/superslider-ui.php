@@ -62,6 +62,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				"zoom_pad"   =>  "10",
 				"zoom_back"   =>  "#000",
 				"scroll"   =>  "on",
+				"scroll_auto"      =>  "on",
+				"totop_text"      =>  "To Top",
+				
 				"scroll_css"   =>  "on",
 				"scroll_time"   =>  "1200",
 				"scroll_trans"   =>  "sine",
@@ -135,6 +138,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				'zoom_pad'		=> $_POST["op_zoom_pad"],
 				'zoom_back'		=> $_POST["op_zoom_back"],
 				'scroll'         => $_POST["op_scroll"],
+				'scroll_auto'         => $_POST["op_scroll_auto"],
+				'totop_text'         => $_POST["op_totop_text"],
 				'scroll_css'         => $_POST["op_scroll_css"],
 				'scroll_time'	=> $_POST["op_scroll_time"],
 				'scroll_trans'	=> $_POST["op_scroll_trans"],
@@ -549,11 +554,21 @@ jQuery(document).ready(function(){
 	   <div id="fragment-7" class="ss-tabs-panel">
         <h3>Page Scroller</h3>
         <fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
-   	        <legend><b><?php _e(' Scroller'); ?>:</b></legend>
+   	     <legend><b><?php _e(' Scroller'); ?>:</b></legend>
+    	<label for="op_scroll_auto">
+    	<input type="checkbox" 
+    	<?php if($ssBase_newOptions['scroll_auto'] == "on") echo $checked; ?> name="op_scroll_auto" id="op_scroll_auto" />
+    	<?php _e(' Add "To Top" link to your pages.',$ssBase_domain); ?></label>
+    	<label for="op_totop_text"><?php _e(' To Top Text',$ssBase_domain); ?>
+               <input type="text" class="span-text" name="op_totop_text" id="op_totop_text" size="20" maxlength="120"
+			 value="<?php echo ($ssBase_newOptions['totop_text']); ?>" /></label>
+                <br />
+    	
     	<label for="op_scroll">
     	<input type="checkbox" 
     	<?php if($ssBase_newOptions['scroll'] == "on") echo $checked; ?> name="op_scroll" id="op_scroll" />
-    	<?php _e(' Add scroller to your page.',$ssBase_domain); ?></label>
+    	<?php _e(' Add scroller button to your post / page edit screen.',$ssBase_domain); ?></label>
+    	<br />
     	<label for="op_scroll_css">
     	<input type="checkbox" 
     	<?php if($ssBase_newOptions['scroll_css'] == "on") echo $checked; ?> name="op_scroll_css" id="op_scroll_css" />

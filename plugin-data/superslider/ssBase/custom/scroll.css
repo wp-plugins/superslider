@@ -61,3 +61,12 @@ Notes:
 	color: #F4CB81;
 	background-position: 0 20;
 }
+.toplink {
+    cursor:pointer;
+    height:18px;
+    padding: 6px 10px 0 24px;
+    position:fixed;
+    right:0;
+    bottom:0;
+    margin-bottom:0;
+}

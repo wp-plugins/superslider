@@ -4,7 +4,7 @@ Plugin Name: SuperSlider
 Plugin URI: http://wp-superslider.com/superslider
 Description: SuperSlider base, is an optional global admin plugin for all SuperSlider plugins. Superslider base also includes the following numerous web 2 motion modules.
 Author: Daiv Mowbray
-Version: 0.9.1
+Version: 1.0
 Author URI: http://wp-superslider.com
 Tags: animation, animated, gallery, slideshow, mootools 1.2, mootools, accordion, slider, superslider, lightbox, link, effects, web2
 
@@ -55,6 +55,7 @@ if (!class_exists("ssBase")) {
 		var $reflect_script_added = 'false';
 		var $zoom_started = 'false';
 		var $has_zoomed = 'false';
+		var $totop_text = '';
 		var $nudger_started = 'false';
 		var $fader_started = 'false';
 		var $link_started = 'false';
@@ -147,6 +148,7 @@ if (!class_exists("ssBase")) {
 				"zoom_pad"      =>  "10",
 				"zoom_back"     =>  "#000",
 				"scroll"           =>  "on",
+				"scroll_auto"      =>  "on",
 				"scroll_css"       =>  "on",				
 				"scroll_time"      =>  "1200",
 				"scroll_trans"     =>  "sine",
@@ -204,8 +206,8 @@ if (!class_exists("ssBase")) {
   			$this->ssBaseOpOut = get_option($this->AdminOptionsName);
   			
   			extract($this->ssBaseOpOut);
-//var_dump($this->ssBaseOpOut);
-//echo " ss_global_over_ride is : ".$ss_global_over_ride;
+            $this->totop_text = $totop_text;// set the scroll link text
+            
   			$this->base_over_ride = $ss_global_over_ride;
   			
   			$this->set_base_paths($css_load, $css_theme);
@@ -286,7 +288,15 @@ if (!class_exists("ssBase")) {
 			     add_action ( 'template_redirect' , array( &$this,'scroll_scan' ) );
 			    
             }
+
+            if ( $scroll_auto == 'on'){  
             
+			     add_action ( 'wp_footer', array(&$this,'scroll_button_out'));
+			     add_action ( "wp_footer", array(&$this,"scroll_starter"));
+			     if ($css_load != 'off' && $scroll_css == 'on') {
+			         add_action ( 'wp_print_styles', array(&$this,'scroll_add_css'));
+			     }
+            }
             if ( $reflect == 'on'){			    
 			      add_action ( 'template_redirect' , array(&$this,'reflect_scan') );
                   add_shortcode ( 'reflect' , array(&$this, 'reflect_shortcode_out') ); //disabled as it fails to work
@@ -818,20 +828,27 @@ function reflect_footer_admin() {
                 return; 	 
         foreach ( $posts as $mypost ) {         
                 if ( false !== strpos ( $mypost->post_content, '<div id="scroll"' ) ) {                 
-                        add_action ( "wp_footer", array(&$this,"scroll_add_script")); 
-                        if ($css_load != 'off' && $scroll_css == 'on') {
-                             add_action('wp_print_styles', array(&$this,'scroll_add_css'));
-                             }
-                        break; 
+                        $this->scroll_add_script(); 
                 } 
          }
+         if ($css_load != 'off' && $scroll_css == 'on') {
+            $this->scroll_add_css();
+         }
+	}
+	function scroll_add_script() {
+	   add_action ( "wp_footer", array(&$this,"scroll_starter")); 
 	}
 	
 	function scroll_add_css() {
-		wp_enqueue_style( 'scroll_style');
-	
+		  wp_enqueue_style( 'scroll_style');
 	}
-	function scroll_add_script() {
+	function scroll_button_out() {
+
+	   $scroll_button = '<div class="totop toplink">'.$this->totop_text.'</div>';
+	   echo $scroll_button;
+
+	}
+	function scroll_starter() {
     
         extract($this->ssBaseOpOut);
         $scroll_trans = $scroll_trans.':'.$scroll_transout;
@@ -865,16 +882,6 @@ function reflect_footer_admin() {
              });
          });
          ";
-/*
-        $scrollOut = "\n\t"."<script type=\"text/javascript\">\n";
-        $scrollOut .= "\t"."// <![CDATA[\n";		
-        $scrollOut .= "window.addEvent('domready', function() {
-        ".$myscroll."
-        });\n";
-        $scrollOut .= "\t"."// ]]></script>\n";
-
-        echo $scrollOut;
-        */
         
         if (!is_admin()) {
            
