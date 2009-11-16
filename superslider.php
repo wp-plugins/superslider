@@ -854,7 +854,7 @@ function reflect_footer_admin() {
         $scroll_trans = $scroll_trans.':'.$scroll_transout;
         
 
-     $myscroll = "  var scroller = new Fx.Scroll(window,{      
+     $myscroll = "  var ssScroller = new Fx.Scroll(window,{      
             links:'elements',
             wait: 'false',
             offset: {'x': 0, 'y': -20},
