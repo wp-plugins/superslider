@@ -23,18 +23,21 @@ HTML:
 	z-index: 0;
 	margin: 10px ;
 }
-.toggler {
+.toggler, .toggleAllAcc, .openAllAcc, .closeAllAcc {
 	display: block;
 	cursor: pointer;
-	padding: 4px 8px 4px 30px;
+	padding: 4px 8px 3px 30px;
 	margin: 0px;
 	background: #c2a367 url('images/logo_ball_mini.png') no-repeat 0px -50px ;
 	color: #ebebeb;
 	border: 1px solid #997f51;
 }
-.toggler:hover{
+.toggler:hover, .toggleAllAcc:hover, .openAllAcc:hover, .closeAllAcc:hover{
     background: #f4cb81 url('images/logo_ball_mini.png') no-repeat 0px -25px ;
 }
+.toggleAllAcc:hover, .closeAllAcc:hover { 
+    background-position: 0px 0px; 
+    }
 .togcontent {
 	display: block;
 	padding: 10px;
@@ -44,3 +47,6 @@ HTML:
 	border: 1px solid #997f51;
 	z-index: 1;
 }
+.toggleAllAcc, .openAllAcc, .closeAllAcc { width: 30%; margin: -10px 10px;}
+.openAllAcc {margin: 10px;}
+.closeAllAcc {margin: 10px;display:none;}

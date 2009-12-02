@@ -63,7 +63,7 @@
 		var f = document.getElementById('acc_elemtag');
 			var h = f.value;
 		
-				show_code = show_code+']\n<'+g+'>toggle one</'+g+'>\n<'+h+'>content one</'+h+'>\n<'+g+'>toggle two</'+g+'>\n<'+h+'>content two</'+h+'>\n<'+g+'>toggle three</'+g+'>\n<'+h+'>content three</'+h+'>\n[/accordion]';
+				show_code = show_code+']\n<'+g+'>toggle one</'+g+'>\n<'+h+'>content one</'+h+'>\n<'+g+'>toggle two</'+g+'>\n<'+h+'>content two</'+h+'>\n<'+g+'>toggle three</'+g+'>\n<'+h+'>content three</'+h+'>\n[/accordion]\n<div class="toggleAllAcc">toggle all Button</div>\n<div class="openAllAcc">open all Button</div>\n<div class="closeAllAcc">close all Button</div>';
 				var destination1 = document.getElementById('content');
 				
 				if (destination1) {

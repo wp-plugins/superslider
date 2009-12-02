@@ -22,11 +22,13 @@ Notes:
 .scrollbar{
     display: block;
     border: 1px solid #3c6386;
-    padding: 4px 0px 0px 0px;
-    margin: 20px 0px 0px 0px;
+    padding: 4px;
+    margin: 20px;
     background: transparent;
     line-height: 1em;
-    text-align: center;
+    text-align: left;
+    float:right;
+    width:250px;
 }
 .scrollbar a{
     border-style: solid;
@@ -35,8 +37,8 @@ Notes:
     padding: 4px 10px 2px 10px;
     background: #f9f9f9;
     color: #67a9e3;
-    margin: 0px 4px 4px 0px;
-    display: inline-block;
+    margin:  2px 4px ;
+    display: block;
 
 }
 .scrollbar a:hover{
@@ -50,10 +52,11 @@ Notes:
 .totop{
     display:block;
     font-style:italic;
-    font-weight:bolder;
+    font-weight:bolder;    
     margin:20px 0 10px 0;
     padding:4px 0 4px 30px;
-    text-transform:uppercase;
+    line-height: 1.2em;
+    text-transform: capitalize;
 	background: transparent url(images/logo_ball_mini.png) no-repeat  0 -50px ;
 }
 .totop:hover{

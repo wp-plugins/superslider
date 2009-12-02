@@ -4,7 +4,7 @@ Plugin Name: SuperSlider
 Plugin URI: http://wp-superslider.com/superslider
 Description: SuperSlider base, is an optional global admin plugin for all SuperSlider plugins. Superslider base also includes the following numerous web 2 motion modules.
 Author: Daiv Mowbray
-Version: 1.0
+Version: 1.1
 Author URI: http://wp-superslider.com
 Tags: animation, animated, gallery, slideshow, mootools 1.2, mootools, accordion, slider, superslider, lightbox, link, effects, web2
 
@@ -267,7 +267,7 @@ if (!class_exists("ssBase")) {
   			//add_action( 'admin_menu', array(&$this,'ssBase_setup_optionspage'));					
 			add_action('wp_enqueue_scripts', array(&$this,'ssBase_add_javascript'),3); //this loads the mootools scripts.
             
-            
+        //if (!is_admin()) {
             if ( $accordion == 'on'){  
                   add_action ( 'template_redirect' , array(&$this,'accordion_scan') );	// Add look ahead for accordion
                   add_shortcode ( 'accordion' , array(&$this, 'accordion_shortcode_out'));
@@ -331,9 +331,9 @@ if (!class_exists("ssBase")) {
             }
             /*if ( $com == 'on' ){             
                  add_filter( 'comments_template', array(&$this,"com_slide_out"), 10 );
-                 add_action('template_redirect', array(&$this,'comments_scan' ) );
-                                   
+                 add_action('template_redirect', array(&$this,'comments_scan' ) );                   
             }*/
+       // }
 	}
 	
 		/**
@@ -405,8 +405,7 @@ if (!class_exists("ssBase")) {
 	*/
 	function ssBase_admin_style(){
 
-			$cssAdminFile = WP_PLUGIN_URL.'/superslider/admin/ss_admin_style.css';  
-    	    
+			$cssAdminFile = WP_PLUGIN_URL.'/superslider/admin/ss_admin_style.css';      	    
     	    wp_register_style('superslider_admin', $cssAdminFile);
         	wp_enqueue_style( 'superslider_admin');
 
@@ -519,7 +518,6 @@ function reflect_footer_admin() {
 			 $this->reflect_started = 'true';	 
 		}
     }
-
    
     /**
     *   Open the window add event
@@ -542,10 +540,8 @@ function reflect_footer_admin() {
         $closeEvent .= "// ]]>\n";
         $closeEvent .= "</script>\n";
         
-        //if ($this->close_addEvent != 'true' & $this->open_addEvent == 'true' ) 
-        
+        //if ($this->close_addEvent != 'true' & $this->open_addEvent == 'true' )         
         echo $closeEvent;
-        
        $this->close_addEvent = 'true';
     }
     /**
@@ -623,8 +619,9 @@ function reflect_footer_admin() {
 	* add the accordion css
 	*/
     function accordion_add_css(){
-        wp_enqueue_style( 'accordion_style');
-
+        if (!is_admin()) {
+            wp_enqueue_style( 'accordion_style');
+        }
 	}
 	
 	function accordion_starter(){
@@ -653,15 +650,37 @@ function reflect_footer_admin() {
                             opacity: '.$acc_opacity.',            
                             width: '.$acc_width.',                
                             firstElementsOpen: ['.$acc_firstopen.']        
-                            });';
+                            });
+                           
+                           var toggleAcc = $$(\'.toggleAllAcc\');
+                           var openAcc = $$(\'.openAllAcc\');
+                           var closeAcc = $$(\'.closeAllAcc\');
+	                             toggleAcc.addEvent(\'click\',function(e) {
+		                          ssAcc'.$this->my_acc_id.'.toggleAll();
+                                 });
+                                 openAcc.addEvent(\'click\',function(e) {
+		                          ssAcc'.$this->my_acc_id.'.showAll();
+		                          openAcc.setStyle(\'display\', \'none\');
+		                          closeAcc.setStyle(\'display\', \'block\');
+                                 });
+                                 closeAcc.addEvent(\'click\',function(e) {
+		                          ssAcc'.$this->my_acc_id.'.hideAll();
+		                          closeAcc.setStyle(\'display\', \'none\');
+		                          openAcc.setStyle(\'display\', \'block\');
+                                 });
+                                 
+                                 ';
+                            
+                            
+                            
              }
-			
-			$this->open_addEvent() ;
-
+			if (!is_admin()) {
+			 $this->open_addEvent() ;
+            
 			  echo $myaccordion;
 			
 			 $this->close_addEvent() ;
-				
+			}
     }
     
         	/**
@@ -808,7 +827,8 @@ function reflect_footer_admin() {
         $replacement = '<a$1href=$2 class="zoom"><img$3 />$4';
         $content = preg_replace($pattern, $replacement, $content);
         
-        if ($this->has_zoomed != 'true') {	
+
+        if (($this->has_zoomed != 'true') && (!is_admin())) {	
                      wp_enqueue_script('zoomer');
                      add_action('wp_footer', array(&$this,'zoom_starter'));
                 }
@@ -836,7 +856,9 @@ function reflect_footer_admin() {
          }
 	}
 	function scroll_add_script() {
-	   add_action ( "wp_footer", array(&$this,"scroll_starter")); 
+	   if (!is_admin()) {
+	       add_action ( "wp_footer", array(&$this,"scroll_starter")); 
+	   }
 	}
 	
 	function scroll_add_css() {
@@ -853,7 +875,6 @@ function reflect_footer_admin() {
         extract($this->ssBaseOpOut);
         $scroll_trans = $scroll_trans.':'.$scroll_transout;
         
-
      $myscroll = "  var ssScroller = new Fx.Scroll(window,{      
             links:'elements',
             wait: 'false',
@@ -869,7 +890,7 @@ function reflect_footer_admin() {
             elem.addEvent('click',function(e){
                     e.preventDefault();
                     e.stop();
-                    scroller.toElement(elements[i]);
+                    ssScroller.toElement(elements[i]);
              });
          });
 
@@ -878,7 +899,7 @@ function reflect_footer_admin() {
                     e.preventDefault();
                     e.stop();
                     //scroller.toElement(start);
-                    scroller.toTop(0, 0);
+                    ssScroller.toTop(0, 0);
              });
          });
          ";
@@ -925,13 +946,6 @@ function reflect_footer_admin() {
         echo '</script>'."\n";
     }
     
-   /* function nudger_add_script(){
-    
-        if (!is_admin()) {	
-            //wp_enqueue_script('nudger');
-        }
-
-    }*/
     function nudger_starter(){
 
         extract($this->ssBaseOpOut);
@@ -1060,12 +1074,6 @@ function reflect_footer_admin() {
         }
     }
     
-    /*function clicker_add_script(){
-    
-        if (!is_admin()) {	
-            wp_enqueue_script('clicker');
-        }
-    }*/
     /**
     function word_wrap_add_script(){
     
@@ -1185,8 +1193,6 @@ var comSlide = new Fx.Slide('slide_comments', {duration: 3000, mode: 'vertical',
     	      else
     	           require( get_theme_root() . '/default/comments.php');
 
-
-
             $com_bar = '<div id="comment_bar"><div class="comslider comment_tab_open">
             <a href="#" id="slidein" title="view comments">'.$com_open;
             $com_bar .=  comments_number('0','1','%');
@@ -1196,9 +1202,7 @@ var comSlide = new Fx.Slide('slide_comments', {duration: 3000, mode: 'vertical',
             $com_bar .= comments_template().'</div><br style="clear:both;" />';
             
             echo $com_bar; 
-    	}*/
-
-    
+    	}*/    
 }	//end class
 } //End if Class ssBase
 
