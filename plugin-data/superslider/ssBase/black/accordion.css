@@ -28,12 +28,18 @@ HTML:
 	cursor: pointer;
 	padding: 4px 8px 3px 30px;
 	margin: 0px;
-	background: #606060 url('images/logo_ball_mini.png') no-repeat 0px -50px ;
+	background: #606060 url('images/logo_ball_mini.png') no-repeat 0px -25px ;
 	color: #ebebeb;
 	border: 1px solid #000;
 }
 .toggler:hover, .toggleAllAcc:hover, .openAllAcc:hover, .closeAllAcc:hover {
-    background: #343434 url('images/logo_ball_mini.png') no-repeat 0px -25px ;
+    background: #343434 url('images/logo_ball_mini.png') no-repeat 0px 0px ;
+}
+.togclosed{
+    background-position: 0px -50px;
+}
+.togclosed:hover{
+    background-position: 0px -25px;
 }
 .toggleAllAcc:hover, .closeAllAcc:hover { 
     background-position: 0px 0px; 
@@ -47,6 +53,6 @@ HTML:
 	border: 1px solid #000;
 	z-index: 1;
 }
-.toggleAllAcc, .openAllAcc, .closeAllAcc { width: 30%; margin: -10px 10px;}
-.openAllAcc {margin: 10px;}
-.closeAllAcc {margin: 10px; display:none;}
+.toggleAllAcc, .openAllAcc, .closeAllAcc { width: 20%; margin: 0px 10px 0px 0px; float:right;}
+.openAllAcc {margin: 0px;}
+.closeAllAcc {margin: 0px;display:none;}

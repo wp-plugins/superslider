@@ -1,17 +1,18 @@
 === SuperSlider ===
 Contributors: Daiv Mowbray
-Plugin URI: http://wp-superslider.com/
+Plugin URI: http://wp-superslider.com/superslider/
+http://wp-superslider.com/support-me/donate/
 Tags:animation, animated, accordion, reflection, page scroll, mootools 1.2, mootools, slider, superslider
 Requires at least: 2.6
-Tested up to: 2.8.5
-Stable tag: 1.1
+Tested up to: 2.9.2
+Stable tag: 1.2
 
 Suit of Animated Plugins which use Mootools 1.2 javascript  
 
 
 == Description ==
 
-SuperSlider base, is a global admin plugin for all SuperSlider plugins. Superslider base includes the following modules: 
+SuperSlider base, is a global admin plugin for all SuperSlider plugins and Superslider base includes the following modules: 
 
 * Reflection: adds floor reflection to your images, 
 * Accordion: add nested accordions to your post content,
@@ -82,6 +83,13 @@ Create your own graphic and animation theme based on one of these provided.
 * custom
 
 == Changelog ==
+
+*1.2 (2010/03/10)
+
+  * Fixed nested accordions.
+  * Added toggler class change to accordion
+  * Added Superslider as top level menu item
+  * various updates for WP 2.9
 
 *1.1 (2009/12/2)
 
