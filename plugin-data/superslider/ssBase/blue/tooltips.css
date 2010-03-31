@@ -1,0 +1,31 @@
+
+/* tootip classes */
+
+.tip-top {
+	width: 280px;
+	height: 20px;
+	background:transparent url('tooltips/tip-sprite.png') no-repeat scroll -281px 0px;
+    }
+.tip-bottom {
+	width: 280px;
+	height: 20px;
+	background:transparent url('tooltips/tip-sprite.png') no-repeat scroll -562px 0px;
+    }
+.tip {
+    background:transparent url('tooltips/tip-sprite.png') repeat-y scroll 0px 0px;
+	color: #5091c9;
+	width: 280px;
+    }
+.tip-title, .tip-text {
+	font-size: 12px;
+	padding: 2px 30px 3px 10px;
+	text-align: center;
+    }
+.tip-title {
+	font-weight: bold;
+	color: #5091c9;
+	padding-bottom: 6px;
+    }
+.tip-text { 
+    font-style: italic; 
+    }

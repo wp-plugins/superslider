@@ -1,0 +1,58 @@
+/**
+Stylesheet: default.css
+	CSS for SuperSlider-Base.
+
+License:
+	MIT-style license.
+
+Copyright:
+	Copyright (c) 2008 [Daiv Mowbray](http://wp-superslider.com/).
+	
+HTML:
+	<div class="accordion">
+		<h3 class="toggler" />
+		<p class="togcontent" />
+		<h3 class="toggler" />
+		<p class="togcontent" />
+	</div>
+	
+*/
+
+.accordion {
+	display: block;
+	z-index: 0;
+	margin: 10px ;
+}
+.toggler, .toggleAllAcc, .openAllAcc, .closeAllAcc {
+	display: block;
+	cursor: pointer;
+	padding: 4px 8px 3px 30px;
+	margin: 0px;
+	background: #c2a367 url('images/logo_ball_mini.png') no-repeat 0px -25px ;
+	color: #ebebeb;
+	border: 1px solid #997f51;
+}
+.toggler:hover, .toggleAllAcc:hover, .openAllAcc:hover, .closeAllAcc:hover{
+    background: #f4cb81 url('images/logo_ball_mini.png') no-repeat 0px 0px ;
+}
+.togclosed{
+    background-position: 0px -50px;
+}
+.togclosed:hover{
+    background-position: 0px -25px;
+}
+.toggleAllAcc:hover, .closeAllAcc:hover { 
+    background-position: 0px 0px; 
+    }
+.togcontent {
+	display: block;
+	padding: 10px;
+	margin: 0px;
+	background: #f1eedb ;
+	color: #000;
+	border: 1px solid #997f51;
+	z-index: 1;
+}
+.toggleAllAcc, .openAllAcc, .closeAllAcc { width: 20%; margin: 0px 10px 0px 0px; float:right;}
+.openAllAcc {margin: 0px;}
+.closeAllAcc {margin: 0px;display:none;}
