@@ -5,7 +5,7 @@ Donate link: http://wp-superslider.com/support-me/donate/
 Tags:animation, animated, accordion, reflection, page scroll, mootools 1.2, mootools, slider, superslider
 Requires at least: 2.6
 Tested up to: 2.9.2
-Stable tag: 1.2
+Stable tag: 1.3
 
 Suit of Animated Plugins which use Mootools 1.2 javascript  
 
@@ -86,6 +86,11 @@ Create your own graphic and animation theme based on one of these provided.
 * custom
 
 == Changelog ==
+
+*1.3 (2010/03/29)
+
+  * Added tooltips module.
+  * integrated ss-menu plugin.
 
 *1.2 (2010/03/10)
 

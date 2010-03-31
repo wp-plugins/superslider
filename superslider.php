@@ -5,7 +5,7 @@ Plugin URI: http://wp-superslider.com/superslider/
 Description: SuperSlider base, is an optional global admin plugin for all SuperSlider plugins. Superslider base also includes the following numerous web 2 motion modules.
 Author: Daiv Mowbray
 Author URI: http://wp-superslider.com
-Version: 1.2
+Version: 1.3
 
 Credits:
 
@@ -16,7 +16,7 @@ Page Scroller _ http://wp-superslider.com/superslider
 Link Nudger - http://www.nwhite.net/2009/02/07/insights-from-link-nudging/
 Fader - http://davidwalsh.name/opacity-focus 
 Linker - http://davidwalsh.name/iphone-click 
-Word wrap - http://davidwalsh.name/word-wrap-mootools-php
+Word wrap - http://davidwalsh.name/word-wrap-mootools-php (not activated)
 Clickable - http://davidwalsh.name/dwclickable-entire-block-clickable-mootools
 
 Copyright 2008
@@ -113,7 +113,6 @@ if (!class_exists("ssBase")) {
 		* @return array
 		*/			
 	function set_default_admin_options() {
-		//global $defaultOptions; 
 		
 		$defaultOptions = array(
 				"load_moo" => "on",
@@ -157,6 +156,16 @@ if (!class_exists("ssBase")) {
 				"scroll_trans"     =>  "sine",
 				"scroll_transout"  =>  "out",
 				
+				"tooltips"   =>  "on",
+				"tt_showDelay"   =>  "950",
+				"tt_hideDelay"   =>  "1250",
+				"tt_offsetx"   =>  "-280",
+				"tt_offsety"   =>  "0",
+				"tt_fixed"   =>  "on",
+				"tt_tip_opacity"   =>  "0.9",
+				"tipTitle" => 'title',
+		        "tipText" => 'rel',
+		        
 				"totop_text"  =>  "goin up",				
 				"com"       =>  "on",
 				"com_css"   =>  "on",
@@ -167,7 +176,7 @@ if (!class_exists("ssBase")) {
 				"com_open"        =>  "Open comments",
 				"com_close" => "Close comments",
 				"nudger" => "on",
-				"nudge_amount" => "20",
+				"nudge_amount" => "10",
                 "nudge_duration" => "500",
                 "nudge_family" => "#footer a, #sidebar a",
                 "fader" => "on",
@@ -223,7 +232,8 @@ if (!class_exists("ssBase")) {
 			wp_register_script('moomore',$this->js_path. 'mootools-1.2.3.1-more.js',array( 'moocore' ), '1.2.3');
 			wp_register_script('multiopen-accordion',$this->js_path.'multiopen-accordion.js',array( 'moocore' ), '1', true);
 			wp_register_style('accordion_style', $this->css_path.'/accordion.css');
-			wp_register_style('scroll_style', $this->css_path.'/scroll.css');			
+			wp_register_style('scroll_style', $this->css_path.'/scroll.css');
+			wp_register_style('tooltip_style', $this->css_path.'/tooltips.css');
 			wp_register_script('zoomer',$this->js_path.'zoomer.js',array( 'moomore' ), '1', true);
 			
   			add_action('wp_enqueue_scripts', array(&$this,'ssBase_add_javascript'),3); //this loads the mootools scripts.
@@ -247,6 +257,12 @@ if (!class_exists("ssBase")) {
                  add_action ( 'admin_footer', array( &$this, 'scroll_codeview_button' ) );
 			     add_action ( 'template_redirect' , array( &$this,'scroll_scan' ) );
 			    
+            }
+          
+            if ( $tooltips == 'on'){  
+                 add_action ( 'wp_footer', array( &$this, 'tooltip_starter' ) );
+			     //add_action ( 'wp_print_styles', array(&$this,'tooltip_add_css'));
+			     $this->tooltip_add_css();
             }
 
             if ( $scroll_auto == 'on'){  
@@ -304,13 +320,13 @@ if (!class_exists("ssBase")) {
 			//if (  current_user_can('manage_options') ) {
 				//$plugin_page = add_options_page(__('SuperSlider'),__('SuperSlider-Base'), 8, 'superslider', array(&$this, 'ssBase_ui'));
 				
-				add_menu_page('SuperSlider', ' SuperSlider ', 'manage_options', 'superslider_options', array(&$this, 'ssBase_ui'), plugins_url('superslider/admin/img/logo_mini.png'));
+				add_menu_page( 'SuperSlider', ' SuperSlider ', 'manage_options', 'superslider_options', array(&$this, 'ssBase_ui'), plugins_url('superslider/admin/img/logo_mini.png'));
 
-				add_filter('plugin_action_links', array(&$this, 'filter_plugin_show'), 10, 2 );
+				add_filter( 'plugin_action_links', array(&$this, 'filter_plugin_base'), 'manage_options', 2 );
 				
 				add_action ( 'admin_print_styles', array(&$this,'ssBase_admin_style'));
 				
-				add_action ('admin_print_scripts', array(&$this,'ssBase_admin_script'));
+				add_action ( 'admin_print_scripts', array(&$this,'ssBase_admin_script'));
 	
 			//}					
 		}
@@ -326,6 +342,8 @@ if (!class_exists("ssBase")) {
 	//$ss_Plugin_Classes = array('ssShow', 'ssLogin', 'ssExcerpt', 'ssFlow', 'ssPnext', 'ssSlim', '');
 	
 		if (class_exists('ssShow')) add_submenu_page('superslider_options', __('SuperSlider-Show'), __(' SS -- Show '), 'manage_options', 'superslider-show', array(&$this, 'ssShow_ui'));
+	    
+	    if (class_exists('ssMenu')) add_submenu_page('superslider_options', __('SuperSlider-Menu'), __(' SS -- Menu '), 'manage_options', 'superslider-menu', array(&$this, 'ssMenu_ui'));
 	
 	    if (class_exists('ssPnext')) add_submenu_page('superslider_options', __('SuperSlider-Pnext'), __(' SS -- PreviousNext'), 'manage_options', 'superslider-pnext', array(&$this, 'ssPnext_ui'));
 	   
@@ -362,6 +380,10 @@ if (!class_exists("ssBase")) {
 	   if (class_exists('ssSlim')) $this->Slim_over_ride = 'true';
 	   include_once WP_PLUGIN_DIR.'/superslider-'.$name.'/admin/superslider-'.$name.'-ui.php';
 	}
+	function ssMenu_ui($name) {
+	   $name = 'menu';
+	   include_once WP_PLUGIN_DIR.'/superslider-'.$name.'/admin/superslider-'.$name.'-ui.php';
+	}
 	function ssPnext_ui($name) {
 	   $name = 'pnext';
 	   include_once WP_PLUGIN_DIR.'/superslider-previousnext-thumbs/admin/superslider-'.$name.'-ui.php';
@@ -390,12 +412,12 @@ if (!class_exists("ssBase")) {
 		/**
 		* Add link to options page from plugin list WP 2.6.
 		*/
-	function filter_plugin_show($links, $file) {
+	function filter_plugin_base($links, $file) {
 		 static $this_plugin;
 			if (  ! $this_plugin ) $this_plugin = plugin_basename(__FILE__);
 
 		if (  $file == $this_plugin )
-			$settings_link = '<a href="options-general.php?page=superslider/admin/superslider-ui.php">'.__('Settings').'</a>';
+			$settings_link = '<a href="admin.php?page=superslider_options">'.__('Settings').'</a>';
 			array_unshift( $links, $settings_link ); //  before other links
 			return $links;
 	}
@@ -720,6 +742,92 @@ function reflect_footer_admin() {
 		include_once 'admin/js/superslider-acc-box.js';
 	}
 	
+	function tooltip_starter(){
+
+		extract($this->ssModOpOut);
+		
+		if ( $toolClass == '' ) { $mytool = "'.tool'";
+		} else { $mytool = "['.tool','".$toolClass."']";
+		}
+		
+		$mytootips = "var myTips = new Tips($$(".$mytool."), {
+								className: 'tool',
+								showDelay : ".$tt_showDelay.",
+								hideDelay : ".$tt_hideDelay.",
+								fixed: ".$tt_fixed.",
+								title: '".$tipTitle."',
+								text: '".$tipText."',
+								windowPadding: {'x':10, 'y':10},
+								offsets: {'x': ".$tt_offsetx.", 'y': ".$tt_offsety."},
+					initialize:function(){
+						this.fx = new Fx.Style(this.toolTip, 'opacity', {
+								duration: 1200,
+								transition: Fx.Transitions.Circ.easeInOut,
+								wait: false}).set(0);
+					    
+					    this.fxmorf = new Fx.Morph(this.toolTip, {
+								duration: 1200,
+								transition: Fx.Transitions.Sine.easeInOut,
+								link: 'chain' });
+					},
+					/*
+					onShow: function(toolTip){ 
+					   tip.effects({
+					           duration: 450, 
+					           transition: Fx.Transitions.quadInOut
+					           }).custom({'opacity': [0, 0.96]}); 
+					           },
+		            onHide: function(toolTip){ 
+		                tip.effects({duration: 250,
+		                transition: Fx.Transitions.quadInOut
+		                }).custom({'opacity': [0.96, 0]}); }
+		                */
+
+					onShow: function(toolTip) {
+					   //this.fx.start(".$tt_tip_opacity.");
+						toolTip.fade(".$tt_tip_opacity.");
+						//toolTip.fade(".$tt_tip_opacity.").chain.fxopen.start('.tipOpen');
+						//this.fxmorf.start('.tipOpen');	
+					},
+					onHide: function(toolTip) {
+						//this.fx.start(0);
+						toolTip.fade(0);
+						//tip.fade(0).chain.fxclose.start('.tipClosed');
+						//this.fxmorf.start('.tipClosed');
+					}
+				});
+				
+/*		myTips.addEvent('onShow', function(tip){
+        tip.fade('in');
+        });
+        myTips.addEvent('onHide', function(tip){
+        tip.fade('out');
+        });
+        
+        $('lnk').store('tip:title', 'Titulo del ToolTip');
+        $('lnk').store('tip:text', 'Texto del ToolTip');
+*/
+				";
+		
+		/*
+			maxTitleChars: 255,
+		timeOut: 0,
+    	onShow: function(tip){ tip.effects({duration: 450, transition: Fx.Transitions.quadInOut}).custom({'opacity': [0, 0.96]}); },
+		onHide: function(tip){ tip.effects({duration: 250, transition: Fx.Transitions.quadInOut}).custom({'opacity': [0.96, 0]}); },
+		hideDelay: 0,
+	
+		*/
+        if (!is_admin()) {
+            $this->open_addEvent() ;
+        
+            echo $mytootips;
+        
+            $this->close_addEvent() ;
+        }
+    }
+    function tooltip_add_css() {
+		  wp_enqueue_style( 'tooltip_style');
+	}
 	function zoom_footer_admin() {
 
 	   extract($this->ssModOpOut);

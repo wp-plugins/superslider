@@ -191,12 +191,17 @@ jQuery(document).ready(function(){
                 <input type="radio" name="op_css_load"  id="op_css_load2"
                 <?php if($ssBase_newOptions['css_load'] == "pluginData") echo $checked; ?> value="pluginData" />
                 <?php _e(' Load css from plugin-data folder, see side note. (Recommended)',$ssBase_domain); ?></label><br />
-            <label for="op_css_load3">
+            <!--<label for="op_css_load3">
                 <input type="radio" name="op_css_load"  id="op_css_load3"
+                <?php if($ssBase_newOptions['css_load'] == "theme") echo $checked; ?> value="theme" />
+                <?php _e(' Load css from your theme folder, (themes/your_theme/superslider/ssBase).',$ssBase_domain); ?></label>
+            <br />-->
+            <label for="op_css_load4">
+                <input type="radio" name="op_css_load"  id="op_css_load4"
                 <?php if($ssBase_newOptions['css_load'] == "off") echo $checked; ?> value="off" />
                 <?php _e(' Don\'t load css, manually add to your theme css file.',$ssBase_domain); ?></label>
             <br />
-            <span class="setting-description"><?php _e(' Via ftp, move the folder named plugin-data from this plugin folder into your wp-content folder. This is recomended to avoid over writing any changes you make to the css files when you update this plugin.',$ssBase_domain); ?></span>
+            <p class="setting-description"><?php _e(' Via ftp, move the folder named plugin-data from this plugin folder into your wp-content folder. This is recomended to avoid over writing any changes you make to the css files when you update this plugin.',$ssBase_domain); ?></p>
                    
         
         </li>

@@ -69,6 +69,17 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				"scroll_time"   =>  "1200",
 				"scroll_trans"   =>  "sine",
 				"scroll_transout"   =>  "out",
+				
+				"tooltips"   =>  "on",
+				"tt_showDelay"   =>  "950",
+				"tt_hideDelay"   =>  "1250",
+				"tt_offsetx"   =>  "-280",
+				"tt_offsety"   =>  "0",
+				"tt_fixed"   =>  "on",
+				"tt_tip_opacity"   =>  "0.9",
+				"tipTitle" => 'title',
+		        "tipText" => 'rel',
+				
 				"com"   =>  "on",
 				"com_css"   =>  "on",
 				"com_time"   =>  "1200",
@@ -78,7 +89,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				"com_open"        =>  "Open comments",
 				"com_close" => "Close comments",
 				"nudger" => "on",
-				"nudge_amount" => "20",
+				"nudge_amount" => "10",
                 "nudge_duration" => "500",
                 "nudge_family" => "#footer a, #sidebar a",
                 "fader" => "on",
@@ -142,6 +153,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				'scroll_time'	=> $_POST["op_scroll_time"],
 				'scroll_trans'	=> $_POST["op_scroll_trans"],
 				'scroll_transout'	=> $_POST["op_scroll_transout"],
+				
+				'tooltips'         => $_POST["op_tooltips"],
+				'tt_showDelay'         => $_POST["op_tt_showDelay"],
+				'tt_hideDelay'         => $_POST["op_tt_hideDelay"],
+				'tt_offsetx'         => $_POST["op_tt_offsetx"],
+				'tt_offsety'         => $_POST["op_tt_offsety"],
+				'tt_fixed'         => $_POST["op_tt_fixed"],
+				'tt_tip_opacity'         => $_POST["op_tt_tip_opacity"],
+				'toolClass'			=> $_POST["op_toolClass"],
+				'tipTitle'			=> $_POST["op_tipTitle"],
+				'tipText'			=> $_POST["op_tipText"],
+				
 				'com'         => $_POST["op_com"],
 				'com_css'         => $_POST["op_com_css"],
 				'com_time'	=> $_POST["op_com_time"],
@@ -230,7 +253,8 @@ jQuery(document).ready(function(){
         <li class="ui-state-default"><a href="#fragment-4"><span>Page Scroller</span></a></li>
         <li class="ui-state-default"><a href="#fragment-5"><span>Links</span></a></li>
         <li class="ui-state-default"><a href="#fragment-6"><span>Fader </span></a></li>
-        <li class="ui-state-default" style="display: none;"><a href="#fragment-7"><span>Comment Slider</span></a></li>
+        <li class="ui-state-default"><a href="#fragment-7"><span>ToolTips </span></a></li>
+        <li class="ui-state-default" style="display: none;"><a href="#fragment-8"><span>Comment Slider</span></a></li>
     </ul>
     
 	<div id="fragment-1" class="ss-tabs-panel">
@@ -552,10 +576,11 @@ jQuery(document).ready(function(){
 			 value="<?php echo ($ssMod_newOptions['nudge_duration']); ?>" /></label>
 			 <label for="op_nudge_amount"><?php _e(' nudger distance',$ssBase_domain); ?>
                <input type="text" class="span-text" name="op_nudge_amount" id="op_nudge_amount" size="3" maxlength="6"
-			 value="<?php echo ($ssMod_newOptions['nudge_amount']); ?>" /></label>
+			 value="<?php echo ($ssMod_newOptions['nudge_amount']); ?>" /> .px</label><br />
 			 <label for="op_nudge_family"><?php _e(' nudger families',$ssBase_domain); ?>
-               <input type="text" class="span-text" name="op_nudge_family" id="op_nudge_family" size="60" maxlength="200"
-			 value="<?php echo ($ssMod_newOptions['nudge_family']); ?>" /></label>
+               <input type="text" class="span-text" name="op_nudge_family" id="op_nudge_family" size="18" maxlength="200"
+			 value="<?php echo ($ssMod_newOptions['nudge_family']); ?>" /><?php _e(' css id\'s and or class\'s ex: #footer a.',$ssBase_domain); ?></label>
+			 
             </li>
          </ul>
 	   </fieldset>
@@ -657,8 +682,102 @@ jQuery(document).ready(function(){
 	   </fieldset>-->
 
 	   </div>
+
+<div id="fragment-7" class="ss-tabs-panel">
+	<h3 class="title">Tool Tips</h3>
+	
+
+    <fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;"><!-- ToolTip options start -->
+   <legend><b><?php _e('ToolTip Options',$ssm_domain); ?>:</b></legend>
+   <ul style="list-style-type: none;">
+    <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+    <optgroup label="op_tooltips">
+    
+    	<label for="op_tooltipson">
+    	<input type="radio"  name="op_tooltips" id="op_tooltipson"
+    	<?php if($ssMod_newOptions['tooltips'] == "on") echo $checked; ?> value="on" /></input>
+    	<?php _e('Tooltips turned on.'); ?> </label>
+	<br />
+		<label for="op_tooltipsoff">
+    	<input type="radio"  name="op_tooltips" id="op_tooltipsoff"
+    	<?php if($ssMod_newOptions['tooltips'] == "off") echo $checked; ?> value="off" /></input>
+    	<?php _e('Tooltips turned off.'); ?> </label>	
+	</optgroup>
+	</li>
+	<li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+         <label for="op_tt_showDelay"><?php _e('Tooltip show delay'); ?>:
+         <input type="text" name="op_tt_showDelay" id="op_tt_showDelay" size="6" maxlength="6"
+         value="<?php echo ($ssMod_newOptions['tt_showDelay']); ?>"/></label> 
+         <small><?php _e(' In milliseconds, ie: 1000 = 1 second',$ssm_domain); ?></small>
+     </li>
+     <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+         <label for="op_tt_hideDelay"><?php _e('Tooltip hide delay'); ?>:
+         <input type="text" name="op_tt_hideDelay" id="op_tt_hideDelay" size="6" maxlength="6"
+         value="<?php echo ($ssMod_newOptions['tt_hideDelay']); ?>"/></label> 
+         <small><?php _e(' In milliseconds, ie: 1000 = 1 second',$ssm_domain); ?></small>
+     </li>
+     <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+         <label for="op_tt_tip_opacityy"><?php _e('Tooltip Opacity'); ?>:
+         <input type="text" name="op_tt_tip_opacity" id="op_tt_tip_opacity" size="6" maxlength="6"
+         value="<?php echo ($ssMod_newOptions['tt_tip_opacity']); ?>"/></label> 
+         <small><?php _e(' (default 0.9)',$ssm_domain); ?></small>
+     </li>
+     <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+         <label for="op_tt_offsetx"><?php _e('Offset x'); ?>:
+         <input type="text" name="op_tt_offsetx" id="op_tt_offsetx" size="4" maxlength="4"
+         value="<?php echo ($ssMod_newOptions['tt_offsetx']); ?>"/></label> 
+         <small><?php _e(' horizontal displacement from link, (default =  -290)',$ssm_domain); ?></small>
+     <br />
+         <label for="op_tt_offsety"><?php _e('Offset y'); ?>:
+         <input type="text" name="op_tt_offsety" id="op_tt_offsety" size="4" maxlength="4"
+         value="<?php echo ($ssMod_newOptions['tt_offsety']); ?>"/></label> 
+         <small><?php _e(' vertical displacement from link, (default =  0)',$ssm_domain); ?></small>
+     </li>
+     <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+         <label for="op_toolClass"><?php _e('Add tooltip to objects with the class name of: '); ?>
+         <input type="text" name="op_toolClass" id="op_toolClass" size="15" maxlength="40"
+         value="<?php echo ($ssMod_newOptions['toolClass']); ?>"/></label> 
+         <small><?php _e(' ',$ssm_domain); ?></small>
+     </li>
+          <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+     <label for="op_tipTitle"><?php _e('Tip title, use ',$ssm_domain); ?></label>
+    <select name="op_tipTitle" id="op_tipTitle">
+     <option <?php if($ssMod_newOptions['tipTitle'] == "title") echo $selected; ?> id="titletitle" value='title'> title</option>
+     <option <?php if($ssMod_newOptions['tipTitle'] == "href") echo $selected; ?> id="titlehref" value='href'> href</option>
+     <option <?php if($ssMod_newOptions['tipTitle'] == "rel") echo $selected; ?> id="titlerel" value='rel'> rel</option>     
+    </select>
+    <small><?php _e('for the tooltip title.',$ssm_domain); ?></small>
+    </li>
+    
+    <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+     <label for="op_tipText"><?php _e('Tip text, use ',$ssm_domain); ?></label>
+    <select name="op_tipText" id="op_tipText">
+     <!--<option <?php if($ssMod_newOptions['tipText'] == "title") echo $selected; ?> id="texttitle" value='title'> title</option>-->
+     <option <?php if($ssMod_newOptions['tipText'] == "href") echo $selected; ?> id="texthref" value='href'> href</option>
+     <option <?php if($ssMod_newOptions['tipText'] == "rel") echo $selected; ?> id="textrel" value='rel'> rel</option>     
+    </select>
+    <small><?php _e('for the tooltip text.',$ssm_domain); ?></small>
+    </li>
+         <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
+    <optgroup label="op_tt_fixed">
+    	<label for="op_tt_fixedon">
+     		<input type="radio"
+     		<?php if($ssMod_newOptions['tt_fixed'] == "true") echo $checked; ?>  name="op_tt_fixed" id="op_tt_fixedon" value="true" />
+     		<?php _e('Tool tip possition, fixed on. (default)',$ssm_domain); ?>
+     		</label><br />
+     	<label for="op_tt_fixedoff">
+    		<input type="radio" 
+    		<?php if($ssMod_newOptions['tt_fixed'] == "false") echo $checked; ?> name="op_tt_fixed" id="op_tt_fixedoff" value="false"/> 
+    		<?php _e('fixed off.',$ssm_domain); ?>
+    		</label>    	
+     </optgroup>
+	</li>
+   </ul>
+  </fieldset>
+
+</div><!-- close frag 7 -->   
 	   
-	   <div id="fragment-7" class="ss-tabs-panel" style="display: none;">
+<div id="fragment-8" class="ss-tabs-panel" style="display: none;">
         <h3>Comment Slider</h3>
     	<fieldset style="border:1px solid grey;margin:10px;padding:10px 10px 10px 30px;">
    	        <legend><b><?php _e(' Nudger'); ?>:</b></legend>
