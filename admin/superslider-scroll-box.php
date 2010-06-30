@@ -12,6 +12,9 @@ $box = '
 			<label class ="ss_label" for="acc_height">
 			<input tabindex="22" name="acc_height" id="acc_height" type="checkbox" value="true" /> Transition height</label>
 			
+		<div class="ss-scroll-advanced" style="display: none;">
+		<div>
+		
 			<label class ="ss_label" for="acc_width">
 			<input tabindex="23" name="acc_width" id="acc_width" type="checkbox" value="true" /> Transition width</label> 
 			
@@ -24,14 +27,21 @@ $box = '
 			<label class ="ss_label" for="acc_all">
 			<input tabindex="26" name="acc_all" id="acc_all" type="checkbox" value="" /> All opened at start</label> 
 			
-			
+			<div style=" padding: 10px; clear: left;">
+		<a href="" class="ss-toggler-close" >close</a>
+	</div>
+</div></div>
+				
 			<input type="button" tabindex="27" value="Add Accordion" name="acctotextfield" id="acctotextfield" class="button-primary action" style="margin:10px 40px 0 10px; float: right;" onclick="addacc(); return false;" />
-			
+	
+	   <div id="ss-toggler-holder" style=" padding: 10px; clear: left;">
+	<a href="" class="ss-toggler-open" >advanced</a>
+</div>		
 
 			<input name="acc_togtag" id="acc_togtag" type="hidden" value="'.$acc_togtag.'" />
 			<input name="acc_elemtag" id="acc_elemtag" type="hidden" value="'.$acc_elemtag.'" />
 </form>
-<br style="clear:both;" /><p>This shortcode helper presently only works for the Html view. Selecting any of the above options will add that option to the shortcode. If you want to then set an option to false, just change the property of the option in the shortcode inside of your post window.</p>
+<br style="clear:both;" /><p>This shortcode helper presently only works for the Html view. </p>
 
 ';
 ?>

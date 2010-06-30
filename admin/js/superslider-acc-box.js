@@ -1,4 +1,28 @@
 <script language="javascript" type="text/javascript">
+	jQuery(document).ready(function(){
+
+;(function($) {
+    
+      $("#acc-box .ss-toggler-open").click(function(){
+        $("#acc-box .ss-acc-advanced").slideToggle(1200);
+        $(this).hide();
+        return false;
+      
+    });
+    
+    $("#acc-box .ss-toggler-close").click(function(){
+        $("#acc-box .ss-acc-advanced").slideToggle("slow");
+        $("#acc-box .ss-toggler-open").show();
+        return false;
+      
+    });
+
+})(jQuery);
+    
+});
+	
+	
+	
 	function insertAtCursor(myField, myValue) {
 		//IE support
 		if (document.selection) {

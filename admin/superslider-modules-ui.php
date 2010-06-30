@@ -75,7 +75,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				"tt_hideDelay"   =>  "1250",
 				"tt_offsetx"   =>  "-280",
 				"tt_offsety"   =>  "0",
-				"tt_fixed"   =>  "on",
+				"tt_fixed"   =>  "true",
 				"tt_tip_opacity"   =>  "0.9",
 				"tipTitle" => 'title',
 		        "tipText" => 'rel',
@@ -735,9 +735,15 @@ jQuery(document).ready(function(){
      </li>
      <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
          <label for="op_toolClass"><?php _e('Add tooltip to objects with the class name of: '); ?>
-         <input type="text" name="op_toolClass" id="op_toolClass" size="15" maxlength="40"
-         value="<?php echo ($ssMod_newOptions['toolClass']); ?>"/></label> 
-         <small><?php _e(' ',$ssm_domain); ?></small>
+         <input type="text" name="op_toolClass" id="op_toolClass" size="35" maxlength="150"
+         value="<?php echo ($ssMod_newOptions['toolClass']); ?>"/>         
+         	<a href="#base_tips_info" class="ss_tool" style="padding: 2px 8px;"> ? </a></label>
+    <div id ="base_tips_info" class="info_box" style="display:none;">
+                       <h3><?php _e('field: tooltip class info ',$ssm_domain); ?></h3>
+                        <?php _e('Add the class of .tool to any object, or<br />
+                        Enter a single class here, ie: .myclass a.<br />
+                        You can also add a comma seperated list,<br />
+                        ie: .myclass a, .myotherclass a.<br />',$ssm_domain); ?></div>         
      </li>
           <li style="border-bottom:1px solid #cdcdcd; padding: 6px 0px 8px 0px;">
      <label for="op_tipTitle"><?php _e('Tip title, use ',$ssm_domain); ?></label>

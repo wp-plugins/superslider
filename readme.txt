@@ -4,8 +4,8 @@ Plugin URI: http://wp-superslider.com/superslider/
 Donate link: http://wp-superslider.com/support-me/donate/
 Tags:animation, animated, accordion, reflection, page scroll, mootools 1.2, mootools, slider, superslider
 Requires at least: 2.6
-Tested up to: 2.9.2
-Stable tag: 1.3
+Tested up to: 3
+Stable tag: 1.4.2
 
 Suit of Animated Plugins which use Mootools 1.2 javascript  
 
@@ -14,6 +14,7 @@ Suit of Animated Plugins which use Mootools 1.2 javascript
 
 SuperSlider base, is a global admin plugin for all SuperSlider plugins and comes stocked full of eye candy in the form of modules. Superslider base includes the following modules: 
 
+* Tooltips: add fancy tooltips to any object or group of objects.
 * Reflection: adds floor reflection to your images, 
 * Accordion: add nested accordions to your post content,
 * Scroll: add smooth scroll navigation to your page, 
@@ -87,6 +88,20 @@ Create your own graphic and animation theme based on one of these provided.
 
 == Changelog ==
 
+*1.4.2 (2010/06/02)
+
+  * fixed link to settings page
+  * added save options upon deactivation option
+
+*1.4.1 (2010/04/08)
+
+  * added tooltips to admin css
+
+*1.4 (2010/04/04)
+
+  * Fixed un needed css loading into admin pages.
+  * upgraded the admin post screen meta box accordion shortcode helper
+  
 *1.3 (2010/03/29)
 
   * Added tooltips module.

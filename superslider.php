@@ -5,7 +5,7 @@ Plugin URI: http://wp-superslider.com/superslider/
 Description: SuperSlider base, is an optional global admin plugin for all SuperSlider plugins. Superslider base also includes the following numerous web 2 motion modules.
 Author: Daiv Mowbray
 Author URI: http://wp-superslider.com
-Version: 1.3
+Version: 1.4.2
 
 Credits:
 
@@ -161,7 +161,7 @@ if (!class_exists("ssBase")) {
 				"tt_hideDelay"   =>  "1250",
 				"tt_offsetx"   =>  "-280",
 				"tt_offsety"   =>  "0",
-				"tt_fixed"   =>  "on",
+				"tt_fixed"   =>  "true",
 				"tt_tip_opacity"   =>  "0.9",
 				"tipTitle" => 'title',
 		        "tipText" => 'rel',
@@ -189,7 +189,8 @@ if (!class_exists("ssBase")) {
                 "clicker_tag" => ".clickable li",
                 "clicker_span" => "false",
                 "clicker_color" => "#c9e0f4",
-                "wrap" => "off"
+                "wrap" => "off",
+				'delete_options' => ''
 				);
 		
 		
@@ -228,6 +229,8 @@ if (!class_exists("ssBase")) {
   			$this->set_base_paths($css_load, $css_theme);
   			
   			$this->js_path = WP_CONTENT_URL . '/plugins/'. plugin_basename(dirname(__FILE__)) . '/js/';
+  			$admin_js_path = WP_CONTENT_URL . '/plugins/'. plugin_basename(dirname(__FILE__)) . '/admin/js/';
+  			
   			wp_register_script('moocore',$this->js_path.'mootools-1.2.3-core-yc.js',NULL, '1.2.3');
 			wp_register_script('moomore',$this->js_path. 'mootools-1.2.3.1-more.js',array( 'moocore' ), '1.2.3');
 			wp_register_script('multiopen-accordion',$this->js_path.'multiopen-accordion.js',array( 'moocore' ), '1', true);
@@ -236,6 +239,11 @@ if (!class_exists("ssBase")) {
 			wp_register_style('tooltip_style', $this->css_path.'/tooltips.css');
 			wp_register_script('zoomer',$this->js_path.'zoomer.js',array( 'moomore' ), '1', true);
 			
+            wp_register_script( 'jquery-dimensions', $admin_js_path.'jquery.dimensions.min.js', array( 'jquery' ), '2', false);	    
+            wp_register_script( 'jquery-tooltip', $admin_js_path.'jquery.tooltip.min.js', array( 'jquery-dimensions' ), '2', false);
+            wp_register_script( 'superslider-admin-tool', $admin_js_path.'superslider-admin-tool.js', array( 'jquery-tooltip' ), '2', false);
+
+
   			add_action('wp_enqueue_scripts', array(&$this,'ssBase_add_javascript'),3); //this loads the mootools scripts.
             
             if ( $accordion == 'on'){  
@@ -301,11 +309,11 @@ if (!class_exists("ssBase")) {
                    add_action ( "wp_head", array(&$this,"link_css"), 10, 1);
                    
             }
-            
+            /*
             if ( $wrap == 'on'){ 
                 add_action('wp_enqueue_scripts', array(&$this,'word_wrap_add_script'),3);
             }
-            /*if ( $com == 'on' ){             
+            if ( $com == 'on' ){             
                  add_filter( 'comments_template', array(&$this,"com_slide_out"), 10 );
                  add_action('template_redirect', array(&$this,'comments_scan' ) );                   
             }*/
@@ -317,18 +325,18 @@ if (!class_exists("ssBase")) {
 	function ssBase_setup_optionspage() {
 
 		if (  function_exists('add_menu_page') ) {
-			//if (  current_user_can('manage_options') ) {
+			if (  current_user_can('manage_options') ) {
 				//$plugin_page = add_options_page(__('SuperSlider'),__('SuperSlider-Base'), 8, 'superslider', array(&$this, 'ssBase_ui'));
 				
 				add_menu_page( 'SuperSlider', ' SuperSlider ', 'manage_options', 'superslider_options', array(&$this, 'ssBase_ui'), plugins_url('superslider/admin/img/logo_mini.png'));
 
-				add_filter( 'plugin_action_links', array(&$this, 'filter_plugin_base'), 'manage_options', 2 );
+				add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), array(&$this, 'filter_plugin_base'), 'manage_options', 2 );
 				
 				add_action ( 'admin_print_styles', array(&$this,'ssBase_admin_style'));
 				
 				add_action ( 'admin_print_scripts', array(&$this,'ssBase_admin_script'));
 	
-			//}					
+			}					
 		}
 		
 		//$ss_Plugins = array('show', 'login', 'excerpt', 'mooflow', 'postsincat', 'slimbox', '');
@@ -339,11 +347,13 @@ if (!class_exists("ssBase")) {
 		add_submenu_page('superslider_options', 'SuperSlider', ' SS -- Modules', 'manage_options', 'superslider-modules', array(&$this, 'ssBase_mod_ui'));
 		
 	
-	//$ss_Plugin_Classes = array('ssShow', 'ssLogin', 'ssExcerpt', 'ssFlow', 'ssPnext', 'ssSlim', '');
+	//$ss_Plugin_Classes = array('ssShow', 'ssMenu', 'ssImage', 'ssLogin', 'ssExcerpt', 'ssFlow', 'ssPnext', 'ssSlim', '');
 	
 		if (class_exists('ssShow')) add_submenu_page('superslider_options', __('SuperSlider-Show'), __(' SS -- Show '), 'manage_options', 'superslider-show', array(&$this, 'ssShow_ui'));
 	    
 	    if (class_exists('ssMenu')) add_submenu_page('superslider_options', __('SuperSlider-Menu'), __(' SS -- Menu '), 'manage_options', 'superslider-menu', array(&$this, 'ssMenu_ui'));
+	    
+	    if (class_exists('ssImage')) add_submenu_page('superslider_options', __('SuperSlider-Image'), __(' SS -- Image '), 'manage_options', 'superslider-image', array(&$this, 'ssImage_ui'));
 	
 	    if (class_exists('ssPnext')) add_submenu_page('superslider_options', __('SuperSlider-Pnext'), __(' SS -- PreviousNext'), 'manage_options', 'superslider-pnext', array(&$this, 'ssPnext_ui'));
 	   
@@ -382,6 +392,10 @@ if (!class_exists("ssBase")) {
 	}
 	function ssMenu_ui($name) {
 	   $name = 'menu';
+	   include_once WP_PLUGIN_DIR.'/superslider-'.$name.'/admin/superslider-'.$name.'-ui.php';
+	}
+	function ssImage_ui($name) {
+	   $name = 'image';
 	   include_once WP_PLUGIN_DIR.'/superslider-'.$name.'/admin/superslider-'.$name.'-ui.php';
 	}
 	function ssPnext_ui($name) {
@@ -426,8 +440,10 @@ if (!class_exists("ssBase")) {
 		* Removes user set options from data base upon deactivation
 		*/		
 	function ssBase_ops_deactivation(){
-		delete_option($this->AdminOptionsName);
-		delete_option('ssMod_options');
+		if($this->ssBaseOpOut[delete_options] == true){
+		  delete_option($this->AdminOptionsName);
+		  delete_option('ssMod_options');
+		}
 	}
 
 	function ssBase_add_javascript(){
@@ -447,16 +463,26 @@ if (!class_exists("ssBase")) {
 	* add the ss admin css if over ride
 	*/
 	function ssBase_admin_style(){
-
-			$cssAdminFile = WP_PLUGIN_URL.'/superslider/admin/ss_admin_style.css';      	    
-    	    wp_register_style('superslider_admin', $cssAdminFile);
+        if (is_admin()) {
+			$cssAdminPath = WP_PLUGIN_URL.'/superslider/admin/';    			
+    		
+    		wp_register_style('superslider_admin', $cssAdminPath.'ss_admin_style.css');
+    		wp_register_style('superslider_admin_base', $cssAdminPath.'ss_admin_base.css');
+    		wp_register_style('superslider_admin_tool', $cssAdminPath.'ss_admin_tool.css');
         	wp_enqueue_style( 'superslider_admin');
-
+    	    wp_enqueue_style( 'superslider_admin_base');
+    	    wp_enqueue_style( 'superslider_admin_tool');
+        }
 	}
 	
 	function ssBase_admin_script(){
-		wp_enqueue_script('jquery-ui-tabs');	// this should load the jquery tabs script into head
-		
+		if (is_admin()) {	
+            wp_enqueue_script( 'jquery' );
+            wp_enqueue_script( 'jquery-dimensions' );	  
+            wp_enqueue_script( 'jquery-tooltip' );
+            wp_enqueue_script( 'superslider-admin-tool' );
+            wp_enqueue_script( 'jquery-ui-tabs');	// this should load the jquery tabs script into head
+		}
 	}
 	
 	function ss_change_options( $atts ){
@@ -497,16 +523,16 @@ function reflect_footer_admin() {
 
     /**
     *   Reflect functions : to create the image reflections
-	*	Look ahead to check if any posts contain the [gallery / slideshow] shortcode
+	*	Look ahead to check if any posts contain the [reflect] shortcode
 	*/
 	function reflect_scan () { 
 	   global $posts;
 	   
         if ( !is_array ( $posts ) ) 
                 return; 	 
-        foreach ( $posts as $mypost ) {         
+        foreach ( $posts as $post ) {         
                 
-            if ( false !== strpos ( $mypost->post_content, 'reflect' ) ) {  
+            if ( false !== strpos ( $post->post_content, 'reflect' ) ) {  
                     add_action ( "wp_footer", array(&$this,"reflect_starter"));
                     break; 
             } 
@@ -725,7 +751,7 @@ function reflect_footer_admin() {
 		extract($this->ssModOpOut);
 
 		if	($accordion == 'on')	{
-			if (is_admin ()) {			
+			if (is_admin()) {			
 				if( function_exists( 'add_meta_box' )) {
 					add_meta_box( 'ss_acc', __( 'SuperSlider-Accordion', $ssBase_domain ), array(&$this,'acc_writebox'), 'post', 'advanced', 'high');
 					add_meta_box( 'ss_acc', __( 'SuperSlider-Accordion', $ssBase_domain ), array(&$this,'acc_writebox'), 'page', 'advanced', 'high' );
@@ -740,6 +766,7 @@ function reflect_footer_admin() {
 		include_once 'admin/superslider-acc-box.php';
 		echo $box;		
 		include_once 'admin/js/superslider-acc-box.js';
+		
 	}
 	
 	function tooltip_starter(){
@@ -826,7 +853,9 @@ function reflect_footer_admin() {
         }
     }
     function tooltip_add_css() {
+		if (!is_admin()) {
 		  wp_enqueue_style( 'tooltip_style');
+	   }
 	}
 	function zoom_footer_admin() {
 
@@ -972,7 +1001,9 @@ function reflect_footer_admin() {
 	}
 	
 	function scroll_add_css() {
+	   if (!is_admin()) {
 		  wp_enqueue_style( 'scroll_style');
+	   }
 	}
 	function scroll_button_out() {
 	   echo '<div class="totop toplink">'.$this->ssModOpOut[totop_text].'</div>';

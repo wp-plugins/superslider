@@ -36,7 +36,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				"load_moo" => "on",
 				"css_load" => "default",
 				"css_theme" => "default",
-				"ss_global_over_ride" => "on");
+				"ss_global_over_ride" => "on",
+				'delete_options' => '');
 			
 			update_option('ssBase_options', $ssBase_OldOptions);
 
@@ -53,7 +54,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 				'load_moo'		=> $_POST['op_load_moo'],
 				'css_load'		=> $_POST['op_css_load'],
 				'css_theme'		=> $_POST["op_css_theme"],
-				'ss_global_over_ride'	=> $_POST["op_global_over_ride"]				
+				'ss_global_over_ride'	=> $_POST["op_global_over_ride"],
+				'delete_options'	=> $_POST["op_delete_options"]				
 			);	
 
 		update_option('ssBase_options', $ssBase_newOptions);
@@ -211,13 +213,32 @@ jQuery(document).ready(function(){
 		<p><?php _e(' If your theme or any other plugin loads the mootools 1.2 javascript framework into your file header, you can disactivate it here.',$ssBase_domain); ?></p>
 
 		</div>
-</div>	   
+</div>	 
+<p>
+<label for="op_delete_options">
+		      <input type="checkbox" <?php if($ssBase_newOptions['delete_options'] == "on") echo $checked; ?> name="op_delete_options" id="op_delete_options" />
+		      <?php _e('Remove options. '); ?></label>	
+		 <br /><span class="setting-description"><?php _e('Select to have the plugin options removed from the data base upon deactivation.'); ?></span>
+		 <br />
+</p>
     <p class="submit">
 		<input type="submit" name="set_defaults" value="<?php _e(' Reload Default Options',$ssBase_domain); ?> &raquo;" />
 		<input type="submit" name="submit" id="submit" class="button-primary" value="<?php _e(' Update options',$ssBase_domain); ?> &raquo;" />
 		<input type="hidden" name="action" value="update" />
  	</p>
  </form>
+ <!--<h3>More SuperSlider Plugins</h3>
+ <div class="ss_plugins_list"> 
+    <div class="ss_plugin" style="opacity: 0.5;"><span>active</span><br /><a href="http://wordpress.org/extend/plugins/superslider-show/"> <img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/plugin_icons/show.png" width="110" height="50" /> <br /> <span>SuperSlider-Show</span></a></div>
+    <div class="ss_plugin" style="opacity: 0.5;"><span>active</span><br /><a href="http://wordpress.org/extend/plugins/superslider-menu/"> <img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/plugin_icons/show.png" width="110" height="50" /> <br /> <span>SuperSlider-Menu</span></a></div>
+    <div class="ss_plugin" style="opacity: 0.5;"><span>active</span><br /><a href="http://wordpress.org/extend/plugins/superslider-excerpt/"> <img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/plugin_icons/show.png" width="110" height="50" /> <br /> <span>SuperSlider-Excerpt</span></a></div>
+    <div class="ss_plugin"><span>get it</span><br /><a href="http://wordpress.org/extend/plugins/superslider-show/"> <img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/plugin_icons/show.png" width="110" height="50" /> <br /> <span>SuperSlider-Show</span></a></div>
+    <div class="ss_plugin"><span>get it</span><br /><a href="http://wordpress.org/extend/plugins/superslider-show/"> <img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/plugin_icons/show.png" width="110" height="50" /> <br /> <span>SuperSlider-Show</span></a></div>
+    <div class="ss_plugin"><span>get it</span><br /><a href="http://wordpress.org/extend/plugins/superslider-show/"> <img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/plugin_icons/show.png" width="110" height="50" /> <br /> <span>SuperSlider-Show</span></a></div>
+    <div class="ss_plugin"><span>get it</span><br /><a href="http://wordpress.org/extend/plugins/superslider-show/"> <img src="<?php echo $site ?>/wp-content/plugins/superslider/admin/img/plugin_icons/show.png" width="110" height="50" /> <br /> <span>SuperSlider-Show</span></a></div>
+<br style="clear:both;" />
+ </div>-->
+ 
 </div>
 <?php
 	echo "";
