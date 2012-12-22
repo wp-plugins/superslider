@@ -1,28 +1,29 @@
 === SuperSlider ===
 Contributors: Daiv Mowbray
-Plugin URI: http://wp-superslider.com/superslider/
-Donate link: http://wp-superslider.com/support-me/donate/
-Tags:animation, animated, accordion, reflection, page scroll, mootools 1.2, mootools, slider, superslider
+Plugin URI: http://superslider.daivmowbray.com/superslider/
+Donate link: http://superslider.daivmowbray.com/support-me/donate/
+Tags:animation, animated, accordion, reflection, page scroll, mootools 1.4.5, mootools, slider, superslider
 Requires at least: 2.6
-Tested up to: 3
-Stable tag: 1.4.2
+Tested up to: 3.5
+Stable tag: 1.6
 
-Suit of Animated Plugins which use Mootools 1.2 javascript  
+Suit of Animated Plugins which use Mootools 1.4.5 javascript  
 
 
 == Description ==
 
 SuperSlider base, is a global admin plugin for all SuperSlider plugins and comes stocked full of eye candy in the form of modules. Superslider base includes the following modules: 
 
-* Tooltips: add fancy tooltips to any object or group of objects.
+* ModalBox: add fancy popover modalbox, include any content,
+* Tooltips: add fancy tooltips to any object or group of objects,
 * Reflection: adds floor reflection to your images, 
 * Accordion: add nested accordions to your post content,
 * Scroll: add smooth scroll navigation to your page, 
 * Zoomer: Adds a smooth image enlarging zoomer,
 * Nudger: slide links or small objects on mouseover,
-* Fader: fade transition one object of a group on mouseover (NEW! with version 0.6.2),
-* Linker: iPhone - Safari like darkened background effect when you click a link(NEW! with version 6.4)
-* Clicker: Dynamically takes the first link from the contents of a list item and makes the whole list item a clickable link(NEW! with version 6.4)
+* Fader: fade transition one object of a group on mouseover,
+* Linker: iPhone - Safari like darkened background effect when you click a link,
+* Clicker: Dynamically takes the first link from the contents of a list item and makes the whole list item a clickable link,
 
 
 **Features**
@@ -40,25 +41,42 @@ SuperSlider base, is a global admin plugin for all SuperSlider plugins and comes
 
 This plugin can be seen in use here:
 
-* [SuperSlider Scroller demo](http://wp-superslider.com/2009/superslider-scroller-demo "SuperSlider Scroller demo")
-* [Superslider Accordion demo](http://wp-superslider.com/2009/superslider-accordion-demo "Superslider Accordion demo")
-* [Clicker with fader demo](http://wp-superslider.com/2009/clicker-with-fader-demo "Clicker with fader demo")
-* [Object fader demo](http://wp-superslider.com/2009/object-fader-demo "Object fader demo")
-* [Zoom with reflect demo 1](http://wp-superslider.com/2009/zoom-with-reflect-demo-1 "Zoom with reflect demo 1")
+* [SuperSlider Scroller demo](http://superslider.daivmowbray.com/2009/superslider-scroller-demo "SuperSlider Scroller demo")
+* [Superslider Accordion demo](http://superslider.daivmowbray.com/2009/superslider-accordion-demo "Superslider Accordion demo")
+* [Clicker with fader demo](http://superslider.daivmowbray.com/2009/clicker-with-fader-demo "Clicker with fader demo")
+* [Object fader demo](http://superslider.daivmowbray.com/2009/object-fader-demo "Object fader demo")
+* [Zoom with reflect demo 1](http://superslider.daivmowbray.com/2009/zoom-with-reflect-demo-1 "Zoom with reflect demo 1")
 
-Get the following plugins to accompany this suit: SuperSlider-Show, SuperSlider-Slimbox, SuperSlider-MooFLow. Plugins that use [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.2 javascript. Highly configurable, theme based design, css based animations. Shortcode system on post and page screens and or Widgets. Degrades gracefully with javascript turned off, or plugin removed / disabled.
+Get the following plugins to accompany this suit: SuperSlider-Show, SuperSlider-Media-Pop, SuperSlider-Image. Plugins that use [Mootools](http://mootools.net/ "Your favorite javascript framework") 1.4.1 javascript. Highly configurable, theme based design, css based animations. Shortcode system on post and page screens and or Widgets. Degrades gracefully with javascript turned off, or plugin removed / disabled.
 
 **Support**
-If you have any problems or suggestions regarding these plugins [please speak up](http://support.wp-superslider.com/ "support forum"), 
+If you have any problems or suggestions regarding these plugins [please speak up](http://wordpress.org/extend/plugins/superslider/ "support forum"), 
 
 ##Plugins ##
 Download These Plugins here:
 
 * [SuperSlider-Show](http://wordpress.org/extend/plugins/superslider-show/ "SuperSlider-Show")
-* [SuperSlider-Login](http://wordpress.org/extend/plugins/superslider-login/ "SuperSlider-Login")
-* [SuperSlider-MooFlow](http://wordpress.org/extend/plugins/superslider-mooflow/ "SuperSlider-MooFlow")
+* [SuperSlider-Login](http://wordpress.org/extend/plugins/superslider-media-pop/ "SuperSlider-Media-Pop")
+* [SuperSlider-Image](http://wordpress.org/extend/plugins/superslider-image/ "SuperSlider-Image")
 
-Or download from the domain [wp-superslider.com](http://wp-superslider.com/downloadsuperslider/superslider-download "SuperSlider-Downloads")
+**Support Development**
+
+If you like this plugin we hope that you will help support our continued development. The two best ways to offer your support is to send us a donation. Even $1 helps encourage us to do more. If you can't donate, please help us reach our 5-star rating by rating this plugin.
+
+**Donate**
+
+[Donate today!](http://superslider.daivmowbray.com/support-me/donate/ "Donate today!")
+
+**Rate Us**
+
+Please rate us! Give us a chance to address your [concerns](http://www.daivmowbray.com/contact/ "concerns") if we didn't earn 5 stars.
+
+
+**Special Requests**
+
+We do accept feature requests for all of our plugins, free ones included. The most requested features will make it into the next version.
+
+If you need a special feature NOW,[ contact us!](http://www.daivmowbray.com/contact/ " contact us!") We offer expedited feature development. Most features can be implemented in less than a week at reasonable rates!
 
 == Upgrade Notice ==
 
@@ -70,9 +88,18 @@ You may need to re-save your settings/ options when upgrading
 
 == Installation ==
 
-* Unpack contents to wp-content/plugins/ into a **superslider** directory
-* Activate the plugin,
-* Configure global settings for plugin under > settings > SuperSlider-Base
+The Easy Way
+
+    In your WordPress admin, go to 'Plugins' and then click on 'Add New'.
+    In the search box, type in 'SuperSlider' and hit enter. This plugin should be the first and likely the only result.
+    Click on the 'Install' link.
+    Once installed, click the 'Activate this plugin' link.
+
+The Hard Way
+
+    Download the .zip file containing the plugin, unzip.
+    Upload the Superslider folder into your /wp-content/plugins/ directory 
+    Find the Superslider plugin in the WordPress admin on the 'Plugins' page and click 'Activate'
 
 
 == Themes ==
@@ -87,6 +114,17 @@ Create your own graphic and animation theme based on one of these provided.
 * custom
 
 == Changelog ==
+
+*1.6 (2012/12/20)
+
+  * updated to work with WordPress 3.5 
+  * added the modalBox module
+  * added the tooltips module
+  * updated the multiopen Accordion
+
+*1.5 (2011/12/15)
+
+  * updated to work with WordPress 3.3 and mootools 1.4.5
 
 *1.4.2 (2010/06/02)
 

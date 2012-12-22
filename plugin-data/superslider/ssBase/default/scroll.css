@@ -6,7 +6,7 @@ License:
 	MIT-style license.
 
 Copyright:
-	Copyright (c) 2008 [Daiv Mowbray](http://wp-superslider.com).
+	Copyright (c) 2008 [Daiv Mowbray](http://superslider.daivmowbray.com).
 	
 HTML:
 	<div id="scroll" class="scrollbar">
@@ -49,7 +49,7 @@ Notes:
     border-bottom: 1px solid #999;
     margin: 10px 0px;
 }
-.totop{
+.totop {
     display:block;
     font-style:italic;
     font-weight:bolder;    
@@ -57,18 +57,31 @@ Notes:
     padding:4px 0 4px 30px;
     line-height: 1.2em;
     text-transform: capitalize;
-	background: transparent url(images/logo_ball_mini.png) no-repeat  0 -50px ;
+	background-image:  url(images/logo_ball_mini.png) no-repeat  0 -50px ;
 }
-.totop:hover{
-	background: transparent url(images/logo_ball_mini.png) no-repeat 0 0 ;
-
+.totop:hover { 
+	background-position: 0px 0px;
 }
 .toplink {
     cursor:pointer;
     height:18px;
-    padding: 6px 10px 0 24px;
+    padding: 4px 10px 2px 24px;
     position:fixed;
-    right:0;
+    right:10%;
     bottom:0;
     margin-bottom:0;
+    border: 1px solid #333;
+    -moz-border-radius: 10px 10px 0 0 ;
+    -webkit-border-radius: 10px 10px 0 0 ;
+    border-radius: 10px 10px 0 0 ;
+    
+    background: rgb(142,195,238);
+background: -moz-linear-gradient(top,  rgba(142,195,238,1) 1%, rgba(79,139,188,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(142,195,238,1)), color-stop(100%,rgba(79,139,188,1)));
+background: -webkit-linear-gradient(top,  rgba(142,195,238,1) 1%,rgba(79,139,188,1) 100%);
+background: -o-linear-gradient(top,  rgba(142,195,238,1) 1%,rgba(79,139,188,1) 100%);
+background: -ms-linear-gradient(top,  rgba(142,195,238,1) 1%,rgba(79,139,188,1) 100%);
+background: linear-gradient(to bottom,  rgba(142,195,238,1) 1%,rgba(79,139,188,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ec3ee', endColorstr='#4f8bbc',GradientType=0 );
+
 }

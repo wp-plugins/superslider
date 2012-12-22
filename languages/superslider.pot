@@ -1,0 +1,370 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Daiv Mowbray
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/superslider\n"
+"POT-Creation-Date: 2009-04-04 19:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin/superslider-ui.php:27
+msgid "ACCESS DENIED: Your don't have permission to do this."
+msgstr ""
+
+#: admin/superslider-ui.php:79
+msgid "superslider Default Options reloaded."
+msgstr ""
+
+#: admin/superslider-ui.php:86
+msgid "superslider Options saved."
+msgstr ""
+
+#: admin/superslider-ui.php:164
+msgid " Global Over ride"
+msgstr ""
+
+#: admin/superslider-ui.php:168
+msgid " Global superslider plugin over ride ."
+msgstr ""
+
+#: admin/superslider-ui.php:169
+msgid ""
+" All SuperSlider plugins will use these Base plugin settings for: Themes,"
+"Mootools loading, and css file storage. "
+msgstr ""
+
+#: admin/superslider-ui.php:178
+msgid " Themes"
+msgstr ""
+
+#: admin/superslider-ui.php:215 admin/superslider-ui.php:575
+msgid " Update options"
+msgstr ""
+
+#: admin/superslider-ui.php:222
+msgid " Loading Options"
+msgstr ""
+
+#: admin/superslider-ui.php:228
+msgid " Load Mootools 1.2 into your theme header."
+msgstr ""
+
+#: admin/superslider-ui.php:235
+msgid " Load css from default location. superslider plugin folder."
+msgstr ""
+
+#: admin/superslider-ui.php:239
+msgid " Load css from plugin-data folder, see side note. (Recommended)"
+msgstr ""
+
+#: admin/superslider-ui.php:243
+msgid " Don't load css, manually add to your theme css file."
+msgstr ""
+
+#: admin/superslider-ui.php:245
+msgid ""
+" Via ftp, move the folder named plugin-data from this plugin folder into "
+"your wp-content folder. This is recomended to avoid over writing any changes "
+"you make to the css files when you update this plugin."
+msgstr ""
+
+#: admin/superslider-ui.php:252
+msgid ""
+" If your theme or any other plugin loads the mootools 1.2 javascript "
+"framework into your file header, you can disactivate it here."
+msgstr ""
+
+#: admin/superslider-ui.php:258
+msgid " Modules"
+msgstr ""
+
+#: admin/superslider-ui.php:265
+msgid " Add reflection to your images."
+msgstr ""
+
+#: admin/superslider-ui.php:272
+msgid " Height of the reflection. (default is 0.33 which means 33%)"
+msgstr ""
+
+#: admin/superslider-ui.php:278
+msgid " Opacity of the reflection. (default is 0.5 which means 50%)"
+msgstr ""
+
+#: admin/superslider-ui.php:284
+msgid " Automatically add reflect to all post images."
+msgstr ""
+
+#: admin/superslider-ui.php:286
+msgid ""
+" If turned off, you can manually add class=\"reflect\" to individual images, "
+"or wrap a post or group of images with the reflect shortcode, by clicking on "
+"the reflect button in the html view of your post screen.."
+msgstr ""
+
+#: admin/superslider-ui.php:298
+msgid " Add the Accordion module."
+msgstr ""
+
+#: admin/superslider-ui.php:303
+msgid " Add the Accordion css file."
+msgstr ""
+
+#: admin/superslider-ui.php:309
+msgid " Automatic Accordion module."
+msgstr ""
+
+#: admin/superslider-ui.php:315
+msgid " Accordion container"
+msgstr ""
+
+#: admin/superslider-ui.php:320
+msgid " Toggler class"
+msgstr ""
+
+#: admin/superslider-ui.php:325
+msgid " Toggler item"
+msgstr ""
+
+#: admin/superslider-ui.php:330
+msgid " Toggled  class"
+msgstr ""
+
+#: admin/superslider-ui.php:335
+msgid " Toggled item "
+msgstr ""
+
+#: admin/superslider-ui.php:342
+msgid " Open all at start on."
+msgstr ""
+
+#: admin/superslider-ui.php:347
+msgid " off."
+msgstr ""
+
+#: admin/superslider-ui.php:355
+msgid " Fixed height"
+msgstr ""
+
+#: admin/superslider-ui.php:360
+msgid " Fixed width"
+msgstr ""
+
+#: admin/superslider-ui.php:365
+msgid " Transition opacity on"
+msgstr ""
+
+#: admin/superslider-ui.php:369 admin/superslider-ui.php:379
+#: admin/superslider-ui.php:389
+msgid " off"
+msgstr ""
+
+#: admin/superslider-ui.php:375
+msgid " Transition height on"
+msgstr ""
+
+#: admin/superslider-ui.php:385
+msgid " Transition width on"
+msgstr ""
+
+#: admin/superslider-ui.php:394
+msgid " Open at first"
+msgstr ""
+
+#: admin/superslider-ui.php:398
+msgid ""
+" Which toggle item should be opened at first view? Ordering starts at \"0\", "
+"-1 will leave all closed."
+msgstr ""
+
+#: admin/superslider-ui.php:405
+msgid ""
+" To use the accordion, click on the add accordion button found in the "
+"SuperSlider-Accordion meta box on your post screen (this works best in code "
+"view). This will insert the accordion structure. Edit the toggle bar titles, "
+"ie: toggle one, toggle two , then insert your content into content one and "
+"content two etc. to add more toggle bars and content just copy and paste the "
+"h3 followed by the div tags."
+msgstr ""
+
+#: admin/superslider-ui.php:413
+msgid " Add zoom to your images."
+msgstr ""
+
+#: admin/superslider-ui.php:417
+msgid " Auto zoom your images."
+msgstr ""
+
+#: admin/superslider-ui.php:420 admin/superslider-ui.php:478
+#: admin/superslider-ui.php:521
+msgid " Transition type"
+msgstr ""
+
+#: admin/superslider-ui.php:432 admin/superslider-ui.php:490
+#: admin/superslider-ui.php:533
+msgid " Transition action."
+msgstr ""
+
+#: admin/superslider-ui.php:438
+msgid " zoom time"
+msgstr ""
+
+#: admin/superslider-ui.php:442 admin/superslider-ui.php:500
+#: admin/superslider-ui.php:543
+msgid " IN is the begginning of transition. OUT is the end of transition."
+msgstr ""
+
+#: admin/superslider-ui.php:446
+msgid "Image border -"
+msgstr ""
+
+#: admin/superslider-ui.php:451
+msgid " padding -"
+msgstr ""
+
+#: admin/superslider-ui.php:456
+msgid "px, background color -"
+msgstr ""
+
+#: admin/superslider-ui.php:461
+msgid ""
+" If You deactivate the auto zoom, you can add a zoom to your image by "
+"including class=\"zoom\" to the a href tag surrounding your image. Or use "
+"the zoom button to add shortcode around a group of images. Colors can be "
+"named or hex values, ie: silver, transparent or #afafaf. And border style "
+"can be any of the following: solid, dotted, dashed, double, groove, ridge, "
+"inset, outset."
+msgstr ""
+
+#: admin/superslider-ui.php:471
+msgid " Add scroller to your page."
+msgstr ""
+
+#: admin/superslider-ui.php:475
+msgid " Add scroll Css file."
+msgstr ""
+
+#: admin/superslider-ui.php:496
+msgid " Scroll time"
+msgstr ""
+
+#: admin/superslider-ui.php:502
+msgid ""
+" Use the quick tag button in html/code view to insert a scroll structure to "
+"your page or post. Edit the content of the structure to your needs. Add more "
+"items by copy and paste. Content object divs must be number sequencially, "
+"ie: div id=\"scroll3\"... div id=\"scroll4\"...  This works for single posts "
+"and pages, but not for multiple posts per page."
+msgstr ""
+
+#: admin/superslider-ui.php:514
+msgid " Add Commmet Slider to your page."
+msgstr ""
+
+#: admin/superslider-ui.php:518
+msgid " Add Com Slider Css file."
+msgstr ""
+
+#: admin/superslider-ui.php:539
+msgid " com time"
+msgstr ""
+
+#: admin/superslider-ui.php:550
+msgid " open link text"
+msgstr ""
+
+#: admin/superslider-ui.php:556
+msgid " close link text"
+msgstr ""
+
+#: admin/superslider-ui.php:568
+msgid " "
+msgstr ""
+
+#: admin/superslider-ui.php:574
+msgid " Reload Default Options"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Plugin Name of an extension
+#: superslider.php:216
+msgid "SuperSlider"
+msgstr ""
+
+#: superslider.php:216
+msgid "SuperSlider-Base"
+msgstr ""
+
+#: superslider.php:245
+msgid "Settings"
+msgstr ""
+
+#: superslider.php:299
+msgid "Enter height (0.5 = 50%)"
+msgstr ""
+
+#: superslider.php:300
+msgid "Enter opacity (0.5 = 50%)"
+msgstr ""
+
+#: superslider.php:309 superslider.php:315
+msgid "reflect"
+msgstr ""
+
+#: superslider.php:316
+msgid "Insert File reflect"
+msgstr ""
+
+#: superslider.php:515 superslider.php:516
+msgid "SuperSlider-Accordion"
+msgstr ""
+
+#: superslider.php:546 superslider.php:552
+msgid "zoom"
+msgstr ""
+
+#: superslider.php:553
+msgid "Insert File zoom"
+msgstr ""
+
+#: superslider.php:730 superslider.php:736
+msgid "scroll"
+msgstr ""
+
+#: superslider.php:737
+msgid "Insert Page scroll"
+msgstr ""
+
+#. Plugin URI of an extension
+msgid "http://wp-superslider.com/superslider"
+msgstr ""
+
+#. Description of an extension
+msgid ""
+"SuperSlider base, is a global admin plugin for all SuperSlider plugins. "
+"Superslider base includes the following modules: Reflection;(adds floor "
+"reflection to your images), Accordion;(add accordions to your post content). "
+"Scroll (add smooth scroll to your page) Zoomer (Adds a smooth image zoomer)."
+msgstr ""
+
+#. Author of an extension
+msgid "Daiv Mowbray"
+msgstr ""
+
+#. Author URI of an extension
+msgid "http://wp-superslider.com"
+msgstr ""
+
+#. Tags of an extension
+msgid ""
+"animation, animated, gallery, slideshow, mootools 1.2, mootools, accordion, "
+"slider, superslider, menu, lightbox"
+msgstr ""

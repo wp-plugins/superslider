@@ -6,7 +6,7 @@ License:
 	MIT-style license.
 
 Copyright:
-	Copyright (c) 2008 [Daiv Mowbray](http://wp-superslider.com/).
+	Copyright (c) 2008 [Daiv Mowbray](http://superslider.daivmowbray.com/).
 	
 HTML:
 	<div class="accordion">
@@ -24,6 +24,7 @@ HTML:
 	margin: 10px ;
 }
 .toggler, .toggleAllAcc, .openAllAcc, .closeAllAcc {
+	margin-bottom: 0px!important;
 	display: block;
 	cursor: pointer;
 	padding: 4px 8px 3px 30px;
